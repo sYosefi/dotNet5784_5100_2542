@@ -19,6 +19,6 @@ partial class Program
         Console.Write("Enter your name: ");
         string name = "";
         name = Console.ReadLine();
-        Console.WriteLine(name + ",welcome to my first console");
+        Console.WriteLine(name + ",welcome to my first console project");
     }
 }
