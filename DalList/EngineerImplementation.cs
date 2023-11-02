@@ -1,7 +1,7 @@
 ﻿namespace Dal;
 using DalApi;
 using DO;
-using System.Collections.Generic;
+
 
 public class EngineerImplementation : IEngineer
 {
@@ -18,7 +18,7 @@ public class EngineerImplementation : IEngineer
 
     public void Delete(int id)
     {
-        Engineer eng = DataSource.Engineers.FirstOrDefault(e => e.IdEngineer == id);
+        Engineer eng = DataSource.Engineers.FirstOrDefault(e => e.IdEngineer == id)!;
         if (eng == null)
             throw new Exception($" Engineer with ID={id} is not exist ");
 
@@ -30,16 +30,23 @@ public class EngineerImplementation : IEngineer
 
     public Engineer? Read(int id)
     {
-        throw new NotImplementedException();
+        return DataSource.Engineers.FirstOrDefault(e => e.IdEngineer == id);
     }
 
     public List<Engineer> ReadAll()
     {
-        throw new NotImplementedException();
+        return new List<Engineer>(DataSource.Engineers);
     }
 
     public void Update(Engineer item)
     {
-        throw new NotImplementedException();
+        Engineer eng = DataSource.Engineers.FirstOrDefault(e => e.IdEngineer == item.IdEngineer)!;
+        if (eng == null)
+            throw new Exception($" Enginerr with ID={item.IdEngineer} is not exist ");
+        else
+        {
+            DataSource.Engineers.Remove(eng);
+            DataSource.Engineers.Add(eng);
+        }
     }
 }

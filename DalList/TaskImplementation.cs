@@ -15,7 +15,7 @@ public class TaskImplementation : ITask
 
     public void Delete(int id)
     {
-        Task task = DataSource.Tasks.FirstOrDefault(t => t.TaskNumber == id);
+        Task task = DataSource.Tasks.FirstOrDefault(t => t.TaskNumber == id)!;
         if (task==null)
             throw new Exception($" Task with ID={id} is not exist ");
         
@@ -38,14 +38,13 @@ public class TaskImplementation : ITask
 
     public void Update(Task item)
     {
-        Task t = DataSource.Tasks.FirstOrDefault(t => t.TaskNumber == item.TaskNumber);
+        Task t = DataSource.Tasks.FirstOrDefault(t => t.TaskNumber == item.TaskNumber)!;
         if ( t== null)
             throw new Exception($" Task with ID={item.TaskNumber} is not exist ");
         else
         {
             DataSource.Tasks.Remove(t);
             DataSource.Tasks.Add(item);
-        }
-            
+        }   
     }
 }

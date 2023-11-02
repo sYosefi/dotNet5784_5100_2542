@@ -6,15 +6,20 @@
 
 public enum Levels
 {
-    Expert, 
-    Junior,
-    Novice
+    Novice,
+    AdvancedBeginner,
+    Competent,
+    Proficient,
+    Expert
 }
 
 public enum Experience
 {
-    Expert,
-    Junior,
+    Novice,
+    AdvancedBeginner,
+    Competent,
+    Proficient,
+    Expert
 }
 
 

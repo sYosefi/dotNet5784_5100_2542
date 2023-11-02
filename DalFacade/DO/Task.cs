@@ -4,7 +4,7 @@ public record Task
  (
   int TaskNumber,
   string Description,
-  string nickname,
+  string Nickname,
   bool Milestone,
   DateTime ProductionDate,
   DateTime StartDate,
