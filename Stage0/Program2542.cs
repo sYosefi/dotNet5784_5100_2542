@@ -6,5 +6,6 @@
      static partial void Welcome2542()
     {
         Console.WriteLine("I am here!");
+        Console.WriteLine("Good Luck!");
     }
 }
