@@ -34,6 +34,7 @@ public static class Initialization
         t_dalTask.Create(t3);
         t_dalTask.Create(t4);  
         t_dalTask.Create(t5);
+        t_dalTask.Create(t6);
     }
 
     private static void createEngineers()
