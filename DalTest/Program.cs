@@ -12,6 +12,9 @@ namespace DalTest
         private static ITask? t_dalITask = new TaskImplementation(); //Stage 1
         private static IDependence? d_dalIDependence = new DependenceImplementation(); //Stage 1
 
+        /// <summary>
+        /// 
+        /// </summary>
         private static void CreateTask()
         {
             string desc, nick, product, note;
