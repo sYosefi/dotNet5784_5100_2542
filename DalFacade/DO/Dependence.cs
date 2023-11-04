@@ -3,7 +3,7 @@
 public record Dependence
 (
   
-    int IdDependence,
+    int? IdDependence,
     int NumberDependenceTask,
     int NuberPreviousTask
  );

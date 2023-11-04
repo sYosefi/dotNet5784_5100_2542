@@ -22,7 +22,18 @@ public static class Initialization
 
     private static void createTasks()
     {
-      
+        Task t1 = new(1, "ניתוח סיכונים בפרויקט", "Risk Analysis", false, DateTime.Now, null, null, null, null, null, null, null, Levels.Proficient);
+        Task t2 = new(2, "אופטימיזיציה של המערכת", "BM#", false, DateTime.Now, null, null, null, null, null, null, null, Levels.AdvancedBeginner);
+        Task t3 = new(3, "ביקורת קוד", "AA", false, DateTime.Now, null, null, null, null, null, null, null, Levels.Expert);
+        Task t4 = new(4, "מחקר ויישום טכנולוגיות חדשות", "Research", false, DateTime.Now, null, null, null, null, null, null, null, Levels.Novice);
+        Task t5 = new(5, "הטמעת אמצעי אבטחה", "Implementation-SM", false, DateTime.Now, null, null, null, null, null, null, null, Levels.Competent);
+        Task t6 = new(6, "הכנת דרישות לא פונקציונאליות", "T8", false, DateTime.Now, null, null, null, null, null, null, null, Levels.Competent);
+        t_dalTask.Create(t1);
+        t_dalTask.Create(t1);
+        t_dalTask.Create(t2);
+        t_dalTask.Create(t3);
+        t_dalTask.Create(t4);  
+        t_dalTask.Create(t5);
     }
 
     private static void createEngineers()
@@ -53,5 +64,16 @@ public static class Initialization
     }
 
     private static void createDependences()
-    { }
+    {
+        Dependence d1 = new(null, 1, 2);
+        Dependence d2 = new(null, 2, 3);
+        Dependence d3 = new(null, 1, 6);
+        Dependence d4 = new(null, 5, 4);
+        Dependence d5 = new(null, 5, 3);
+        d_dalDependence.Create(d1);
+        d_dalDependence.Create(d2);
+        d_dalDependence.Create(d3); 
+        d_dalDependence.Create(d4);
+        d_dalDependence.Create(d5);
+    }
 }
