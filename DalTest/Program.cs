@@ -97,7 +97,7 @@ namespace DalTest
         {
             Console.WriteLine("Enter Engineer id: ");
             int idEngineer = int.Parse(Console.ReadLine());
-            t_dalEngineer!.Delete(idEngineer);
+            e_dalIEngineer!.Delete(idEngineer);
 
         }
         private static Dependence DependenceDetails()
@@ -115,7 +115,7 @@ namespace DalTest
         {
             Dependence depTmp=DependenceDetails();
             Dependence newDep = (depTmp.IdDependence, depTmp.NumberDependenceTask, depTmp.NuberPreviousTask);
-            d_dalDependence!.Create(newDep);
+            d_dalIDependence!.Create(newDep);
         }
 
 
@@ -123,21 +123,28 @@ namespace DalTest
         {
             Console.WriteLine("Enter Id Dependence ");
             int id = int.Parse(Console.ReadLine());
-            d_dalDependence!.Read(id);
+            d_dalIDependence!.Read(id);
         }
         private static void DeleteDependence()
         {
             Console.WriteLine("Enter Id Dependence ");
             int IdDepend = int.Parse(Console.ReadLine());
-            d_dalDependence!.Delete(IdDepend);
+            d_dalIDependence!.Delete(IdDepend);
         }
         private static void UpdateDependence()
         {
             Console.WriteLine("Enter Id Dependence ");
             int IdDepend = int.Parse(Console.ReadLine());
-            d_dalDependence!.Delete(IdDepend);
+            d_dalIDependence!.Delete(IdDepend);
             Dependence depTmp = DependenceDetails();
-            Dependence newDep = (IdDepend, depTmp.NumberDependenceTask, depTmp.NuberPreviousTask);
+            //Dependence newDep = (IdDepend, depTmp.NumberDependenceTask, depTmp.NuberPreviousTask);
+            Dependence newDep = new Dependence
+            {
+                IdDependence = IdDepend,
+                NumberDependenceTask = depTmp.NumberDependenceTask,
+                NuberPreviousTask = depTmp.NuberPreviousTask
+            };
+
 
 
         }
@@ -206,7 +213,7 @@ namespace DalTest
                 {
                     case 1: { ShowTask(); break; };
                     case 2: { ShowEngineer(); break; };
-                    case 3: { showDependence(); break};
+                    case 3: { showDependence(); break; };
                 }
                 Console.WriteLine("Enter 0 to exist the main menu\n Enter 1 to Engineers\n Enter 2 to Tasks\n Enter 3 to Dependences");
                 choice = int.Parse(Console.ReadLine());
