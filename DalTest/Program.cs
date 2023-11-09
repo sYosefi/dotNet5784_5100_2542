@@ -13,9 +13,9 @@ namespace DalTest
         private static IDependence? d_dalIDependence = new DependenceImplementation(); //Stage 1
 
         /// <summary>
-        /// 
+        /// The function picks up what data is being used and creates a new task
         /// </summary>
-        /// 
+        
         private static void CreateTask()
         {
             string desc, nick, product, note;
@@ -38,6 +38,9 @@ namespace DalTest
             Console.WriteLine(t_dalITask!.Create(t));
 
         }
+        /// <summary>
+        /// 
+        /// </summary>
         private static void ReadTask()
         {
             Console.WriteLine("Enter task number");
@@ -67,7 +70,7 @@ namespace DalTest
         {
             int id,salary;
             string name, mail, e;
-             ;
+        
             Console.WriteLine("Enter ID engineer");
             id = int.Parse(Console.ReadLine());
             Console.WriteLine("Enter name engineer");
@@ -90,6 +93,54 @@ namespace DalTest
             e_dalIEngineer!.Read(id);
         }
 
+        private static void DeleteEngineer()
+        {
+            Console.WriteLine("Enter Engineer id: ");
+            int idEngineer = int.Parse(Console.ReadLine());
+            t_dalEngineer!.Delete(idEngineer);
+
+        }
+        private static Dependence DependenceDetails()
+        {
+            int NumberDependence, NuberPrevious;
+            Console.WriteLine("Enter a number dependence task");
+            NumberDependence = int.Parse(Console.ReadLine());
+            Console.WriteLine("Enter a number previous task");
+            NuberPrevious = int.Parse(Console.ReadLine());
+            Dependence dep = new(null, NumberDependence, NuberPrevious);
+            return dep;
+        }
+
+        private static void CreateDependence()
+        {
+            Dependence depTmp=DependenceDetails();
+            Dependence newDep = (depTmp.IdDependence, depTmp.NumberDependenceTask, depTmp.NuberPreviousTask);
+            d_dalDependence!.Create(newDep);
+        }
+
+
+        private static void ReadDependence()
+        {
+            Console.WriteLine("Enter Id Dependence ");
+            int id = int.Parse(Console.ReadLine());
+            d_dalDependence!.Read(id);
+        }
+        private static void DeleteDependence()
+        {
+            Console.WriteLine("Enter Id Dependence ");
+            int IdDepend = int.Parse(Console.ReadLine());
+            d_dalDependence!.Delete(IdDepend);
+        }
+        private static void UpdateDependence()
+        {
+            Console.WriteLine("Enter Id Dependence ");
+            int IdDepend = int.Parse(Console.ReadLine());
+            d_dalDependence!.Delete(IdDepend);
+            Dependence depTmp = DependenceDetails();
+            Dependence newDep = (IdDepend, depTmp.NumberDependenceTask, depTmp.NuberPreviousTask);
+
+
+        }
 
         private static void ShowTask()
         {
@@ -127,6 +178,24 @@ namespace DalTest
                 choice = int.Parse(Console.ReadLine());
             }
         }
+        private static void showDependence()
+        {
+            Console.WriteLine("Enter 0 to exist the main menu\n Enter 1 to create a dependence \nEnter 2 to display a dependence\nEnter 3 to update a dependence \nEnter 4 to delete a dependence");
+            int choice = int.Parse(Console.ReadLine());
+            while (choice != 0)
+            {
+                switch (choice)
+                {
+
+                    case 1: { CreateDependence(); break; };
+                    case 2: { ReadDependence(); break; };
+                    case 3: { UpdateDependence(); break; };
+                    case 4: { DeleteDependence(); break; };
+                }
+                Console.WriteLine("Enter 0 to exist the main menu\n Enter 1 to create a dependence \nEnter 2 to display a dependence\nEnter 3 to update a dependence \nEnter 4 to delete a dependence");
+                choice = int.Parse(Console.ReadLine());
+            }
+        }
         private static void Menu()
         {
             Console.WriteLine("Enter 0 to exist the main menu\n Enter 1 to Engineers\n Enter 2 to Tasks\n Enter 3 to Dependences");
@@ -135,7 +204,9 @@ namespace DalTest
             {
                 switch (choice)
                 {
-                    case 1: { ShowTask(); break; }
+                    case 1: { ShowTask(); break; };
+                    case 2: { ShowEngineer(); break; };
+                    case 3: { showDependence(); break};
                 }
                 Console.WriteLine("Enter 0 to exist the main menu\n Enter 1 to Engineers\n Enter 2 to Tasks\n Enter 3 to Dependences");
                 choice = int.Parse(Console.ReadLine());

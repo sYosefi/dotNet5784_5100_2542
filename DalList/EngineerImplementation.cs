@@ -5,6 +5,15 @@ using DO;
 
 public class EngineerImplementation : IEngineer
 {
+
+
+    /// <summary>
+    /// The function accepts a variable of engineer type and checks if its id already exists in the system,
+    /// if so - throw an exception, otherwise - add it to the list of engineers
+    /// </summary>
+    /// <param name="item">An object of type Engineer</param>
+    /// <returns>id Engineer</returns>
+    /// <exception cref="Exception"></exception>
     public int Create(Engineer item)
     {
         if (DataSource.Engineers.FirstOrDefault(e=>e.IdEngineer==item.IdEngineer)!=null)
@@ -15,6 +24,14 @@ public class EngineerImplementation : IEngineer
         }
         return item.IdEngineer;
     }
+
+
+    /// <summary>
+    /// The function receives an id and checks whether there is an engineer in the system with the received id, 
+    /// if so - it deletes the engineer found, if not - it will throw an exception.
+    /// </summary>
+    /// <param name="id"></param>
+    /// <exception cref="Exception"></exception>
 
     public void Delete(int id)
     {
