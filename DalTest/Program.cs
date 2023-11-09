@@ -12,11 +12,9 @@ namespace DalTest
         private static ITask? t_dalITask = new TaskImplementation(); //Stage 1
         private static IDependence? d_dalIDependence = new DependenceImplementation(); //Stage 1
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// 
-        private static void CreateTask()
+
+
+        public static Task TaskDetails()
         {
             string desc, nick, product, note;
             DateTime start, end, estimatedCompletion, finalDate;
@@ -25,7 +23,7 @@ namespace DalTest
             Console.WriteLine("Enter a nickName for the task");
             nick = Console.ReadLine();
             Console.WriteLine("Enter start date for the task");
-            start=DateTime.Parse(Console.ReadLine());
+            start = DateTime.Parse(Console.ReadLine());
             Console.WriteLine("Enter an estimated end date");
             estimatedCompletion = DateTime.Parse(Console.ReadLine());
             Console.WriteLine("Enter Final date for the task");
@@ -34,9 +32,16 @@ namespace DalTest
             product = Console.ReadLine();
             Console.WriteLine("Enter notes on the task");
             note = Console.ReadLine();
-            DO.Task t = new(null, desc, nick,false, DateTime.Now, start, estimatedCompletion, finalDate, null,product,note,null,null);
-            Console.WriteLine(t_dalITask!.Create(t));
-
+            DO.Task t = new(null, desc, nick, false, DateTime.Now, start, estimatedCompletion, finalDate, null, product, note, null, null);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// 
+        private static void CreateTask()
+        {
+            Task taskToCreate = TaskDetails();
+            Console.WriteLine(t_dalITask!.Create(taskToCreate));
         }
         private static void ReadTask()
         {
@@ -49,11 +54,8 @@ namespace DalTest
             Console.WriteLine("Enter task number");
             int taskNumber=int.Parse (Console.ReadLine());
             Console.WriteLine(t_dalITask!.Read(taskNumber));
-            Console.WriteLine("Enter new data to update");
-            //איך יודעים איזה נתון המשתמש רוצה לעדכן?
-            //--------------------------------------
-            
-
+            Task tempTask = TaskDetails();
+            t_dalITask.Update(tempTask);
         }
         private static void DeleteTask()
         {
@@ -62,25 +64,32 @@ namespace DalTest
             t_dalITask!.Delete(taskNumber);
 
         }
+
+       private static Engineer EnginerrDetails()
+        {
+            int  salary;
+            string name, mail, e;
+            Console.WriteLine("Enter name engineer");
+            name = Console.ReadLine();
+            Console.WriteLine("Enter engineer mail");
+            mail = Console.ReadLine();
+            Console.WriteLine("Enter engineer experience");
+            e = Console.ReadLine();
+            Experience exp = (Experience)Enum.Parse(typeof(Experience), e, true);
+            Console.WriteLine("Enter price per hour");
+            salary = int.Parse(Console.ReadLine());
+            Engineer eng = new(null, name, mail, exp, salary);
+            return eng;
+        }
         
         private static void CreateEngineer()
         {
-            int id,salary;
-            string name, mail, e;
-             ;
+            int id;
             Console.WriteLine("Enter ID engineer");
             id = int.Parse(Console.ReadLine());
-            Console.WriteLine("Enter name engineer");
-            name=Console.ReadLine();
-            Console.WriteLine("Enter engineer mail");
-            mail=Console.ReadLine();
-            Console.WriteLine("Enter engineer experience");
-            e = Console.ReadLine();
-            Experience exp=(Experience)Enum.Parse( typeof(Experience),e,true);
-            Console.WriteLine("Enter price per hour");
-            salary=int.Parse(Console.ReadLine());
-            Engineer eng=new(id,name,mail, exp, salary);
-            e_dalIEngineer!.Create(eng);
+            Engineer tempEng=EnginerrDetails();
+            Engineer newEng=new(id, tempEng.NameEngineer, tempEng.MailEnginerr, tempEng.EngineerRank, tempEng.PricePerHour);
+            Console.WriteLine(e_dalIEngineer!.Create(newEng));
         }
 
         private static void ReadEngineer()
@@ -89,7 +98,16 @@ namespace DalTest
             int id = int.Parse(Console.ReadLine());
             e_dalIEngineer!.Read(id);
         }
-
+        private static void UpdateEngineer()
+        {
+            Console.WriteLine("Enter Engineer id to update");
+            int idEngineer = int.Parse(Console.ReadLine());
+            Enginerr eng = e_dalIEngineer!.Read(idEngineer);
+            Console.WriteLine(eng);
+            Engineer updatedEng = EnginerrDetails();
+            updatedEng.IdEngineer=idEngineer;
+            e_dalIEngineer!.Update(updatedEng);
+        }
 
         private static void ShowTask()
         {
@@ -135,7 +153,7 @@ namespace DalTest
             {
                 switch (choice)
                 {
-                    case 1: { ShowTask(); break; }
+                    case 1: { ShowTask(); break; };
                 }
                 Console.WriteLine("Enter 0 to exist the main menu\n Enter 1 to Engineers\n Enter 2 to Tasks\n Enter 3 to Dependences");
                 choice = int.Parse(Console.ReadLine());
