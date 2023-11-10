@@ -8,16 +8,17 @@ namespace DalTest
 {
     internal class Program
     {
-        private static IEngineer? e_dalIEngineer = new EngineerImplementation(); //Stage 1
-        private static ITask? t_dalITask = new TaskImplementation(); //Stage 1
-        private static IDependence? d_dalIDependence = new DependenceImplementation(); //Stage 1
+        //private static IEngineer? e_dalIEngineer = new EngineerImplementation(); //Stage 1
+        //private static ITask? t_dalITask = new TaskImplementation(); //Stage 1
+        //private static IDependence? d_dalIDependence = new DependenceImplementation(); //Stage 1
+         static readonly IDal s_dal=new DalList();//stage 2
 
         /// <summary>
         /// The function picks up what data is being used and creates a new task
         /// </summary>
 
 
-        public static Task TaskDetails()
+        public static DO.Task TaskDetails()
         {
             string desc, nick, product, note;
             DateTime start, end, estimatedCompletion, finalDate;
@@ -40,8 +41,8 @@ namespace DalTest
         }
         private static void CreateTask()
         {
-            Task taskToCreate = TaskDetails();
-            Console.WriteLine(t_dalITask!.Create(taskToCreate));
+            DO.Task taskToCreate = TaskDetails();
+            Console.WriteLine(s_dal!.Task.Create(taskToCreate));
 
         }
 
@@ -49,21 +50,21 @@ namespace DalTest
         {
             Console.WriteLine("Enter task number");
             int taskNumber=int.Parse(Console.ReadLine());
-            t_dalITask!.Read(taskNumber);
+            s_dal!.Task.Read(taskNumber);
         }
         private static void UpdateTask()
         {
             Console.WriteLine("Enter task number");
             int taskNumber = int.Parse(Console.ReadLine());
-            Console.WriteLine(t_dalITask!.Read(taskNumber));
-            Task tempTask = TaskDetails();
-            t_dalITask.Update(tempTask);
+            Console.WriteLine(s_dal!.Task.Read(taskNumber));
+            DO.Task tempTask = TaskDetails();
+            s_dal!.Task.Update(tempTask);
         }
         private static void DeleteTask()
         {
             Console.WriteLine("Enter task number");
             int taskNumber = int.Parse(Console.ReadLine());
-            t_dalITask!.Delete(taskNumber);
+            s_dal!.Task.Delete(taskNumber);
 
         }
         private static Engineer EnginerrDetails()
@@ -89,31 +90,31 @@ namespace DalTest
             id = int.Parse(Console.ReadLine());
             Engineer tempEng = EnginerrDetails();
             Engineer newEng = new(id, tempEng.NameEngineer, tempEng.MailEnginerr, tempEng.EngineerRank, tempEng.PricePerHour);
-            Console.WriteLine(e_dalIEngineer!.Create(newEng));
+            Console.WriteLine(s_dal!.Engineer.Create(newEng));
         }
 
         private static void ReadEngineer()
         {
             Console.WriteLine("Enter engineer ID");
             int id = int.Parse(Console.ReadLine());
-            e_dalIEngineer!.Read(id);
+            s_dal!.Engineer.Read(id);
         }
         private static void UpdateEngineer()
         {
             Console.WriteLine("Enter Engineer id to update");
             int idEngineer = int.Parse(Console.ReadLine());
-            Engineer eng = e_dalIEngineer!.Read(idEngineer);
+            Engineer eng = s_dal!.Engineer.Read(idEngineer);
             Console.WriteLine(eng);
             Engineer updatedEng = EnginerrDetails();
             updatedEng.IdEngineer = idEngineer;
-            e_dalIEngineer!.Update(updatedEng);
+            s_dal!.Engineer.Update(updatedEng);
         }
 
         private static void DeleteEngineer()
         {
             Console.WriteLine("Enter Engineer id: ");
             int idEngineer = int.Parse(Console.ReadLine());
-            e_dalIEngineer!.Delete(idEngineer);
+            s_dal!.Engineer.Delete(idEngineer);
 
         }
         private static Dependence DependenceDetails()
@@ -130,8 +131,8 @@ namespace DalTest
         private static void CreateDependence()
         {
             Dependence depTmp=DependenceDetails();
-            Dependence newDep = (depTmp.IdDependence, depTmp.NumberDependenceTask, depTmp.NuberPreviousTask);
-            d_dalIDependence!.Create(newDep);
+            Dependence newDep = (int.Parse(depTmp.IdDependence), depTmp.NumberDependenceTask, depTmp.NuberPreviousTask);
+            s_dal!.Dependence!.Create(newDep);
         }
 
 
@@ -139,19 +140,19 @@ namespace DalTest
         {
             Console.WriteLine("Enter Id Dependence ");
             int id = int.Parse(Console.ReadLine());
-            d_dalIDependence!.Read(id);
+            s_dal!.Dependence!.Read(id);
         }
         private static void DeleteDependence()
         {
             Console.WriteLine("Enter Id Dependence ");
             int IdDepend = int.Parse(Console.ReadLine());
-            d_dalIDependence!.Delete(IdDepend);
+            s_dal!.Dependence!.Delete(IdDepend);
         }
         private static void UpdateDependence()
         {
             Console.WriteLine("Enter Id Dependence ");
             int IdDepend = int.Parse(Console.ReadLine());
-            d_dalIDependence!.Delete(IdDepend);
+            s_dal!.Dependence!.Delete(IdDepend);
             Dependence depTmp = DependenceDetails();
             //Dependence newDep = (IdDepend, depTmp.NumberDependenceTask, depTmp.NuberPreviousTask);
             Dependence newDep = new Dependence
@@ -240,7 +241,7 @@ namespace DalTest
        {
             try
             {
-                Initialization.Do(t_dalITask, e_dalIEngineer, d_dalIDependence);
+                Initialization.Do(s_dal);
             }
 
             catch (Exception ex)

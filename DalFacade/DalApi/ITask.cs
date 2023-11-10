@@ -1,10 +1,5 @@
 ﻿namespace DalApi;
 using DO;
-public interface ITask
+public interface ITask:ICrud<Task>
 {
-    int Create(Task item); //Creates new entity object in DAL
-    Task? Read(int id); //Reads entity object by its ID 
-    List<Task> ReadAll(); //Reads all entity objects
-    void Update(Task  item); //Updates entity objects
-    void Delete(int id); //Deletes an object by is Id
 }

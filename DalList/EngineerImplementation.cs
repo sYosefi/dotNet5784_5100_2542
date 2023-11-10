@@ -1,9 +1,9 @@
 ﻿namespace Dal;
 using DalApi;
 using DO;
+using System.Collections.Generic;
 
-
-public class EngineerImplementation : IEngineer
+internal class EngineerImplementation : IEngineer
 {
 
 
@@ -22,7 +22,7 @@ public class EngineerImplementation : IEngineer
         {
             DataSource.Engineers.Add(item);
         }
-        return item.IdEngineer;
+        return int.Parse(item.IdEngineer);
     }
 
 
@@ -45,14 +45,31 @@ public class EngineerImplementation : IEngineer
         }
     }
 
-    public Engineer? Read(int id)
+    //public Engineer? Read(int id)//satge 1
+    //{
+    //    return DataSource.Engineers.FirstOrDefault(e => e.IdEngineer == id);
+    //}
+
+    public Engineer? Read(Func<Engineer, bool>? filter)//stage 2
     {
-        return DataSource.Engineers.FirstOrDefault(e => e.IdEngineer == id);
+        return DataSource.Engineers.FirstOrDefault(filter!);
     }
 
-    public List<Engineer> ReadAll()
+    //public List<Engineer> ReadAll()
+    //{
+    //    return new List<Engineer>(DataSource.Engineers);
+    //}
+
+    public IEnumerable<Engineer?> ReadAll(Func<Engineer, bool>? filter = null)//stage 2
     {
-        return new List<Engineer>(DataSource.Engineers);
+        if(filter!=null)
+        {
+            return from item in DataSource.Engineers
+                   where filter(item)
+                   select item;
+        }
+        return from item in DataSource.Engineers
+               select item;
     }
 
     public void Update(Engineer item)

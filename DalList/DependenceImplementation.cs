@@ -2,8 +2,10 @@
 namespace Dal;
 using DalApi;
 using DO;
+using System.Collections.Generic;
+using System.Linq;
 
-public class DependenceImplementation : IDependence
+internal class DependenceImplementation : IDependence
 {
     public int Create(Dependence item)
     {
@@ -25,14 +27,31 @@ public class DependenceImplementation : IDependence
         }
     }
 
-    public Dependence? Read(int id)
+    //public Dependence? Read(int id)//satge 1
+    //{
+    //    return DataSource.Dependences.FirstOrDefault(d => d.IdDependence == id)!; 
+    //}
+
+    public Dependence? Read(Func<Dependence, bool>? filter)//stage 2
     {
-        return DataSource.Dependences.FirstOrDefault(d => d.IdDependence == id)!; 
+        return DataSource.Dependences.FirstOrDefault(filter!);
     }
 
-    public List<Dependence> ReadAll()
+    //public List<Dependence> ReadAll()
+    //{
+    //    return new List<Dependence>(DataSource.Dependences);
+    //}
+
+    public IEnumerable<Dependence?> ReadAll(Func<Dependence, bool>? filter = null)
     {
-        return new List<Dependence>(DataSource.Dependences);
+        if (filter != null)
+        {
+            return from item in DataSource.Dependences
+                   where filter(item)
+                   select item;
+        }
+        return from item in DataSource.Dependences
+               select item;
     }
 
     public void Update(Dependence item)

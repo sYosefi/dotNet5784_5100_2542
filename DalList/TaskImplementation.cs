@@ -1,9 +1,10 @@
 ﻿namespace Dal;
 using DalApi;
 using DO;
+using System.Collections.Generic;
+using System.Linq;
 
-
-public class TaskImplementation : ITask
+internal class TaskImplementation : ITask
 {
     public int Create(Task item)
     {
@@ -25,15 +26,32 @@ public class TaskImplementation : ITask
         }
     }
 
-    public Task? Read(int id)
+    //public Task? Read(int id)//stage 1
+    //{
+    //    Task task = DataSource.Tasks.FirstOrDefault(t => t.TaskNumber == id)!;
+    //    return task;
+    //}
+
+    public Task? Read(Func<Task, bool>? filter)//stage 2
     {
-        Task task = DataSource.Tasks.FirstOrDefault(t => t.TaskNumber == id)!;
-        return task;
+        return DataSource.Tasks.FirstOrDefault(filter!);
     }
 
-    public List<Task> ReadAll()
+    //public List<Task> ReadAll()
+    //{
+    //    return new List<Task>(DataSource.Tasks);
+    //}
+
+    public IEnumerable<Task?> ReadAll(Func<Task, bool>? filter = null)
     {
-        return new List<Task>(DataSource.Tasks);
+        if (filter != null)
+        {
+            return from item in DataSource.Tasks
+                   where filter(item)
+                   select item;
+        }
+        return from item in DataSource.Tasks
+               select item;
     }
 
     public void Update(Task item)

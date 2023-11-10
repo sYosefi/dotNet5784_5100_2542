@@ -4,7 +4,7 @@ namespace DO;
 
 public record Engineer
     ( 
-    int IdEngineer,
+    int? IdEngineer,
     string NameEngineer,
     string MailEnginerr,
     Experience EngineerRank,
