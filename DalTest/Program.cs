@@ -74,7 +74,7 @@ namespace DalTest
             Console.WriteLine("Enter name engineer");
             name = Console.ReadLine();
             Console.WriteLine("Enter engineer mail");
-            mail = Console.ReadLine();
+            mail = Console.ReadLine(); 
             Console.WriteLine("Enter engineer experience");
             e = Console.ReadLine();
             Experience exp = (Experience)Enum.Parse(typeof(Experience), e, true);
