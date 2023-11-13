@@ -1,7 +1,8 @@
 ﻿using Dal;
 using DalApi;
-using DalList;
 using DO;
+
+
 
 
 namespace DalTest
@@ -18,7 +19,7 @@ namespace DalTest
         /// </summary>
 
 
-        public static DO.Task TaskDetails()
+        public static DO.Task TaskDetails(int id)
         {
             string desc, nick, product, note;
             DateTime start, end, estimatedCompletion, finalDate;
@@ -36,12 +37,12 @@ namespace DalTest
             product = Console.ReadLine();
             Console.WriteLine("Enter notes on the task");
             note = Console.ReadLine();
-            DO.Task t = new(null, desc, nick, false, DateTime.Now, start, estimatedCompletion, finalDate, null, product, note, null, null);
+            DO.Task t = new(id, desc, nick, false, DateTime.Now, start, estimatedCompletion, finalDate, null, product, note, null, null);
             return t;
         }
         private static void CreateTask()
         {
-            DO.Task taskToCreate = TaskDetails();
+            DO.Task taskToCreate = TaskDetails(0);
             Console.WriteLine(s_dal!.Task.Create(taskToCreate));
 
         }
@@ -50,14 +51,14 @@ namespace DalTest
         {
             Console.WriteLine("Enter task number");
             int taskNumber=int.Parse(Console.ReadLine());
-            s_dal!.Task.Read(taskNumber);
+            s_dal!.Task.Read(t => t.TaskNumber == taskNumber); // Use a lambda expression to define the filter
         }
         private static void UpdateTask()
         {
             Console.WriteLine("Enter task number");
             int taskNumber = int.Parse(Console.ReadLine());
-            Console.WriteLine(s_dal!.Task.Read(taskNumber));
-            DO.Task tempTask = TaskDetails();
+            Console.WriteLine(s_dal!.Task.Read(t => t.TaskNumber == taskNumber));
+            DO.Task tempTask = TaskDetails(taskNumber);
             s_dal!.Task.Update(tempTask);
         }
         private static void DeleteTask()
@@ -67,7 +68,7 @@ namespace DalTest
             s_dal!.Task.Delete(taskNumber);
 
         }
-        private static Engineer EnginerrDetails()
+        private static Engineer EnginerrDetails(int id)
         {
             int salary;
             string name, mail, e;
@@ -80,7 +81,7 @@ namespace DalTest
             Experience exp = (Experience)Enum.Parse(typeof(Experience), e, true);
             Console.WriteLine("Enter price per hour");
             salary = int.Parse(Console.ReadLine());
-            Engineer eng = new(null, name, mail, exp, salary);
+            Engineer eng = new(id, name, mail, exp, salary);
             return eng;
         }
         private static void CreateEngineer()
@@ -88,7 +89,7 @@ namespace DalTest
             int id;
             Console.WriteLine("Enter ID engineer");
             id = int.Parse(Console.ReadLine());
-            Engineer tempEng = EnginerrDetails();
+            Engineer tempEng = EnginerrDetails(id);
             Engineer newEng = new(id, tempEng.NameEngineer, tempEng.MailEnginerr, tempEng.EngineerRank, tempEng.PricePerHour);
             Console.WriteLine(s_dal!.Engineer.Create(newEng));
         }
@@ -97,16 +98,16 @@ namespace DalTest
         {
             Console.WriteLine("Enter engineer ID");
             int id = int.Parse(Console.ReadLine());
-            s_dal!.Engineer.Read(id);
+            Func<DO.Engineer, bool> filter = (engineer) => engineer.IdEngineer == id;
+            s_dal!.Engineer.Read(filter);
         }
         private static void UpdateEngineer()
         {
             Console.WriteLine("Enter Engineer id to update");
             int idEngineer = int.Parse(Console.ReadLine());
-            Engineer eng = s_dal!.Engineer.Read(idEngineer);
+            Engineer eng = s_dal!.Engineer.Read(e => e.IdEngineer == idEngineer); 
             Console.WriteLine(eng);
-            Engineer updatedEng = EnginerrDetails();
-            updatedEng.IdEngineer = idEngineer;
+            Engineer updatedEng = EnginerrDetails(idEngineer);
             s_dal!.Engineer.Update(updatedEng);
         }
 
@@ -117,7 +118,7 @@ namespace DalTest
             s_dal!.Engineer.Delete(idEngineer);
 
         }
-        private static Dependence DependenceDetails()
+        private static Dependence DependenceDetails(int id)
         {
             int NumberDependence, NuberPrevious;
             Console.WriteLine("Enter a number dependence task");
@@ -130,9 +131,10 @@ namespace DalTest
 
         private static void CreateDependence()
         {
-            Dependence depTmp=DependenceDetails();
-            Dependence newDep = (int.Parse(depTmp.IdDependence), depTmp.NumberDependenceTask, depTmp.NuberPreviousTask);
-            s_dal!.Dependence!.Create(newDep);
+            Dependence depTmp = DependenceDetails(0);
+            Dependence newDep = new (depTmp.IdDependence,depTmp.NumberDependenceTask, depTmp.NuberPreviousTask);
+            s_dal!.Dependence!.Create(newDep); 
+
         }
 
 
@@ -140,7 +142,8 @@ namespace DalTest
         {
             Console.WriteLine("Enter Id Dependence ");
             int id = int.Parse(Console.ReadLine());
-            s_dal!.Dependence!.Read(id);
+            Func<DO.Dependence, bool> filter = (dependence) => dependence.IdDependence == id;
+            s_dal!.Dependence!.Read(filter);
         }
         private static void DeleteDependence()
         {
@@ -151,19 +154,9 @@ namespace DalTest
         private static void UpdateDependence()
         {
             Console.WriteLine("Enter Id Dependence ");
-            int IdDepend = int.Parse(Console.ReadLine());
-            s_dal!.Dependence!.Delete(IdDepend);
-            Dependence depTmp = DependenceDetails();
-            //Dependence newDep = (IdDepend, depTmp.NumberDependenceTask, depTmp.NuberPreviousTask);
-            Dependence newDep = new Dependence
-            {
-                IdDependence = IdDepend,
-                NumberDependenceTask = depTmp.NumberDependenceTask,
-                NuberPreviousTask = depTmp.NuberPreviousTask
-            };
-
-
-
+            int idDepend = int.Parse(Console.ReadLine());
+            Dependence depTmp = DependenceDetails(idDepend);
+            s_dal!.Dependence!.Update(depTmp);
         }
 
         private static void ShowTask()

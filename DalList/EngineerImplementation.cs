@@ -1,11 +1,12 @@
-﻿namespace Dal;
+﻿
+namespace Dal;
 using DalApi;
 using DO;
 using System.Collections.Generic;
+using System.Linq;
 
 internal class EngineerImplementation : IEngineer
 {
-
 
     /// <summary>
     /// The function accepts a variable of engineer type and checks if its id already exists in the system,
@@ -16,13 +17,14 @@ internal class EngineerImplementation : IEngineer
     /// <exception cref="Exception"></exception>
     public int Create(Engineer item)
     {
+       
         if (DataSource.Engineers.FirstOrDefault(e=>e.IdEngineer==item.IdEngineer)!=null)
-            throw new Exception($" Engineer with ID={item.IdEngineer} is not already exist ");
+            throw new DalAlreayExistException($" Engineer with ID={item.IdEngineer} already exist ");
         else
         {
             DataSource.Engineers.Add(item);
         }
-        return int.Parse(item.IdEngineer);
+        return int.Parse(item.IdEngineer.Value.ToString());
     }
 
 
@@ -37,7 +39,7 @@ internal class EngineerImplementation : IEngineer
     {
         Engineer eng = DataSource.Engineers.FirstOrDefault(e => e.IdEngineer == id)!;
         if (eng == null)
-            throw new Exception($" Engineer with ID={id} is not exist ");
+            throw new DalDoesNotExistException($" Engineer with ID={id} is not exist ");
 
         else
         {
@@ -45,20 +47,11 @@ internal class EngineerImplementation : IEngineer
         }
     }
 
-    //public Engineer? Read(int id)//satge 1
-    //{
-    //    return DataSource.Engineers.FirstOrDefault(e => e.IdEngineer == id);
-    //}
 
     public Engineer? Read(Func<Engineer, bool>? filter)//stage 2
     {
         return DataSource.Engineers.FirstOrDefault(filter!);
     }
-
-    //public List<Engineer> ReadAll()
-    //{
-    //    return new List<Engineer>(DataSource.Engineers);
-    //}
 
     public IEnumerable<Engineer?> ReadAll(Func<Engineer, bool>? filter = null)//stage 2
     {
@@ -76,7 +69,7 @@ internal class EngineerImplementation : IEngineer
     {
         Engineer eng = DataSource.Engineers.FirstOrDefault(e => e.IdEngineer == item.IdEngineer)!;
         if (eng == null)
-            throw new Exception($" Enginerr with ID={item.IdEngineer} is not exist ");
+            throw new DalDoesNotExistException($" Enginerr with ID={item.IdEngineer} is not exist ");
         else
         {
             DataSource.Engineers.Remove(eng);
