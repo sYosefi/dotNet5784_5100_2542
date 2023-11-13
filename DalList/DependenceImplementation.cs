@@ -19,7 +19,7 @@ internal class DependenceImplementation : IDependence
     {
         Dependence dependence = DataSource.Dependences.FirstOrDefault(d => d.IdDependence == id)!; ;
         if (dependence == null)
-            throw new Exception($" Dependence with ID={id} is not exist ");
+            throw new DalDoesNotExistException($" Dependence with ID={id} is not exist ");
 
         else
         {
@@ -27,20 +27,10 @@ internal class DependenceImplementation : IDependence
         }
     }
 
-    //public Dependence? Read(int id)//satge 1
-    //{
-    //    return DataSource.Dependences.FirstOrDefault(d => d.IdDependence == id)!; 
-    //}
-
     public Dependence? Read(Func<Dependence, bool>? filter)//stage 2
     {
         return DataSource.Dependences.FirstOrDefault(filter!);
     }
-
-    //public List<Dependence> ReadAll()
-    //{
-    //    return new List<Dependence>(DataSource.Dependences);
-    //}
 
     public IEnumerable<Dependence?> ReadAll(Func<Dependence, bool>? filter = null)
     {
@@ -58,7 +48,7 @@ internal class DependenceImplementation : IDependence
     {
         Dependence dependence = DataSource.Dependences.FirstOrDefault(d => d.IdDependence == item.IdDependence)!;
         if (dependence== null)
-            throw new Exception($" Dependence with ID={item.IdDependence} is not exist ");
+            throw new DalDoesNotExistException($" Dependence with ID={item.IdDependence} is not exist ");
         else
         {
             DataSource.Dependences.Remove(dependence);
