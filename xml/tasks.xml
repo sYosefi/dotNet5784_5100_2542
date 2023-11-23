@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfTask>
+	<TaskNumber>1</TaskNumber>
+	<Description>ניתוח סיכונים בפרויקט</Description>
+	<Nickname>Risk Analysis</Nickname>
+	<Milestone>false</Milestone>
+	<ProductionDate>DateTime.Now</ProductionDate>
+	<DifficultyLevel></DifficultyLevel>
+
+	<TaskNumber>2</TaskNumber>
+	<Description>אופטימיזיציה של המערכת</Description>
+	<Nickname>BM#</Nickname>
+	<Milestone>false</Milestone>
+
+	<TaskNumber>3</TaskNumber>
+	<Description>ביקורת קוד</Description>
+	<Nickname>AA</Nickname>
+	<Milestone>false</Milestone>
+
+	<TaskNumber>4</TaskNumber>
+	<Description>מחקר ויישום טכנולוגיות חדשות</Description>
+	<Nickname>Research</Nickname>
+	<Milestone>false</Milestone>
+
+	<TaskNumber>5</TaskNumber>
+	<Description>הטמעת אמצעי אבטחה</Description>
+	<Nickname>Implementation-SM</Nickname>
+	<Milestone>false</Milestone>
+
+	<TaskNumber>6</TaskNumber>
+	<Description>הכנת דרישות לא פונקציונאליות</Description>
+	<Nickname>T8</Nickname>
+	<Milestone>false</Milestone>
+
+	<TaskNumber>7</TaskNumber>
+	<Description> ויישום תכונת תוכנה חדשה</Description>
+	<Nickname>software application</Nickname>
+	<Milestone>false</Milestone>
+
+	<TaskNumber>8</TaskNumber>
+	<Description>ניתוח מערכת מקיף</Description>
+	<Nickname>system analysis</Nickname>
+	<Milestone>false</Milestone>
+
+	<TaskNumber>9</TaskNumber>
+	<Description>ניפוי באגים</Description>
+	<Nickname>debugging</Nickname>
+	<Milestone>false</Milestone>
+
+	<TaskNumber>10</TaskNumber>
+	<Description>תיעוד טכני ודוחות</Description>
+	<Nickname>documentation</Nickname>
+	<Milestone>false</Milestone>
+
+	<TaskNumber>11</TaskNumber>
+	<Description>פתרון צווארי בקבוק בביצועים במערכת</Description>
+	<Nickname>#SP</Nickname>
+	<Milestone>false</Milestone>
+
+	<TaskNumber>12</TaskNumber>
+	<Description>תחזוקת תוכנה</Description>
+	<Nickname>software </Nickname>
+	<Milestone>false</Milestone>
+
+	<TaskNumber>13</TaskNumber>
+	<Description>זיהוי תחומים לשיפור</Description>
+	<Nickname>Identify areas</Nickname>
+	<Milestone></Milestone>
+
+	<TaskNumber>14</TaskNumber>
+	<Description>הטמעת בקרת גרסאות ותהליכי סקירת קוד</Description>
+	<Nickname>Implementation</Nickname>
+	<Milestone>false</Milestone>
+	
+	<TaskNumber>15</TaskNumber>
+	<Description>ייעול ביצועי</Description>
+	<Nickname>performance optimization</Nickname>
+	<Milestone>false</Milestone>
+
+	<TaskNumber>16</TaskNumber>
+	<Description>עיצוב מסד הנתונים</Description>
+	<Nickname>Database design</Nickname>
+	<Milestone>false</Milestone>
+
+	<TaskNumber>17</TaskNumber>
+	<Description>ביקורות אבטחה</Description>
+	<Nickname>Security audits</Nickname>
+	<Milestone>false</Milestone>
+
+	<TaskNumber>18</TaskNumber>
+	<Description>ניתוח ביצועים</Description>
+	<Nickname>performance analysis</Nickname>
+	<Milestone>false</Milestone>
+
+	<TaskNumber>19</TaskNumber>
+	<Description>ביצוע בדיקות עומס</Description>
+	<Nickname>load tests</Nickname>
+	<Milestone>false</Milestone>
+
+	<TaskNumber>20</TaskNumber>
+	<Description> לאינטגרציה עם מערכות חיצוניות APIs פיתוח ותחזוקה של</Description>
+	<Nickname>APIs dev</Nickname>
+	<Milestone>false</Milestone>
+	
+</ArrayOfTask>
