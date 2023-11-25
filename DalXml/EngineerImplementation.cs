@@ -9,27 +9,66 @@ using System.Collections.Generic;
 internal class EngineerImplementation : IEngineer
 {
     public int Create(Engineer item)
-    {
-        throw new NotImplementedException();
+    {   
+        List<Engineer> allEng = XMLTools.LoadListFromXMLElement<Engineer>("engineers");
+        if (allEng.FirstOrDefault(e => e.IdEngineer == item.IdEngineer) != null)
+            throw new DalAlreayExistException($" Engineer with ID={item.IdEngineer} already exist ");
+        else
+        {
+            allEng.Add(item);
+            XMLTools.SaveListToXMLElement(allEng, "engineers");
+        }
+        return int.Parse(item.IdEngineer.Value.ToString()) ;
     }
 
     public void Delete(int id)
     {
-        throw new NotImplementedException();
+        List<Engineer> allEng = XMLTools.LoadListFromXMLElement<Engineer>("engineers");
+        Engineer eng=allEng.FirstOrDefault(e=>e.IdEngineer == id);
+        if(eng == null)
+            throw new DalDoesNotExistException($" Engineer with ID={id} is not exist ");
+        else
+        {
+            allEng.Remove(eng);
+            XMLTools.SaveListToXMLElement(allEng, "engineers");
+
+        }
+
     }
 
     public Engineer? Read(Func<Engineer, bool>? filter)
     {
-        throw new NotImplementedException();
+        List<Engineer> allEng = XMLTools.LoadListFromXMLElement<Engineer>("engineers");
+        return allEng.FirstOrDefault(filter!);
     }
 
     public IEnumerable<Engineer?> ReadAll(Func<Engineer, bool>? filter = null)
     {
-        throw new NotImplementedException();
+        List<Engineer> allEng = XMLTools.LoadListFromXMLElement<Engineer>("engineers");
+
+        if (filter != null)
+        {
+            return from item in allEng
+                   where filter(item)
+                   select item;
+        }
+        return from item in allEng
+               select item;
     }
 
     public void Update(Engineer item)
     {
-        throw new NotImplementedException();
+
+        List<Engineer> allEng = XMLTools.LoadListFromXMLElement<Engineer>("Engineer");
+        Engineer eng = allEng.FirstOrDefault(e => e.IdEngineer == item.IdEngineer)!;
+        if (eng == null)
+            throw new DalDoesNotExistException($" Enginerr with ID={item.IdEngineer} is not exist ");
+        else
+        {
+            allEng.Remove(eng);
+            allEng.Add(eng);
+            List<Engineer> allEng = XMLTools.LoadListFromXMLElement<Engineer>("engineers");
+
+        }
     }
 }
