@@ -15,7 +15,12 @@ public record Task
   string? Notes = null,
   int? EngineerId = null,
   Levels? DifficultyLevel = null
-  );
+  )
+
+{
+  public Task(int? taskNumber) : this(taskNumber, "", "", false){}
+}
+
 
 
 

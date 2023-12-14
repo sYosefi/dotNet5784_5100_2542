@@ -2,6 +2,7 @@
 namespace Dal;
 using DalApi;
 using DO;
+using System.Linq;
 using System.Xml;
 using System.Xml.Linq;
 
@@ -17,35 +18,81 @@ internal class TaskImplementation : ITask
     //    return nextId;
     //}
 
-
-    public int Create(DO.Task item)
+    public List<Task> makeTaskList()
     {
         XElement element = XMLTools.LoadListFromXMLElement("task");
         List<Task> allTasks = new List<Task>();
-
-        // Check if the XElement has elements and convert them to Task objects
         if (element.HasElements)
         {
             allTasks = element.Elements("task")
                               .Select(e => new Task(
-                                  TaskNumber: XmlElement.Element("TaskNumber")
-                                  ) //{ /* Map XML elements to Task properties */ })
+                                  TaskNumber: (int)e.Element("TaskNumber"),
+                                  Description: e.Element("Description").ToString(),
+                                  Nickname: e.Element("Nickname").ToString(),
+                                  Milestone: (bool)e.Element("Milestone"),
+                                  ProductionDate: (DateTime)e.Element("ProductionDate"),
+                                  StartDate: (DateTime)e.Element("StartDate"),
+                                  EstimatedCompletionDate: (DateTime)e.Element("EstimatedCompletionDate"),
+                                  FinalDateForCompletion: (DateTime)e.Element("StartDate"),
+                                  ActualEndDate: (DateTime)e.Element("ActualEndDate"),
+                                  Product: e.Element("Product").ToString(),
+                                  Notes: e.Element("Notes").ToString(),
+                                  EngineerId: (int)e.Element("EngineerId"),
+                                  DifficultyLevel: (Levels?)Enum.Parse(typeof(Levels), e.Element("DifficultyLevel").Value)
+                              // Map other properties similarly
+                              ))
                               .ToList();
         }
+        return allTasks;
+    }
 
+    public void saveList(List<Task> allTasks,string entity)
+    {
+        XElement rootElem = new XElement(entity,
+        allTasks.Select(task => new XElement("task",
+            new XElement("TaskNumber", task.TaskNumber),
+            new XElement("Description", task.Description),
+            new XElement("Nickname", task.Nickname),
+            new XElement("Milestone", task.Milestone),
+            new XElement("ProductionDate", task.ProductionDate),
+            new XElement("StartDate", task.StartDate),
+            new XElement("EstimatedCompletionDate", task.EstimatedCompletionDate),
+            new XElement("FinalDateForCompletion", task.FinalDateForCompletion),
+            new XElement("ActualEndDate", task.ActualEndDate),
+            new XElement("Product", task.Product),
+            new XElement("Notes", task.Notes),
+            new XElement("EngineerId", task.EngineerId),
+             new XElement("DifficultyLevel", task.DifficultyLevel)
+        ))) ;
+
+        try
+        {
+            rootElem.Save("task.xml");
+        }
+        catch (Exception ex)
+        {
+            throw new DalXMLFileLoadCreateException($"Failed to save list");
+        }
+    }
+    public int Create(DO.Task item)
+    {
+        
+
+        // Check if the XElement has elements and convert them to Task objects
+        List<Task> allTasks = makeTaskList();
         int nextId = Config.NextTaskId;
-        Task newTask = item with { TaskNumber = nextId };
+        Task newTask = new Task(TaskNumber: nextId,"","",false);
         allTasks.Add(newTask);
 
         // Save the updated list of tasks to the XML
-        XMLTools.SaveListToXMLElement(allTasks, "tasks");
+        saveList(allTasks, "tasks");
 
         return nextId;
     }
 
     public void Delete(int id)
     {
-        List<Task> allTask = XMLTools.LoadListFromXMLElement<Task>("tasks");
+        List<Task> allTask = makeTaskList();
         Task task = allTask.FirstOrDefault(t => t.TaskNumber == id)!;
         if (task == null)
             throw new DalDoesNotExistException($" Task with ID={id} is not exist ");
@@ -53,19 +100,19 @@ internal class TaskImplementation : ITask
         else
         {
             allTask.Remove(task);
-            XMLTools.SaveListToXMLElement(allTask, "tasks");
+            saveList(allTask, "tasks");
         }
     }
 
     public DO.Task? Read(Func<DO.Task, bool>? filter)
     {
-        List<Task> allTask = XMLTools.LoadListFromXMLElement<Task>("tasks");
+        List<Task> allTask = makeTaskList();
         return allTask.FirstOrDefault(filter!);
     }
 
     public IEnumerable<DO.Task?> ReadAll(Func<DO.Task, bool>? filter = null)
     {
-        List<Task> allTask = XMLTools.LoadListFromXMLElement<Task>("tasks");
+        List<Task> allTask = makeTaskList();
         if (filter != null)
         {
             return from item in allTask
@@ -78,7 +125,7 @@ internal class TaskImplementation : ITask
 
     public void Update(DO.Task item)
     {
-        List<Task> allTask = XMLTools.LoadListFromXMLElement<Task>("tasks");
+        List<Task> allTask = makeTaskList();
 
         Task t = allTask.FirstOrDefault(t => t.TaskNumber == item.TaskNumber)!;
         if (t == null)
@@ -87,7 +134,7 @@ internal class TaskImplementation : ITask
         {
             allTask.Remove(t);
             allTask.Add(item);
-            XMLTools.SaveListToXMLElement(allTask, "tasks");
+            saveList(allTask, "tasks");
         }
     }
 }
