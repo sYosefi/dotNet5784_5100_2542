@@ -2,15 +2,44 @@
 namespace Dal;
 using DalApi;
 using DO;
+using System.Xml;
+using System.Xml.Linq;
+
 internal class TaskImplementation : ITask
 {
+    //public int Create(DO.Task item)
+    //{
+    //    List<Task> allTasks = XMLTools.LoadListFromXMLElement<Task>("task");
+    //    int nextId = Config.NextTaskId;
+    //    Task newTask = item with { TaskNumber = nextId };
+    //    allTasks.Add(newTask);
+    //    XMLTools.SaveListToXMLElement(allTasks, "tasks");
+    //    return nextId;
+    //}
+
+
     public int Create(DO.Task item)
     {
-        List<Task> allTasks = XMLTools.LoadListFromXMLElement<Task>("task");
+        XElement element = XMLTools.LoadListFromXMLElement("task");
+        List<Task> allTasks = new List<Task>();
+
+        // Check if the XElement has elements and convert them to Task objects
+        if (element.HasElements)
+        {
+            allTasks = element.Elements("task")
+                              .Select(e => new Task(
+                                  TaskNumber: XmlElement.Element("TaskNumber")
+                                  ) //{ /* Map XML elements to Task properties */ })
+                              .ToList();
+        }
+
         int nextId = Config.NextTaskId;
         Task newTask = item with { TaskNumber = nextId };
         allTasks.Add(newTask);
+
+        // Save the updated list of tasks to the XML
         XMLTools.SaveListToXMLElement(allTasks, "tasks");
+
         return nextId;
     }
 
