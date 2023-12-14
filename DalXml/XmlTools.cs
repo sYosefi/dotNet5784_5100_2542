@@ -25,7 +25,7 @@ static class XMLTools
         double.TryParse((string?)element.Element(name), out var result) ? (double?)result : null;
 
     public static int? ToIntNullable(this XElement element, string name) =>
-        int.TryParse((string?)element.Element(name), out var result) ? (int?)result : null;
+      int.TryParse((string?)element.Element(name), out var result) ? (int?)result : null;
 
     #endregion
 

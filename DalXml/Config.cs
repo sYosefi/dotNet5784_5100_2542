@@ -8,9 +8,12 @@ namespace Dal;
 
 internal static class Config
 {
-    static string s_data_config_xml = "data-config";
-    internal static int NextDependenceId { get => XMLTools.GetAndIncreaseNextId(s_data_config_xml, "NextDependenceId"); }
-    internal static int NextTaskId { get => XMLTools.GetAndIncreaseNextId(s_data_config_xml, "NextTaskId"); }
+   // static string s_data_config_xml = "data-config";
+    static string s_task_xml = "tasks";
+    static string s_engineer_xml = "engineers";
+    static string s_dependence_xml = "dependences";
+    internal static int NextDependenceId { get => XMLTools.GetAndIncreaseNextId(s_dependence_xml, "NextDependenceId"); }
+    internal static int NextTaskId { get => XMLTools.GetAndIncreaseNextId(s_task_xml, "TaskNumber"); }
 
     //S
     //int nextId = Config.NextCourseId;
