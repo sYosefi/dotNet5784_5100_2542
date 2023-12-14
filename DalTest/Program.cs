@@ -12,7 +12,11 @@ namespace DalTest
         //private static IEngineer? e_dalIEngineer = new EngineerImplementation(); //Stage 1
         //private static ITask? t_dalITask = new TaskImplementation(); //Stage 1
         //private static IDependence? d_dalIDependence = new DependenceImplementation(); //Stage 1
-         static readonly IDal s_dal=new DalList();//stage 2
+        // static readonly IDal s_dal=new DalList();//stage 2
+        // static readonly IDal s_dal = new DalXml(); //stage 3
+        static readonly Dal.DalXml s_dal = new Dal.DalXml(); // Fully qualify the namespace
+
+
 
         /// <summary>
         /// The function picks up what data is being used and creates a new task
@@ -234,8 +238,11 @@ namespace DalTest
        {
             try
             {
-                Initialization.Do(s_dal);
-            }
+                Console.Write("Would you like to create Initial data? (Y/N)"); //stage 3
+                string? ans = Console.ReadLine() ?? throw new FormatException("Wrong input"); //stage 3
+                if (ans == "Y") //stage 3
+                    Initialization.Do(s_dal);//stage 2 
+            }            
 
             catch (Exception ex)
             {
