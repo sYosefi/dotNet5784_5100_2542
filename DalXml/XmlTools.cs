@@ -101,8 +101,6 @@ static class XMLTools
             using FileStream file = new(filePath, FileMode.Open);
             XmlSerializer x = new(typeof(List<T>));
             return x.Deserialize(file) as List<T> ?? new();
-            //XmlSerializer x = new(typeof(List<T?>));
-            //return x.Deserialize(file) as List<T?> ?? new();
 
         }
         catch (Exception ex)
