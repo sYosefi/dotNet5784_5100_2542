@@ -1,2 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ArrayOfTask></ArrayOfTask>
+<tasks>
+  <task>
+    <TaskNumber>2</TaskNumber>
+    <Description>אופטימיזיציה של המערכת</Description>
+    <Nickname>BM#</Nickname>
+    <Milestone>false</Milestone>
+    <ProductionDate>2023-12-27T15:58:56.6739218+02:00</ProductionDate>
+    <StartDate />
+    <EstimatedCompletionDate />
+    <FinalDateForCompletion />
+    <ActualEndDate />
+    <Product />
+    <Notes />
+    <EngineerId />
+    <DifficultyLevel>AdvancedBeginner</DifficultyLevel>
+  </task>
+</tasks>

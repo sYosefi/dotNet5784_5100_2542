@@ -20,7 +20,7 @@ internal class TaskImplementation : ITask
 
     public List<Task> makeTaskList()
     {
-        XElement element = XMLTools.LoadListFromXMLElement("task");
+        XElement element = XMLTools.LoadListFromXMLElement("tasks");
         List<Task> allTasks = new List<Task>();
         if (element.HasElements)
            
@@ -31,11 +31,11 @@ internal class TaskImplementation : ITask
                                   Description: e.Element("Description").ToString(),
                                   Nickname: e.Element("Nickname").ToString(),
                                   Milestone: (bool)e.Element("Milestone"),
-                                  ProductionDate: (DateTime)e.Element("ProductionDate"),
-                                  StartDate: (DateTime)e.Element("StartDate"),
-                                  EstimatedCompletionDate: (DateTime)e.Element("EstimatedCompletionDate"),
-                                  FinalDateForCompletion: (DateTime)e.Element("StartDate"),
-                                  ActualEndDate: (DateTime)e.Element("ActualEndDate"),
+                                  ProductionDate: DateTime.Parse( e.Element("ProductionDate").ToString()),
+                                  StartDate: DateTime.Parse(e.Element("StartDate").ToString()),
+                                  EstimatedCompletionDate: DateTime.Parse(e.Element("EstimatedCompletionDate").ToString()),
+                                  FinalDateForCompletion: DateTime.Parse(e.Element("FinalDateForCompletion").ToString()),
+                                  ActualEndDate: DateTime.Parse(e.Element("ActualEndDate").ToString()),
                                   Product: e.Element("Product").ToString(),
                                   Notes: e.Element("Notes").ToString(),
                                   EngineerId: (int)e.Element("EngineerId"),
@@ -68,7 +68,10 @@ internal class TaskImplementation : ITask
 
         try
         {
-            rootElem.Save("task.xml");
+            XMLTools.SaveListToXMLElement(rootElem, "tasks");
+
+            //string filePath = $"{s_xml_dir + entity}.xml";
+            //rootElem.Save("tasks.xml");
         }
         catch (Exception ex)
         {

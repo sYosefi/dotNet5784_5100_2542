@@ -100,4 +100,29 @@
     <NumberDependenceTask>5</NumberDependenceTask>
     <NuberPreviousTask>3</NuberPreviousTask>
   </Dependence>
+  <Dependence>
+    <IdDependence>0</IdDependence>
+    <NumberDependenceTask>1</NumberDependenceTask>
+    <NuberPreviousTask>2</NuberPreviousTask>
+  </Dependence>
+  <Dependence>
+    <IdDependence>0</IdDependence>
+    <NumberDependenceTask>2</NumberDependenceTask>
+    <NuberPreviousTask>3</NuberPreviousTask>
+  </Dependence>
+  <Dependence>
+    <IdDependence>0</IdDependence>
+    <NumberDependenceTask>1</NumberDependenceTask>
+    <NuberPreviousTask>6</NuberPreviousTask>
+  </Dependence>
+  <Dependence>
+    <IdDependence>0</IdDependence>
+    <NumberDependenceTask>5</NumberDependenceTask>
+    <NuberPreviousTask>4</NuberPreviousTask>
+  </Dependence>
+  <Dependence>
+    <IdDependence>0</IdDependence>
+    <NumberDependenceTask>5</NumberDependenceTask>
+    <NuberPreviousTask>3</NuberPreviousTask>
+  </Dependence>
 </ArrayOfDependence>
