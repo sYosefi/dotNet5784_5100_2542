@@ -25,17 +25,17 @@ internal class TaskImplementation : ITask
         if (element.HasElements)
            
         {
-            allTasks = element.Elements("task")
+            allTasks = element.Elements("tasks")
                               .Select(e => new Task(
                                   TaskNumber: (int)e.Element("TaskNumber"),
                                   Description: e.Element("Description").ToString(),
                                   Nickname: e.Element("Nickname").ToString(),
                                   Milestone: (bool)e.Element("Milestone"),
-                                  ProductionDate: (DateTime)e.Element("ProductionDate"),
-                                  StartDate: (DateTime)e.Element("StartDate"),
-                                  EstimatedCompletionDate: (DateTime)e.Element("EstimatedCompletionDate"),
-                                  FinalDateForCompletion: (DateTime)e.Element("StartDate"),
-                                  ActualEndDate: (DateTime)e.Element("ActualEndDate"),
+                                  ProductionDate: DateTime.Parse(e.Element("ProductionDate").ToString()),
+                                  StartDate: DateTime.Parse(e.Element("StartDate").ToString()),
+                                  EstimatedCompletionDate: DateTime.Parse(e.Element("EstimatedCompletionDate").ToString()),
+                                  FinalDateForCompletion: DateTime.Parse(e.Element("FinalDateForCompletion").ToString()),
+                                  ActualEndDate: DateTime.Parse(e.Element("ActualEndDate").ToString()),
                                   Product: e.Element("Product").ToString(),
                                   Notes: e.Element("Notes").ToString(),
                                   EngineerId: (int)e.Element("EngineerId"),
