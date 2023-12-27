@@ -18,7 +18,23 @@ public record Task
   )
 
 {
-  public Task(int? taskNumber) : this(taskNumber, "", "", false){}
+    public Task(int? taskNumber, Task t): this(null, "", "", false)
+    {
+        this.TaskNumber = taskNumber;
+        this.Description = t.Description;
+        this.Nickname = t.Nickname;
+        this.Milestone = t.Milestone;
+        this.ProductionDate = t.ProductionDate;
+        this.StartDate = t.StartDate;
+        this.EstimatedCompletionDate= t.EstimatedCompletionDate;
+        this.FinalDateForCompletion= t.FinalDateForCompletion;
+        this.ActualEndDate = t.ActualEndDate;
+        this.Product = t.Product;
+        this.Notes = t.Notes;
+        this.EngineerId= t.EngineerId;
+        this.DifficultyLevel = t.DifficultyLevel;
+
+    }
 }
 
 

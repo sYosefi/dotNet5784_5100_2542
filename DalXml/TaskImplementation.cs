@@ -23,6 +23,7 @@ internal class TaskImplementation : ITask
         XElement element = XMLTools.LoadListFromXMLElement("task");
         List<Task> allTasks = new List<Task>();
         if (element.HasElements)
+           
         {
             allTasks = element.Elements("task")
                               .Select(e => new Task(
@@ -76,12 +77,13 @@ internal class TaskImplementation : ITask
     }
     public int Create(DO.Task item)
     {
-        
+        //1. לקבל את הרשימה של כל המשימות
+        //2. להוסיף 
 
         // Check if the XElement has elements and convert them to Task objects
         List<Task> allTasks = makeTaskList();
         int nextId = Config.NextTaskId;
-        Task newTask = new Task(TaskNumber: nextId,"","",false);
+        Task newTask = new Task(item.TaskNumber,item);
         allTasks.Add(newTask);
 
         // Save the updated list of tasks to the XML

@@ -54,14 +54,18 @@ public static class Initialization
 
          }*/
         Engineer e1 = new(227355056, "Elad Arison", "eladA@gmai.com", Experience.Expert, 50);
-        s_dal!.Engineer.Create(e1);
+      
         Engineer e2 = new(218796347, "Aviran Asor", "avirn2187@gmai.com", Experience.Novice, 30);
-        s_dal!.Engineer.Create(e2);
+        
         Engineer e3 = new(219975145, "Carmela Avner", "Carmela@gmai.com", Experience.AdvancedBeginner, 32);
-        s_dal!.Engineer.Create(e3);
+       
         Engineer e4 = new(354871125, "Alon Barnea", "aBarnea@gmai.com", Experience.Expert, 55);
-        s_dal!.Engineer.Create(e4);
+
         Engineer e5 = new(375942451, "Ravit Bohan", "RB451@gmail.com", Experience.Proficient, 40);
+        s_dal!.Engineer.Create(e1);
+        s_dal!.Engineer.Create(e2);
+        s_dal!.Engineer.Create(e3);
+        s_dal!.Engineer.Create(e4);
         s_dal!.Engineer.Create(e5);
 
     }

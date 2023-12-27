@@ -9,15 +9,25 @@ using System.Collections.Generic;
 internal class EngineerImplementation : IEngineer
 {
     public int Create(Engineer item)
-    {   
+    {
+        //int nextId = Config.NextDependenceId;
+        //List<Dependence> allDep = XMLTools.LoadListFromXMLSerializer<Dependence>("dependences");
+        //Dependence newDep = item with { IdDependence = nextId };
+        //allDep.Add(newDep);
+        //XMLTools.SaveListToXMLSerializer<Dependence>(allDep, "dependences");
+        //return nextId;
+
+
+
         List<Engineer> allEng = XMLTools.LoadListFromXMLSerializer<Engineer>("engineers");
-        if (allEng.FirstOrDefault(e => e.IdEngineer == item.IdEngineer) != null)
-            throw new DalAlreayExistException($" Engineer with ID={item.IdEngineer} already exist ");
-        else
-        {
+        //if (allEng.FirstOrDefault(e => e.IdEngineer == item.IdEngineer) != null)
+        //    throw new DalAlreayExistException($" Engineer with ID={item.IdEngineer} already exist ");
+
+        //else
+        //{
             allEng.Add(item);
             XMLTools.SaveListToXMLSerializer(allEng, "engineers");
-        }
+      //  }
         return int.Parse(item.IdEngineer.Value.ToString()) ;
     }
 
