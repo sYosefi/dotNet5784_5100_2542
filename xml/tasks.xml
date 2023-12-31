@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <tasks>
   <tasks>
-    <TaskNumber>0</TaskNumber>
+    <TaskNumber>75</TaskNumber>
     <Description>ניתוח סיכונים בפרויקט</Description>
     <Nickname>Risk Analysis</Nickname>
     <Milestone>false</Milestone>
-    <ProductionDate>2023-12-31T18:34:23.8967164+02:00</ProductionDate>
+    <ProductionDate>2023-12-31T18:52:17.1170561+02:00</ProductionDate>
     <StartDate />
     <EstimatedCompletionDate />
     <FinalDateForCompletion />
@@ -16,11 +16,11 @@
     <DifficultyLevel>Proficient</DifficultyLevel>
   </tasks>
   <tasks>
-    <TaskNumber>0</TaskNumber>
+    <TaskNumber>76</TaskNumber>
     <Description>אופטימיזיציה של המערכת</Description>
     <Nickname>BM#</Nickname>
     <Milestone>false</Milestone>
-    <ProductionDate>2023-12-31T18:34:23.9032744+02:00</ProductionDate>
+    <ProductionDate>2023-12-31T18:52:17.1218139+02:00</ProductionDate>
     <StartDate />
     <EstimatedCompletionDate />
     <FinalDateForCompletion />
@@ -31,11 +31,11 @@
     <DifficultyLevel>AdvancedBeginner</DifficultyLevel>
   </tasks>
   <tasks>
-    <TaskNumber>0</TaskNumber>
+    <TaskNumber>77</TaskNumber>
     <Description>ביקורת קוד</Description>
     <Nickname>AA</Nickname>
     <Milestone>false</Milestone>
-    <ProductionDate>2023-12-31T18:34:23.9032781+02:00</ProductionDate>
+    <ProductionDate>2023-12-31T18:52:17.1218167+02:00</ProductionDate>
     <StartDate />
     <EstimatedCompletionDate />
     <FinalDateForCompletion />
@@ -46,11 +46,11 @@
     <DifficultyLevel>Expert</DifficultyLevel>
   </tasks>
   <tasks>
-    <TaskNumber>0</TaskNumber>
+    <TaskNumber>78</TaskNumber>
     <Description>מחקר ויישום טכנולוגיות חדשות</Description>
     <Nickname>Research</Nickname>
     <Milestone>false</Milestone>
-    <ProductionDate>2023-12-31T18:34:23.9032787+02:00</ProductionDate>
+    <ProductionDate>2023-12-31T18:52:17.1218171+02:00</ProductionDate>
     <StartDate />
     <EstimatedCompletionDate />
     <FinalDateForCompletion />
@@ -61,11 +61,11 @@
     <DifficultyLevel>Novice</DifficultyLevel>
   </tasks>
   <tasks>
-    <TaskNumber>0</TaskNumber>
+    <TaskNumber>79</TaskNumber>
     <Description>הטמעת אמצעי אבטחה</Description>
     <Nickname>Implementation-SM</Nickname>
     <Milestone>false</Milestone>
-    <ProductionDate>2023-12-31T18:34:23.9032789+02:00</ProductionDate>
+    <ProductionDate>2023-12-31T18:52:17.1218173+02:00</ProductionDate>
     <StartDate />
     <EstimatedCompletionDate />
     <FinalDateForCompletion />
@@ -76,11 +76,11 @@
     <DifficultyLevel>Competent</DifficultyLevel>
   </tasks>
   <tasks>
-    <TaskNumber>0</TaskNumber>
+    <TaskNumber>80</TaskNumber>
     <Description>הכנת דרישות לא פונקציונאליות</Description>
     <Nickname>T8</Nickname>
     <Milestone>false</Milestone>
-    <ProductionDate>2023-12-31T18:34:23.9032791+02:00</ProductionDate>
+    <ProductionDate>2023-12-31T18:52:17.1218174+02:00</ProductionDate>
     <StartDate />
     <EstimatedCompletionDate />
     <FinalDateForCompletion />

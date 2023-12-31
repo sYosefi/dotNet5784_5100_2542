@@ -29,7 +29,7 @@ internal class TaskImplementation : ITask
             new XElement("DifficultyLevel", item.DifficultyLevel));
         root.Add(newTask);
         XMLTools.SaveListToXMLElement(root, "tasks");
-        return item.TaskNumber;
+        return nextId;
 
     }
     public Task CreateTaskFromElement(XElement taskElem)
