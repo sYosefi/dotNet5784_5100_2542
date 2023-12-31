@@ -14,7 +14,8 @@ internal class Program
     //private static ITask? t_dalITask = new TaskImplementation(); //Stage 1
     //private static IDependence? d_dalIDependence = new DependenceImplementation(); //Stage 1
     //static readonly IDal s_dal=new DalList();//stage 2
-    static readonly IDal s_dal = new Dal.DalXml (); //stage 3
+    //static readonly IDal s_dal = new Dal.DalXml (); //stage 3
+    static readonly IDal s_dal = Factory.Get; //stage 4
 
 
     /// <summary>
@@ -188,7 +189,6 @@ internal class Program
         {
             switch (choice)
             {
-               //Miriam 20:49
 
                 case 1: { CreateEngineer(); break; };
                 case 2: { ReadEngineer(); break; };
@@ -240,7 +240,8 @@ internal class Program
             Console.Write("Would you like to create Initial data? (Y/N)"); //stage 3
             string? ans = Console.ReadLine() ?? throw new FormatException("Wrong input"); //stage 3
             if (ans == "Y") //stage 3
-                Initialization.Do(s_dal);//stage 2 
+                //Initialization.Do(s_dal);//stage 2 
+                Initialization.Do(); //stage 4
         }            
 
         catch (Exception ex)
