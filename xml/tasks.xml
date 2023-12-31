@@ -1,2 +1,93 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ArrayOfTask></ArrayOfTask>
+<tasks>
+  <tasks>
+    <TaskNumber>0</TaskNumber>
+    <Description>ניתוח סיכונים בפרויקט</Description>
+    <Nickname>Risk Analysis</Nickname>
+    <Milestone>false</Milestone>
+    <ProductionDate>2023-12-31T18:34:23.8967164+02:00</ProductionDate>
+    <StartDate />
+    <EstimatedCompletionDate />
+    <FinalDateForCompletion />
+    <ActualEndDate />
+    <Product />
+    <Notes />
+    <EngineerId />
+    <DifficultyLevel>Proficient</DifficultyLevel>
+  </tasks>
+  <tasks>
+    <TaskNumber>0</TaskNumber>
+    <Description>אופטימיזיציה של המערכת</Description>
+    <Nickname>BM#</Nickname>
+    <Milestone>false</Milestone>
+    <ProductionDate>2023-12-31T18:34:23.9032744+02:00</ProductionDate>
+    <StartDate />
+    <EstimatedCompletionDate />
+    <FinalDateForCompletion />
+    <ActualEndDate />
+    <Product />
+    <Notes />
+    <EngineerId />
+    <DifficultyLevel>AdvancedBeginner</DifficultyLevel>
+  </tasks>
+  <tasks>
+    <TaskNumber>0</TaskNumber>
+    <Description>ביקורת קוד</Description>
+    <Nickname>AA</Nickname>
+    <Milestone>false</Milestone>
+    <ProductionDate>2023-12-31T18:34:23.9032781+02:00</ProductionDate>
+    <StartDate />
+    <EstimatedCompletionDate />
+    <FinalDateForCompletion />
+    <ActualEndDate />
+    <Product />
+    <Notes />
+    <EngineerId />
+    <DifficultyLevel>Expert</DifficultyLevel>
+  </tasks>
+  <tasks>
+    <TaskNumber>0</TaskNumber>
+    <Description>מחקר ויישום טכנולוגיות חדשות</Description>
+    <Nickname>Research</Nickname>
+    <Milestone>false</Milestone>
+    <ProductionDate>2023-12-31T18:34:23.9032787+02:00</ProductionDate>
+    <StartDate />
+    <EstimatedCompletionDate />
+    <FinalDateForCompletion />
+    <ActualEndDate />
+    <Product />
+    <Notes />
+    <EngineerId />
+    <DifficultyLevel>Novice</DifficultyLevel>
+  </tasks>
+  <tasks>
+    <TaskNumber>0</TaskNumber>
+    <Description>הטמעת אמצעי אבטחה</Description>
+    <Nickname>Implementation-SM</Nickname>
+    <Milestone>false</Milestone>
+    <ProductionDate>2023-12-31T18:34:23.9032789+02:00</ProductionDate>
+    <StartDate />
+    <EstimatedCompletionDate />
+    <FinalDateForCompletion />
+    <ActualEndDate />
+    <Product />
+    <Notes />
+    <EngineerId />
+    <DifficultyLevel>Competent</DifficultyLevel>
+  </tasks>
+  <tasks>
+    <TaskNumber>0</TaskNumber>
+    <Description>הכנת דרישות לא פונקציונאליות</Description>
+    <Nickname>T8</Nickname>
+    <Milestone>false</Milestone>
+    <ProductionDate>2023-12-31T18:34:23.9032791+02:00</ProductionDate>
+    <StartDate />
+    <EstimatedCompletionDate />
+    <FinalDateForCompletion />
+    <ActualEndDate />
+    <Product />
+    <Notes />
+    <EngineerId />
+    <DifficultyLevel>Competent</DifficultyLevel>
+  </tasks>
+</tasks>

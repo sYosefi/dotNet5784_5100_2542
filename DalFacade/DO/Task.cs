@@ -2,7 +2,7 @@
 
 public record Task
  (
-  int? TaskNumber,
+  int TaskNumber,
   string Description,
   string Nickname,
   bool Milestone,
@@ -18,7 +18,7 @@ public record Task
   )
 
 {
-    public Task(int? taskNumber, Task t): this(null, "", "", false)
+    public Task(int taskNumber, Task t): this(0, "", "", false)
     {
         this.TaskNumber = taskNumber;
         this.Description = t.Description;

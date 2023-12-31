@@ -17,17 +17,15 @@ internal class EngineerImplementation : IEngineer
         //XMLTools.SaveListToXMLSerializer<Dependence>(allDep, "dependences");
         //return nextId;
 
-
-
         List<Engineer> allEng = XMLTools.LoadListFromXMLSerializer<Engineer>("engineers");
-        //if (allEng.FirstOrDefault(e => e.IdEngineer == item.IdEngineer) != null)
-        //    throw new DalAlreayExistException($" Engineer with ID={item.IdEngineer} already exist ");
+        if (allEng.FirstOrDefault(e => e.IdEngineer == item.IdEngineer) != null)
+           throw new DalAlreayExistException($" Engineer with ID={item.IdEngineer} already exist ");
 
-        //else
-        //{
+        else
+        {
             allEng.Add(item);
             XMLTools.SaveListToXMLSerializer(allEng, "engineers");
-      //  }
+        }
         return int.Parse(item.IdEngineer.Value.ToString()) ;
     }
 

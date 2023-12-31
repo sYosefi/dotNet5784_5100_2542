@@ -31,7 +31,6 @@ public static class Initialization
         Task t5 = new(5, "הטמעת אמצעי אבטחה", "Implementation-SM", false, DateTime.Now, null, null, null, null, null, null, null, Levels.Competent);
         Task t6 = new(6, "הכנת דרישות לא פונקציונאליות", "T8", false, DateTime.Now, null, null, null, null, null, null, null, Levels.Competent);
         s_dal!.Task.Create(t1);
-        s_dal!.Task.Create(t1);
         s_dal!.Task.Create(t2);
         s_dal!.Task.Create(t3);
         s_dal!.Task.Create(t4);
@@ -72,11 +71,11 @@ public static class Initialization
 
     private static void createDependences()
     {
-        Dependence d1 = new(null, 1, 2);
-        Dependence d2 = new(null, 2, 3);
-        Dependence d3 = new(null, 1, 6);
-        Dependence d4 = new(null, 5, 4);
-        Dependence d5 = new(null, 5, 3);
+        Dependence d1 = new(0, 1, 2);
+        Dependence d2 = new(0, 2, 3);
+        Dependence d3 = new(0, 1, 6);
+        Dependence d4 = new(0, 5, 4);
+        Dependence d5 = new(0, 5, 3);
         s_dal!.Dependence.Create(d1);
         s_dal!.Dependence.Create(d2);
         s_dal!.Dependence.Create(d3);

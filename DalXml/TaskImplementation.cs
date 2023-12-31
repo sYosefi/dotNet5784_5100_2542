@@ -8,135 +8,117 @@ using System.Xml.Linq;
 
 internal class TaskImplementation : ITask
 {
-    //public int Create(DO.Task item)
-    //{
-    //    List<Task> allTasks = XMLTools.LoadListFromXMLElement<Task>("task");
-    //    int nextId = Config.NextTaskId;
-    //    Task newTask = item with { TaskNumber = nextId };
-    //    allTasks.Add(newTask);
-    //    XMLTools.SaveListToXMLElement(allTasks, "tasks");
-    //    return nextId;
-    //}
 
-    public List<Task> makeTaskList()
-    {
-        XElement element = XMLTools.LoadListFromXMLElement("task");
-        List<Task> allTasks = new List<Task>();
-        if (element.HasElements)
-           
-        {
-            allTasks = element.Elements("tasks")
-                              .Select(e => new Task(
-                                  TaskNumber: (int)e.Element("TaskNumber"),
-                                  Description: e.Element("Description").ToString(),
-                                  Nickname: e.Element("Nickname").ToString(),
-                                  Milestone: (bool)e.Element("Milestone"),
-                                  ProductionDate: DateTime.Parse(e.Element("ProductionDate").ToString()),
-                                  StartDate: DateTime.Parse(e.Element("StartDate").ToString()),
-                                  EstimatedCompletionDate: DateTime.Parse(e.Element("EstimatedCompletionDate").ToString()),
-                                  FinalDateForCompletion: DateTime.Parse(e.Element("FinalDateForCompletion").ToString()),
-                                  ActualEndDate: DateTime.Parse(e.Element("ActualEndDate").ToString()),
-                                  Product: e.Element("Product").ToString(),
-                                  Notes: e.Element("Notes").ToString(),
-                                  EngineerId: (int)e.Element("EngineerId"),
-                                  DifficultyLevel: (Levels?)Enum.Parse(typeof(Levels), e.Element("DifficultyLevel").Value)
-                              // Map other properties similarly
-                              ))
-                              .ToList();
-        }
-        return allTasks;
-    }
-
-    public void saveList(List<Task> allTasks,string entity)
-    {
-        XElement rootElem = new XElement(entity,
-        allTasks.Select(task => new XElement("task",
-            new XElement("TaskNumber", task.TaskNumber),
-            new XElement("Description", task.Description),
-            new XElement("Nickname", task.Nickname),
-            new XElement("Milestone", task.Milestone),
-            new XElement("ProductionDate", task.ProductionDate),
-            new XElement("StartDate", task.StartDate),
-            new XElement("EstimatedCompletionDate", task.EstimatedCompletionDate),
-            new XElement("FinalDateForCompletion", task.FinalDateForCompletion),
-            new XElement("ActualEndDate", task.ActualEndDate),
-            new XElement("Product", task.Product),
-            new XElement("Notes", task.Notes),
-            new XElement("EngineerId", task.EngineerId),
-             new XElement("DifficultyLevel", task.DifficultyLevel)
-        ))) ;
-
-        try
-        {
-            rootElem.Save("task.xml");
-        }
-        catch (Exception ex)
-        {
-            throw new DalXMLFileLoadCreateException($"Failed to save list");
-        }
-    }
     public int Create(DO.Task item)
     {
-        //1. לקבל את הרשימה של כל המשימות
-        //2. להוסיף 
-
-        // Check if the XElement has elements and convert them to Task objects
-        List<Task> allTasks = makeTaskList();
+        XElement root = XMLTools.LoadListFromXMLElement("tasks");
         int nextId = Config.NextTaskId;
-        Task newTask = new Task(item.TaskNumber,item);
-        allTasks.Add(newTask);
+        XElement newTask = new XElement("tasks",
+            new XElement("TaskNumber", nextId),
+            new XElement("Description", item.Description),
+            new XElement("Nickname", item.Nickname),
+            new XElement("Milestone", item.Milestone),
+            new XElement("ProductionDate", item.ProductionDate),
+            new XElement("StartDate", item.StartDate),
+            new XElement("EstimatedCompletionDate", item.EstimatedCompletionDate),
+            new XElement("FinalDateForCompletion", item.FinalDateForCompletion),
+            new XElement("ActualEndDate", item.ActualEndDate),
+            new XElement("Product", item.Product),
+            new XElement("Notes", item.Notes),
+            new XElement("EngineerId", item.EngineerId),
+            new XElement("DifficultyLevel", item.DifficultyLevel));
+        root.Add(newTask);
+        XMLTools.SaveListToXMLElement(root, "tasks");
+        return item.TaskNumber;
 
-        // Save the updated list of tasks to the XML
-        saveList(allTasks, "tasks");
-
-        return nextId;
     }
+    public Task CreateTaskFromElement(XElement taskElem)
+    {
+        Task newTask = new Task(
+            taskElem.Element("TaskNumber") != null ? (int)int.Parse(taskElem.Element("TaskNumber").Value) : 0,
+            taskElem.Element("Description")?.Value,
+            taskElem.Element("Nickname")?.Value,
+            (bool)taskElem.Element("Milestone"),
+            taskElem.Element("ProductionDate") != null ? (DateTime?)DateTime.Parse(taskElem.Element("ProductionDate").Value) : null,
+            taskElem.Element("StartDate") != null ? (DateTime?)DateTime.Parse(taskElem.Element("StartDate").Value) : null,
+            taskElem.Element("EstimatedCompletionDate") != null ? (DateTime?)DateTime.Parse(taskElem.Element("EstimatedCompletionDate").Value) : null,
+            taskElem.Element("FinalDateForCompletion") != null ? (DateTime?)DateTime.Parse(taskElem.Element("FinalDateForCompletion").Value) : null,
+            taskElem.Element("ActualEndDate") != null ? (DateTime?)DateTime.Parse(taskElem.Element("ActualEndDate").Value) : null,
+            taskElem.Element("Product")?.Value,
+            taskElem.Element("Notes")?.Value,
+            taskElem.Element("EngineerId") != null ? (int?)int.Parse(taskElem.Element("EngineerId").Value) : null,
+            taskElem.Element("DifficultyLevel") != null ? (Levels)Enum.Parse(typeof(Levels), taskElem.Element("DifficultyLevel").Value) : null
+        );
 
+        return newTask;
+    }
     public void Delete(int id)
     {
-        List<Task> allTask = makeTaskList();
-        Task task = allTask.FirstOrDefault(t => t.TaskNumber == id)!;
-        if (task == null)
+        XElement root = XMLTools.LoadListFromXMLElement("tasks");
+        XElement taskToDel = root.Elements("tasks").FirstOrDefault(t => (int)t.Element("TaskNumber") == id);
+        if (taskToDel == null)
+        {
             throw new DalDoesNotExistException($" Task with ID={id} is not exist ");
 
-        else
-        {
-            allTask.Remove(task);
-            saveList(allTask, "tasks");
         }
+        taskToDel.Remove();
+        XMLTools.SaveListToXMLElement(root, "tasks");
     }
 
     public DO.Task? Read(Func<DO.Task, bool>? filter)
     {
-        List<Task> allTask = makeTaskList();
-        return allTask.FirstOrDefault(filter!);
+        XElement root = XMLTools.LoadListFromXMLElement("tasks");
+
+        // If a filter is provided, use it to filter the tasks
+        IEnumerable<XElement> filteredTasks = filter != null
+            ? root.Elements("tasks").Where(t => filter(CreateTaskFromElement(t)))
+            : root.Elements("tasks");
+
+        XElement taskElem = filteredTasks.FirstOrDefault();
+
+        if (taskElem != null)
+        {
+            return CreateTaskFromElement(taskElem);
+        }
+
+        return null;
     }
 
     public IEnumerable<DO.Task?> ReadAll(Func<DO.Task, bool>? filter = null)
     {
-        List<Task> allTask = makeTaskList();
+        XElement root = XMLTools.LoadListFromXMLElement("tasks");
+        IEnumerable<XElement> allTasks = root.Elements("tasks");
         if (filter != null)
         {
-            return from item in allTask
-                   where filter(item)
-                   select item;
+            allTasks = allTasks.Where(t => filter(CreateTaskFromElement(t)));
         }
-        return from item in allTask
-               select item;
+        return allTasks.Select(t => CreateTaskFromElement(t));
     }
 
     public void Update(DO.Task item)
     {
-        List<Task> allTask = makeTaskList();
+        XElement root = XMLTools.LoadListFromXMLElement("tasks");
+        XElement taskToUpdate = root.Elements("tasks").FirstOrDefault(t => (int)t.Element("TaskNumber") == item.TaskNumber);
+        if (taskToUpdate != null)
+        {
+            taskToUpdate.Element("Description").SetValue(item.Description);
+            taskToUpdate.Element("Nickname").SetValue(item.Nickname);
+            taskToUpdate.Element("Milestone").SetValue(item.Milestone);
+            taskToUpdate.Element("ProductionDate").SetValue(item.ProductionDate);
+            taskToUpdate.Element("StartDate").SetValue(item.StartDate);
+            taskToUpdate.Element("EstimatedCompletionDate").SetValue(item.EstimatedCompletionDate);
+            taskToUpdate.Element("FinalDateForCompletion").SetValue(item.FinalDateForCompletion);
+            taskToUpdate.Element("ActualEndDate").SetValue(item.ActualEndDate);
+            taskToUpdate.Element("Product").SetValue(item.Product);
+            taskToUpdate.Element("Notes").SetValue(item.Notes);
+            taskToUpdate.Element("EngineerId").SetValue(item.EngineerId);
+            taskToUpdate.Element("DifficultyLevel").SetValue(item.DifficultyLevel);
 
-        Task t = allTask.FirstOrDefault(t => t.TaskNumber == item.TaskNumber)!;
-        if (t == null)
-            throw new DalDoesNotExistException($" Task with ID={item.TaskNumber} is not exist ");
+        }
+
         else
         {
-            allTask.Remove(t);
-            allTask.Add(item);
-            saveList(allTask, "tasks");
+            throw new DalDoesNotExistException($" Task with ID={item.TaskNumber} is not exist ");
         }
     }
 }
