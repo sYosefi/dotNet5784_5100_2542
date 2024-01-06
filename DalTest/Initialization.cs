@@ -11,12 +11,13 @@ public static class Initialization
     private static readonly Random s_rand = new();
     private static IDal? s_dal;
 
-    public static void Do()
+    //public static void Do(IDal dal) //stage 2
+    public static void Do()//stage 4
     {
         //e_dalEngineer = dalEngineer ?? throw new NullReferenceException("DAL can not be null!");
         //t_dalTask = dalTask ?? throw new NullReferenceException("DAL can not be null!");
         //d_dalDependence = dalDependence ?? throw new NullReferenceException("DAL can not be null!");
-        //s_dal=dal?? throw new NullReferenceException("DAL object can not be null!");-Stage 2
+        //s_dal=dal?? throw new NullReferenceException("DAL object can not be null!");//Stage 2
         s_dal = DalApi.Factory.Get; //stage 4
         createTasks();
         createEngineers();
