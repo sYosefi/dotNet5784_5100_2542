@@ -2,7 +2,7 @@
 
 public interface ITask
 {
-    public IEnumerable<BO.Task> GetAllTask();
+    public IEnumerable<BO.Task> GetAllTasks();
     public BO.Task GetTaskDetails(int taskNumber);
     public void AddTask(BO.Task task);
     public void UpdateTask(BO.Task task);

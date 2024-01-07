@@ -10,13 +10,6 @@ internal class EngineerImplementation : IEngineer
 {
     public int Create(Engineer item)
     {
-        //int nextId = Config.NextDependenceId;
-        //List<Dependence> allDep = XMLTools.LoadListFromXMLSerializer<Dependence>("dependences");
-        //Dependence newDep = item with { IdDependence = nextId };
-        //allDep.Add(newDep);
-        //XMLTools.SaveListToXMLSerializer<Dependence>(allDep, "dependences");
-        //return nextId;
-
         List<Engineer> allEng = XMLTools.LoadListFromXMLSerializer<Engineer>("engineers");
         if (allEng.FirstOrDefault(e => e.IdEngineer == item.IdEngineer) != null)
            throw new DalAlreayExistException($" Engineer with ID={item.IdEngineer} already exist ");
@@ -66,14 +59,15 @@ internal class EngineerImplementation : IEngineer
 
     public void Update(Engineer item)
     {
-        List<Engineer> allEng = XMLTools.LoadListFromXMLSerializer<Engineer>("Engineer");
+        List<Engineer> allEng = XMLTools.LoadListFromXMLSerializer<Engineer>("engineers");
         Engineer eng = allEng.FirstOrDefault(e => e.IdEngineer == item.IdEngineer)!;
         if (eng == null)
             throw new DalDoesNotExistException($" Enginerr with ID={item.IdEngineer} is not exist ");
         else
         {
             allEng.Remove(eng);
-            allEng.Add(eng);
+            allEng.Add(item);
+            XMLTools.SaveListToXMLSerializer(allEng, "engineers");
         }
     }
 }

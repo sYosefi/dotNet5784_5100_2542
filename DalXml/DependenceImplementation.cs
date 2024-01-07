@@ -26,7 +26,9 @@ internal class DependenceImplementation : IDependence
         else
         {
             allDep.Remove(dependence);
+            XMLTools.SaveListToXMLSerializer<Dependence>(allDep, "dependences");
         }
+
     }
 
     public Dependence? Read(Func<Dependence, bool>? filter)
@@ -60,6 +62,7 @@ internal class DependenceImplementation : IDependence
         {
             allDep.Remove(dependence);
             allDep.Add(item);
+            XMLTools.SaveListToXMLSerializer<Dependence>(allDep, "dependences");
         }
     }
 }

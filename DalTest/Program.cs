@@ -25,11 +25,13 @@ internal class Program
 
     public static DO.Task TaskDetails(int id)
     {
+        Levels level;
         string desc, nick, product, note;
-        DateTime start, end, estimatedCompletion, finalDate;
-        Console.WriteLine("Enter descibtion of the task");
+        DateTime start, end, estimatedCompletion, finalDate, actualEndDate;
+        int engId;
+        Console.WriteLine("Enter description of the task");
         desc = Console.ReadLine();
-        Console.WriteLine("Enter a nickName for the task");
+        Console.WriteLine("Enter a nickname for the task");
         nick = Console.ReadLine();
         Console.WriteLine("Enter start date for the task");
         start = DateTime.Parse(Console.ReadLine());
@@ -37,11 +39,18 @@ internal class Program
         estimatedCompletion = DateTime.Parse(Console.ReadLine());
         Console.WriteLine("Enter Final date for the task");
         finalDate = DateTime.Parse(Console.ReadLine());
+        Console.WriteLine("Enter a actual end date of the task product");
+        actualEndDate = DateTime.Parse(Console.ReadLine());
         Console.WriteLine("Enter a description of the task product");
         product = Console.ReadLine();
         Console.WriteLine("Enter notes on the task");
         note = Console.ReadLine();
-        DO.Task t = new(id, desc, nick, false, DateTime.Now, start, estimatedCompletion, finalDate, null, product, note, null, null);
+        Console.WriteLine("Enter engineer id");
+        engId=int.Parse(Console.ReadLine());
+        Console.WriteLine("Enter level of the task");
+        //(Levels)Enum.Parse(typeof(Levels), taskElem.Element("DifficultyLevel").Value)
+        level =(Levels)Enum.Parse(typeof(Levels), Console.ReadLine());
+        DO.Task t = new(id, desc, nick, false, DateTime.Now, start, estimatedCompletion, finalDate, actualEndDate, product, note, engId, level);
         return t;
     }
     private static void CreateTask()
@@ -54,7 +63,7 @@ internal class Program
     private static void ReadTask()
     {
         Console.WriteLine("Enter task number");
-        int taskNumber=int.Parse(Console.ReadLine());
+        int taskNumber = int.Parse(Console.ReadLine());
         s_dal!.Task.Read(t => t.TaskNumber == taskNumber); // Use a lambda expression to define the filter
     }
     private static void UpdateTask()
@@ -79,7 +88,7 @@ internal class Program
         Console.WriteLine("Enter name engineer");
         name = Console.ReadLine();
         Console.WriteLine("Enter engineer mail");
-        mail = Console.ReadLine(); 
+        mail = Console.ReadLine();
         Console.WriteLine("Enter engineer experience");
         e = Console.ReadLine();
         Experience exp = (Experience)Enum.Parse(typeof(Experience), e, true);
@@ -103,13 +112,13 @@ internal class Program
         Console.WriteLine("Enter engineer ID");
         int id = int.Parse(Console.ReadLine());
         Func<DO.Engineer, bool> filter = (engineer) => engineer.IdEngineer == id;
-        s_dal!.Engineer.Read(filter);
+        Console.WriteLine(s_dal!.Engineer.Read(filter)); 
     }
     private static void UpdateEngineer()
     {
         Console.WriteLine("Enter Engineer id to update");
         int idEngineer = int.Parse(Console.ReadLine());
-        Engineer eng = s_dal!.Engineer.Read(e => e.IdEngineer == idEngineer); 
+        Engineer eng = s_dal!.Engineer.Read(e => e.IdEngineer == idEngineer);
         Console.WriteLine(eng);
         Engineer updatedEng = EnginerrDetails(idEngineer);
         s_dal!.Engineer.Update(updatedEng);
@@ -129,15 +138,15 @@ internal class Program
         NumberDependence = int.Parse(Console.ReadLine());
         Console.WriteLine("Enter a number previous task");
         NuberPrevious = int.Parse(Console.ReadLine());
-        Dependence dep = new(0, NumberDependence, NuberPrevious);
+        Dependence dep = new(id, NumberDependence, NuberPrevious);
         return dep;
     }
 
     private static void CreateDependence()
     {
         Dependence depTmp = DependenceDetails(0);
-        Dependence newDep = new (depTmp.IdDependence,depTmp.NumberDependenceTask, depTmp.NuberPreviousTask);
-        s_dal!.Dependence!.Create(newDep); 
+        Dependence newDep = new(depTmp.IdDependence, depTmp.NumberDependenceTask, depTmp.NuberPreviousTask);
+        s_dal!.Dependence!.Create(newDep);
 
     }
 
@@ -165,8 +174,8 @@ internal class Program
 
     private static void ShowTask()
     {
-        Console.WriteLine("Enter 0 to exist the main menu\n Enter 1 to create a new engineer\nEnter 2 to display a engineer\nEnter 3 to update a engineer \nEnter 4 to delete a engineer");
-        int choice= int.Parse(Console.ReadLine());
+        Console.WriteLine("Enter 0 to exist the main menu\nEnter 1 to create a new task \nEnter 2 to display a task\nEnter 3 to update a task \nEnter 4 to delete a task");
+        int choice = int.Parse(Console.ReadLine());
         while (choice != 0)
         {
             switch (choice)
@@ -176,14 +185,14 @@ internal class Program
                 case 3: { UpdateTask(); break; };
                 case 4: { DeleteTask(); break; };
             }
-            Console.WriteLine("Enter 0 to exist the main menu\n Enter 1 to create a new task \nEnter 2 to display a task\nEnter 3 to update a task \nEnter 4 to delete a task");
+            Console.WriteLine("Enter 0 to exist the main menu\nEnter 1 to create a new task \nEnter 2 to display a task\nEnter 3 to update a task \nEnter 4 to delete a task");
             choice = int.Parse(Console.ReadLine());
         }
 
     }
     private static void ShowEngineer()
     {
-        Console.WriteLine("Enter 0 to exist the main menu\n Enter 1 to create a new task \nEnter 2 to display a task\nEnter 3 to update a task \nEnter 4 to delete a task");
+        Console.WriteLine("Enter 0 to exist the main menu\nEnter 1 to create a new engineer \nEnter 2 to display a engineer\nEnter 3 to update a engineer \nEnter 4 to delete a engineer");
         int choice = int.Parse(Console.ReadLine());
         while (choice != 0)
         {
@@ -195,13 +204,13 @@ internal class Program
                 case 3: { UpdateEngineer(); break; };
                 case 4: { DeleteEngineer(); break; };
             }
-            Console.WriteLine("Enter 0 to exist the main menu\n Enter 1 to create a new task \nEnter 2 to display a task\nEnter 3 to update a task \nEnter 4 to delete a task");
+            Console.WriteLine("Enter 0 to exist the main menu\nEnter 1 to create a new engineer \nEnter 2 to display a engineer\nEnter 3 to update a engineer \nEnter 4 to delete a engineer");
             choice = int.Parse(Console.ReadLine());
         }
     }
     private static void showDependence()
     {
-        Console.WriteLine("Enter 0 to exist the main menu\n Enter 1 to create a dependence \nEnter 2 to display a dependence\nEnter 3 to update a dependence \nEnter 4 to delete a dependence");
+        Console.WriteLine("Enter 0 to exist the main menu\nEnter 1 to create a dependence \nEnter 2 to display a dependence\nEnter 3 to update a dependence \nEnter 4 to delete a dependence");
         int choice = int.Parse(Console.ReadLine());
         while (choice != 0)
         {
@@ -213,28 +222,30 @@ internal class Program
                 case 3: { UpdateDependence(); break; };
                 case 4: { DeleteDependence(); break; };
             }
-            Console.WriteLine("Enter 0 to exist the main menu\n Enter 1 to create a dependence \nEnter 2 to display a dependence\nEnter 3 to update a dependence \nEnter 4 to delete a dependence");
+            Console.WriteLine("Enter 0 to exist the main menu\nEnter 1 to create a dependence \nEnter 2 to display a dependence\nEnter 3 to update a dependence \nEnter 4 to delete a dependence");
             choice = int.Parse(Console.ReadLine());
         }
     }
     private static void Menu()
     {
-        Console.WriteLine("Enter 0 to exist the main menu\n Enter 1 to Engineers\n Enter 2 to Tasks\n Enter 3 to Dependences");
+        Console.WriteLine("Enter 0 to exist the main menu\nEnter 1 to Engineers\nEnter 2 to Tasks\nEnter 3 to Dependences");
         int choice = int.Parse(Console.ReadLine());
         while (choice != 0)
         {
             switch (choice)
             {
-                case 1: { ShowTask(); break; };
-                case 2: { ShowEngineer(); break; };
+                case 1: { ShowEngineer(); break; };
+                case 2: { ShowTask(); break; };
                 case 3: { showDependence(); break; };
-            }
-            Console.WriteLine("Enter 0 to exist the main menu\n Enter 1 to Engineers\n Enter 2 to Tasks\n Enter 3 to Dependences");
+            };
+
+
+            Console.WriteLine("Enter 0 to exist the main menu\nEnter 1 to Engineers\nEnter 2 to Tasks\nEnter 3 to Dependences");
             choice = int.Parse(Console.ReadLine());
         }
     }
     static void Main(string[] args)
-   {
+    {
         try
         {
             Console.Write("Would you like to create Initial data? (Y/N)"); //stage 3
@@ -242,13 +253,17 @@ internal class Program
             if (ans == "Y") //stage 3
                 //Initialization.Do(s_dal);//stage 2 
                 Initialization.Do(); //stage 4
-        }            
+            else
+            {
+                Menu();
+            }
+        }
 
         catch (Exception ex)
         {
             Console.WriteLine(ex);
         }
-   } 
-    
+    }
+
 }
 

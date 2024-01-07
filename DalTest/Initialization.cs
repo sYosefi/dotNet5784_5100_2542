@@ -1,6 +1,7 @@
 ﻿namespace DalTest;
 using DalApi;
 using DO;
+using System;
 
 
 public static class Initialization
@@ -26,12 +27,12 @@ public static class Initialization
 
     private static void createTasks()
     {
-        Task t1 = new(1, "ניתוח סיכונים בפרויקט", "Risk Analysis", false, DateTime.Now, null, null, null, null, null, null, null, Levels.Proficient);
-        Task t2 = new(2, "אופטימיזיציה של המערכת", "BM#", false, DateTime.Now, null, null, null, null, null, null, null, Levels.AdvancedBeginner);
-        Task t3 = new(3, "ביקורת קוד", "AA", false, DateTime.Now, null, null, null, null, null, null, null, Levels.Expert);
-        Task t4 = new(4, "מחקר ויישום טכנולוגיות חדשות", "Research", false, DateTime.Now, null, null, null, null, null, null, null, Levels.Novice);
-        Task t5 = new(5, "הטמעת אמצעי אבטחה", "Implementation-SM", false, DateTime.Now, null, null, null, null, null, null, null, Levels.Competent);
-        Task t6 = new(6, "הכנת דרישות לא פונקציונאליות", "T8", false, DateTime.Now, null, null, null, null, null, null, null, Levels.Competent);
+        Task t1 = new(1, "ניתוח סיכונים בפרויקט", "Risk Analysis", false, DateTime.Now, DateTime.Now, DateTime.Now, DateTime.Now, DateTime.Now, null, null, null, Levels.Proficient);
+        Task t2 = new(2, "אופטימיזיציה של המערכת", "BM#", false, DateTime.Now, DateTime.Now, DateTime.Now, DateTime.Now, DateTime.Now, null, null, null, Levels.AdvancedBeginner);
+        Task t3 = new(3, "ביקורת קוד", "AA", false, DateTime.Now, DateTime.Now, DateTime.Now, DateTime.Now, DateTime.Now, null, null, null, Levels.Expert);
+        Task t4 = new(4, "מחקר ויישום טכנולוגיות חדשות", "Research", false, DateTime.Now, DateTime.Now, DateTime.Now, DateTime.Now, DateTime.Now, null, null, null, Levels.Novice);
+        Task t5 = new(5, "הטמעת אמצעי אבטחה", "Implementation-SM", false, DateTime.Now, DateTime.Now, DateTime.Now, DateTime.Now, DateTime.Now, null, null, null, Levels.Competent);
+        Task t6 = new(6, "הכנת דרישות לא פונקציונאליות", "T8", false, DateTime.Now, DateTime.Now, DateTime.Now, DateTime.Now, DateTime.Now, null, null, null, Levels.Competent);
         s_dal!.Task.Create(t1);
         s_dal!.Task.Create(t2);
         s_dal!.Task.Create(t3);
