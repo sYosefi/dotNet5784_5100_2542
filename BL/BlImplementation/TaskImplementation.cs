@@ -5,6 +5,7 @@ namespace BlImplementation
 {
     internal class TaskImplementation : ITask
     {
+        EngineerImplementation engineerImplementation = new EngineerImplementation();
         private DalApi.IDal _dal = DalApi.Factory.Get;
         public void AddTask(BO.Task task)
         {
@@ -60,7 +61,7 @@ namespace BlImplementation
                         FinalDateForCompletion = (DateTime)doTask.FinalDateForCompletion,
                         ActualEndDate = (DateTime)doTask.ActualEndDate,
                         Notes = doTask.Notes,
-                        eng =EngineerImplementation.GetEngineerDetails(doTask.EngineerId),
+                        eng = engineerImplementation.GetEngineerDetails(doTask.EngineerId ?? 0),
                         DifficultyLevel =(BO.Levels)Enum.Parse(typeof(BO.Levels),doTask.DifficultyLevel.ToString())
                     }) ;
         }
@@ -141,12 +142,13 @@ namespace BlImplementation
                        task.Product,
                        task.Notes,
                        task.eng.IdEngineer,
-                       task.DifficultyLevel
-                       );
+                      (DO.Levels?)Enum.Parse(typeof(DO.Levels), task.DifficultyLevel.ToString())
+                      ) ;
                     _dal.Task.Update(doTask);
                 }
                    
             }
+            catch { }
         }
     }
 }
