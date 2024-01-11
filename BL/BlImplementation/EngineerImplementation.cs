@@ -37,7 +37,7 @@ internal class EngineerImplementation:IEngineer
         }
     }
 
-    public BO.Engineer GetEngineerDetails(int idEng)
+    public BO.Engineer GetEngineerDetails(int? idEng)
     {
         DO.Engineer? doEng = _dal.Engineer.Read(e => e.IdEngineer == idEng);
         if(doEng==null) 
@@ -48,7 +48,7 @@ internal class EngineerImplementation:IEngineer
         }
         return new BO.Engineer()
         {
-            IdEngineer = idEng,
+            IdEngineer = idEng??0,
             Name = doEng.NameEngineer,
             Email = doEng.MailEnginerr,
             EngineerLevel = (BO.Experience)(int)Enum.Parse(typeof(BO.Experience), doEng.EngineerRank.ToString()),
