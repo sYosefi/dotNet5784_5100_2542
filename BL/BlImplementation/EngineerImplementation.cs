@@ -4,39 +4,38 @@ using System;
 using System.Xml.Linq;
 namespace BlImplementation;
 
-internal class EngineerImplementation:IEngineer
+internal class EngineerImplementation : IEngineer
 {
     private List<EngineerInTask> EngineerInTaskList = new List<EngineerInTask>();
     private DalApi.IDal _dal = DalApi.Factory.Get;
     public void AddEngineer(BO.Engineer eng)
     {
-        try 
+        try
         {
             if (eng.IdEngineer >= 0 && eng.Name != "" && eng.SalaryPerHour > 0 && eng.Email?.Contains("@") == true)
             {
                 DO.Engineer doEng = new DO.Engineer(
-                    eng.IdEngineer, 
-                    eng.Name, 
+                    eng.IdEngineer,
+                    eng.Name,
                     eng.Email,
                     // Convert BO.Experience to DO.Experience?
-                    (DO.Experience?)eng.EngineerLevel, 
+                    (DO.Experience?)eng.EngineerLevel,
                     eng.SalaryPerHour
-                    ); 
+                    );
                 int idEng = _dal.Engineer.Create(doEng);
             }
             else
             {
                 throw new Exception();
             }
-           
+
         }
-        catch (DO.DalAlreayExistException) 
+        catch (DO.DalAlreayExistException)
         {
             //זריקת חריגה של מהנדס קיים מה-BO 
-           // throw new BO.BlAlreadyExistsException($"Student with ID={boStudent.Id} already exists", ex);
+            // throw new BO.BlAlreadyExistsException($"Student with ID={boStudent.Id} already exists", ex);
         }
     }
-
     public BO.Engineer GetEngineerDetails(int? idEng)
     {
         DO.Engineer? doEng = _dal.Engineer.Read(e => e.IdEngineer == idEng);

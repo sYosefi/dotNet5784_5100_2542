@@ -1,154 +1,177 @@
 ﻿using BlApi;
 using DO;
 
-namespace BlImplementation
+namespace BlImplementation;
+
+internal class TaskImplementation : ITask
 {
-    internal class TaskImplementation : ITask
+    EngineerImplementation engineerImplementation = new EngineerImplementation();
+    private DalApi.IDal _dal = DalApi.Factory.Get;
+
+    //פונקציית עזר שמחזירה רשימה של תלויות עבור מספר משימה
+    public List<BO.Task> getDependenciesList(int taskNumber)
     {
-        EngineerImplementation engineerImplementation = new EngineerImplementation();
-        private DalApi.IDal _dal = DalApi.Factory.Get;
-        public void AddTask(BO.Task task)
+        try
         {
-            try
+            List<Dependence> allDependencies = new List<Dependence>();
+            allDependencies = _dal.Dependence.ReadAll().Where(d => d.NumberDependenceTask == taskNumber).ToList();
+
+
+            return allDependencies.Select(d => GetTaskDetails(d.NuberPreviousTask)).ToList();
+        }
+        catch (Exception ex) 
+        {
+            throw new Exception("");
+        }
+    }
+
+    //פונקציית עזר להחזרת הסטטוס המתאים עבור כל משימה בהתאם לתאריכים של המשימה ולתאריך של היום
+    public BO.Status getStatus(
+     DateTime estimatedStartDate, 
+     DateTime actualStartDate,
+     ///*DateTime estimatedCompletionDate*/,
+     DateTime finalDateForCompletion
+    //,DateTime actualEndDate 
+        )
+    {
+        //לא מתוכנן
+        if (estimatedStartDate > DateTime.Now)
+            return BO.Status.Unscheduled;
+        //מתוזמן    
+        if (actualStartDate < DateTime.Now)
+            return BO.Status.Scheduled;
+        //בסכנה
+        if ((finalDateForCompletion - DateTime.Now).TotalDays <= 3)
+            return BO.Status.InJeopardy;
+       return BO.Status.OnTrack;
+
+    }
+    public void AddTask(BO.Task task)
+    {
+        try
+        {
+            if (task.TaskNumber > 0 &&
+                task.Nickname != ""
+                //&& !string.IsNullOrEmpty(task.Nickname)
+                )
             {
-                if (task.TaskNumber > 0 &&
-                    task.Nickname != ""
-                    //&& !string.IsNullOrEmpty(task.Nickname)
-                    )
+                DO.Task doTask = new DO.Task(
+                    task.TaskNumber,
+                    task.Description,
+                    task.Nickname,
+                    true,
+                    task.ProductionDate,
+                    task.ActualStartDate,
+                    task.EstimatedCompletionDate,
+                    task.FinalDateForCompletion,
+                    task.ActualEndDate,
+                    task.Product,
+                    task.Notes,
+                    task.eng!.IdEngineer,
+                    (DO.Levels)(int)Enum.Parse(typeof(DO.Levels),task.DifficultyLevel.ToString())    
+                    );
+                    int numTask = _dal.Task.Create(doTask);
+            }
+            else
+            {
+                throw new NotImplementedException();
+            }
+        }
+        catch (DO.DalAlreayExistException)
+        {
+        }
+    }
+
+    public IEnumerable<BO.Task> GetAllTasks()
+    {
+        return (from DO.Task doTask in _dal.Task.ReadAll()
+
+                select new BO.Task
                 {
-                    DO.Task doTask = new DO.Task(
-                        task.TaskNumber,
-                        task.Description,
-                        task.Nickname,
-                        true,
-                        task.ProductionDate,
-                        task.ActualStartDate,
-                        task.EstimatedCompletionDate,
-                        task.FinalDateForCompletion,
-                        task.ActualEndDate,
-                        task.Product,
-                        task.Notes,
-                        task.eng!.IdEngineer,
-                        (DO.Levels)(int)Enum.Parse(typeof(DO.Levels),task.DifficultyLevel.ToString())    
-                        );
-                        int numTask = _dal.Task.Create(doTask);
-                }
-                else
-                {
-                    throw new NotImplementedException();
-                }
-            }
-            catch (DO.DalAlreayExistException)
+                    TaskNumber = doTask.TaskNumber,
+                    Description = doTask.Description,
+                    Nickname = doTask.Nickname,
+                    ProductionDate = (DateTime)doTask.ProductionDate,
+                    Status=getStatus((DateTime)doTask.EstimatedCompletionDate, (DateTime)doTask.StartDate, (DateTime)doTask.FinalDateForCompletion),
+                    DependenciesList=getDependenciesList(doTask.TaskNumber),
+                    //RelatedMileStone =
+                    ActualStartDate = (DateTime)doTask.StartDate,
+                    EstimatedCompletionDate = (DateTime)doTask.EstimatedCompletionDate,
+                    FinalDateForCompletion = (DateTime)doTask.FinalDateForCompletion,
+                    ActualEndDate = (DateTime)doTask.ActualEndDate,
+                    Notes = doTask.Notes,
+                    eng = engineerImplementation.GetEngineerDetails(doTask.EngineerId ?? 0),
+                    DifficultyLevel =(BO.Levels)Enum.Parse(typeof(BO.Levels),doTask.DifficultyLevel.ToString())
+                }) ;
+    }
+
+    public BO.Task GetTaskDetails(int taskNumber)
+    {
+        DO.Task? doTask=_dal.Task.Read(t=>t.TaskNumber == taskNumber);
+        if(doTask == null)
+        {
+            throw new Exception("Task not found");
+        }
+        return new BO.Task()
+        {
+            TaskNumber = taskNumber,
+            Description = doTask.Description,
+            Nickname = doTask.Nickname,
+            ProductionDate = (DateTime)doTask.ProductionDate,
+            Status = getStatus((DateTime)doTask.EstimatedCompletionDate, (DateTime)doTask.StartDate, (DateTime)doTask.FinalDateForCompletion),
+            DependenciesList = getDependenciesList(doTask.TaskNumber),
+            //RelatedMileStone =
+            ActualStartDate = (DateTime)doTask.StartDate,
+            EstimatedCompletionDate = (DateTime)doTask.EstimatedCompletionDate,
+            FinalDateForCompletion = (DateTime)doTask.FinalDateForCompletion,
+            ActualEndDate = (DateTime)doTask.ActualEndDate,
+            Notes = doTask.Notes,
+            eng = engineerImplementation.GetEngineerDetails(doTask.EngineerId ?? 0),
+            DifficultyLevel = (BO.Levels)Enum.Parse(typeof(BO.Levels), doTask.DifficultyLevel.ToString())
+
+        };
+    }
+
+    public void RemoveTask(int taskNumber)
+    {
+        try
+        {
+            if (_dal.Task.ReadAll().Any(t => t?.TaskNumber == taskNumber) == false)
+                throw new Exception("Task not exist");
+            if (_dal.Dependence.ReadAll().Any(d => d?.NuberPreviousTask == taskNumber))
+                throw new Exception("DEpence");
+            _dal.Task.Delete(taskNumber);
+
+        }
+        catch (Exception ex) { }
+    }
+
+    public void UpdateTask(BO.Task task)
+    {
+        try 
+        {
+            if (task.TaskNumber > 0 &&task.Nickname != "")
             {
+                DO.Task doTask = new DO.Task(
+                   task.TaskNumber,
+                   task.Description,
+                   task.Nickname,
+                   //task.RelatedMileStone,
+                   false,
+                   task.ProductionDate,
+                   task.ActualStartDate,
+                   task.EstimatedCompletionDate,
+                   task.FinalDateForCompletion,
+                   task.ActualEndDate,
+                   task.Product,
+                   task.Notes,
+                   task.eng.IdEngineer,
+                  (DO.Levels?)Enum.Parse(typeof(DO.Levels), task.DifficultyLevel.ToString())
+                  ) ;
+                _dal.Task.Update(doTask);
             }
+               
         }
-
-        public IEnumerable<BO.Task> GetAllTasks()
-        {
-            return (from DO.Task doTask in _dal.Task.ReadAll()
-
-                    select new BO.Task
-                    {
-                        TaskNumber = doTask.TaskNumber,
-                        Description = doTask.Description,
-                        Nickname = doTask.Nickname,
-                        ProductionDate = (DateTime)doTask.ProductionDate,
-                        //Status=(Status)Enum.Parse(typeof(Status),doTask.)
-                        //DependenciesList=
-                        //RelatedMileStone =
-                        ActualStartDate = (DateTime)doTask.StartDate,
-                        EstimatedCompletionDate = (DateTime)doTask.EstimatedCompletionDate,
-                        FinalDateForCompletion = (DateTime)doTask.FinalDateForCompletion,
-                        ActualEndDate = (DateTime)doTask.ActualEndDate,
-                        Notes = doTask.Notes,
-                        eng = engineerImplementation.GetEngineerDetails(doTask.EngineerId ?? 0),
-                        DifficultyLevel =(BO.Levels)Enum.Parse(typeof(BO.Levels),doTask.DifficultyLevel.ToString())
-                    }) ;
-        }
-
-        public BO.Task GetTaskDetails(int taskNumber)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void RemoveTask(int taskNumber)
-        {
-            //try
-            //{
-            //    if (!EngineerInTaskList.Any(e => e.IdEngineer == idEng))
-            //    {
-            //        _dal.Engineer.Delete(idEng);
-            //    }
-            //    else
-            //    {
-            //        throw new Exception();
-            //    }
-
-            //}
-            //catch (DO.DalAlreayExistException)
-            //{
-            //    //זריקת חריגה של מהנדס קיים מה-BO 
-            //    // throw new BO.BlAlreadyExistsException($"Student with ID={boStudent.Id} already exists", ex);
-            //}
-            try
-            {
-                
-            }
-            catch (Exception ex) { }
-        }
-
-        public void UpdateTask(BO.Task task)
-        {
-            //try
-            //{
-            //    if (eng.IdEngineer >= 0 && eng.Name != "" && eng.SalaryPerHour > 0 && eng.Email?.Contains("@") == true)
-            //    {
-            //        DO.Engineer doEng = new DO.Engineer(
-            //            eng.IdEngineer,
-            //            eng.Name,
-            //            eng.Email,
-            //            // Convert BO.Experience to DO.Experience?
-            //            (DO.Experience?)eng.EngineerLevel,
-            //            eng.SalaryPerHour
-            //            );
-            //        _dal.Engineer.Update(doEng);
-            //    }
-            //    else
-            //    {
-            //        throw new Exception();
-            //    }
-
-            //}
-            //catch (DO.DalAlreayExistException)
-            //{
-            //    //זריקת חריגה של מהנדס קיים מה-BO 
-            //    // throw new BO.BlAlreadyExistsException($"Student with ID={boStudent.Id} already exists", ex);
-            //}
-            try 
-            {
-                if (task.TaskNumber > 0 &&task.Nickname != "")
-                {
-                    DO.Task doTask = new DO.Task(
-                       task.TaskNumber,
-                       task.Description,
-                       task.Nickname,
-                       //task.RelatedMileStone,
-                       false,
-                       task.ProductionDate,
-                       task.ActualStartDate,
-                       task.EstimatedCompletionDate,
-                       task.FinalDateForCompletion,
-                       task.ActualEndDate,
-                       task.Product,
-                       task.Notes,
-                       task.eng.IdEngineer,
-                      (DO.Levels?)Enum.Parse(typeof(DO.Levels), task.DifficultyLevel.ToString())
-                      ) ;
-                    _dal.Task.Update(doTask);
-                }
-                   
-            }
-            catch { }
-        }
+        catch { }
     }
 }
