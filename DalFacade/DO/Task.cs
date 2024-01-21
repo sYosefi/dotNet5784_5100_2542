@@ -6,6 +6,7 @@ public record Task
   string Description,
   string Nickname,
   bool Milestone,
+  //TimeSpan RequiredEffortTime,
   DateTime? ProductionDate,
   DateTime? StartDate,
   DateTime? EstimatedCompletionDate  ,

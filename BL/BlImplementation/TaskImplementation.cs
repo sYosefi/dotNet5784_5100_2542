@@ -1,4 +1,5 @@
 ﻿using BlApi;
+using BO;
 using DO;
 
 namespace BlImplementation;
@@ -9,7 +10,7 @@ internal class TaskImplementation : ITask
     private DalApi.IDal _dal = DalApi.Factory.Get;
 
     //פונקציית עזר שמחזירה רשימה של תלויות עבור מספר משימה
-    public List<BO.Task> getDependenciesList(int taskNumber)
+    public List<BO.TaskOnList> getDependenciesList(int taskNumber)
     {
         try
         {
@@ -17,12 +18,30 @@ internal class TaskImplementation : ITask
             allDependencies = _dal.Dependence.ReadAll().Where(d => d.NumberDependenceTask == taskNumber).ToList();
 
 
-            return allDependencies.Select(d => GetTaskDetails(d.NuberPreviousTask)).ToList();
+            //return allDependencies.Select(d => GetTaskDetails(d.NuberPreviousTask)).ToList();
+            return allDependencies.Select(d => GetTaskOnListDetails(d.NuberPreviousTask)).ToList();
         }
         catch (Exception ex) 
         {
             throw new Exception("");
         }
+    }
+
+    public BO.TaskOnList GetTaskOnListDetails(int numberPreviousTask)
+    {
+        DO.Task? doTask = _dal.Task.Read(t => t.TaskNumber == numberPreviousTask);
+        if (doTask == null)
+        {
+            throw new Exception("Task not found");
+        }
+        return new BO.TaskOnList()
+        {
+            TaskNumber = doTask.TaskNumber,
+            Description = doTask.Description,
+            Nickname = doTask.Nickname,
+            Status = getStatus((DateTime)doTask.EstimatedCompletionDate, (DateTime)doTask.StartDate, (DateTime)doTask.FinalDateForCompletion),
+
+        };
     }
 
     //פונקציית עזר להחזרת הסטטוס המתאים עבור כל משימה בהתאם לתאריכים של המשימה ולתאריך של היום
@@ -79,6 +98,7 @@ internal class TaskImplementation : ITask
         }
         catch (DO.DalAlreayExistException)
         {
+
         }
     }
 
@@ -94,7 +114,7 @@ internal class TaskImplementation : ITask
                     ProductionDate = (DateTime)doTask.ProductionDate,
                     Status=getStatus((DateTime)doTask.EstimatedCompletionDate, (DateTime)doTask.StartDate, (DateTime)doTask.FinalDateForCompletion),
                     DependenciesList=getDependenciesList(doTask.TaskNumber),
-                    //RelatedMileStone =
+                    RelatedMileStone = getRelatedMilestoneInTask(doTask.TaskNumber),
                     ActualStartDate = (DateTime)doTask.StartDate,
                     EstimatedCompletionDate = (DateTime)doTask.EstimatedCompletionDate,
                     FinalDateForCompletion = (DateTime)doTask.FinalDateForCompletion,
@@ -103,6 +123,53 @@ internal class TaskImplementation : ITask
                     eng = engineerImplementation.GetEngineerDetails(doTask.EngineerId ?? 0),
                     DifficultyLevel =(BO.Levels)Enum.Parse(typeof(BO.Levels),doTask.DifficultyLevel.ToString())
                 }) ;
+    }
+
+    public MilestoneOnList getRelatedMilestone(int taskNumber)
+    {
+        try
+        {
+            var depenedcies = (from dep in _dal.Dependence.ReadAll(d => d.NuberPreviousTask == taskNumber).ToList()
+                              let id = dep.NuberPreviousTask
+                              where _dal.Task.Read(t => t.TaskNumber == id).Milestone
+                              select _dal.Task.Read(t => t.TaskNumber == id)
+                              ).FirstOrDefault();
+            return new MilestoneOnList() {
+                Id = depenedcies.TaskNumber,
+                Description = depenedcies.Description, 
+                Nickname = depenedcies.Nickname,
+                ProductionDate = (DateTime)depenedcies.ProductionDate,
+                progressPercentage = 0, 
+                Status = getStatus((DateTime)depenedcies.EstimatedCompletionDate, 
+                (DateTime)depenedcies.ActualEndDate,
+                (DateTime)depenedcies.FinalDateForCompletion) };
+
+        }
+        catch(Exception ex)
+        {
+            throw new Exception();
+        }
+    }
+    public MilestoneInTask getRelatedMilestoneInTask(int taskNumber)
+    {
+        try
+        {
+            var depenedcies = (from dep in _dal.Dependence.ReadAll(d => d.NuberPreviousTask == taskNumber).ToList()
+                               let id = dep.NuberPreviousTask
+                               where _dal.Task.Read(t => t.TaskNumber == id).Milestone
+                               select _dal.Task.Read(t => t.TaskNumber == id)
+                              ).FirstOrDefault();
+            return new MilestoneInTask()
+            {
+                MilestoneNum = taskNumber,
+                Nickname = depenedcies.Nickname
+            };
+
+        }
+        catch (Exception ex)
+        {
+            throw new Exception();
+        }
     }
 
     public BO.Task GetTaskDetails(int taskNumber)
@@ -120,7 +187,7 @@ internal class TaskImplementation : ITask
             ProductionDate = (DateTime)doTask.ProductionDate,
             Status = getStatus((DateTime)doTask.EstimatedCompletionDate, (DateTime)doTask.StartDate, (DateTime)doTask.FinalDateForCompletion),
             DependenciesList = getDependenciesList(doTask.TaskNumber),
-            //RelatedMileStone =
+            RelatedMileStone = getRelatedMilestoneInTask(taskNumber),
             ActualStartDate = (DateTime)doTask.StartDate,
             EstimatedCompletionDate = (DateTime)doTask.EstimatedCompletionDate,
             FinalDateForCompletion = (DateTime)doTask.FinalDateForCompletion,

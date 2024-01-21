@@ -1,4 +1,7 @@
-﻿namespace BlApi;
+﻿using BO;
+using DalApi;
+
+namespace BlApi;
 
 public interface ITask
 {
@@ -7,5 +10,9 @@ public interface ITask
     public void AddTask(BO.Task task);
     public void UpdateTask(BO.Task task);
     public void RemoveTask(int taskNumber);
+    public BO.TaskOnList GetTaskOnListDetails(int numberPreviousTask);
+    public List<BO.TaskOnList> getDependenciesList(int taskNumber);
+    public MilestoneOnList getRelatedMilestone(int taskNumber);
+    public MilestoneInTask getRelatedMilestoneInTask(int taskNumber);
 
 }

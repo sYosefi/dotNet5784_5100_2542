@@ -7,9 +7,9 @@ public  class Task
     public string Description { get; set; }
     public string Nickname { get; set; }
     public DateTime ProductionDate { get; set; }
-    public  Status Status { get; set; }
-    public List<Task> DependenciesList { get; set; }
-    public Milestone RelatedMileStone { get; set; }
+    public  BO.Status Status { get; set; }
+    public List<TaskOnList> DependenciesList { get; set; }
+    public MilestoneInTask RelatedMileStone { get; set; }
     public DateTime EstimatedStartDate { get; set; }
     public DateTime ActualStartDate { get; set; }
     public DateTime EstimatedCompletionDate { get; set; }
