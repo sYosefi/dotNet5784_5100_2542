@@ -1,6 +1,8 @@
 ﻿using BlApi;
 using BO;
 using DO;
+using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 
 namespace BlImplementation;
 
@@ -78,7 +80,7 @@ internal class MilestoneImplementation : IMilestone
                 Status = getStatus((DateTime)doMilestone.EstimatedCompletionDate, (DateTime)doMilestone.ActualEndDate, (DateTime)doMilestone.FinalDateForCompletion),
                 DependenciesList = getDependenciesList(milestoneNum)
             };
-            throw new Exception("error");
+            throw new BlNullPropertyException($" Milestone with ID={milestoneNum} is null ");
         }
         catch {
             throw new Exception();
@@ -99,9 +101,37 @@ internal class MilestoneImplementation : IMilestone
         }
     }
 
-    public BO.Milestone UpdateMilestone(int milestoneNum)
+    public BO.Milestone Update(int milestoneNum,string nickname,string desc,string notes)
     {
-        throw new NotImplementedException();
+        try
+        {
+            DO.Task currentTask = _dal.Task.Read(d => d.TaskNumber == milestoneNum);
+            DO.Task doTask = new DO.Task(
+              currentTask.TaskNumber,
+              desc,
+              nickname,
+            //task.RelatedMileStone,
+                 false,
+                 currentTask.ProductionDate,
+                 currentTask.ActualStartDate,
+                 currentTask.EstimatedCompletionDate,
+                 currentTask.FinalDateForCompletion,
+                 currentTask.ActualEndDate,
+                 currentTask.Product,
+                 currentTask.Notes,
+                 currentTask.eng.IdEngineer,
+                (DO.Levels?)Enum.Parse(typeof(DO.Levels), currentTask.DifficultyLevel.ToString())
+                );
+        };
+
+            if (currentTask!=null)
+            {
+                _dal.Task.Update(task);
+                
+            }
+           
+        }
+        catch (Exception ex) { }
     }
 
 

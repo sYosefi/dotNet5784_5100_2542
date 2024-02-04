@@ -123,7 +123,7 @@ internal class Program
          s_bl.Task.RemoveTask(taskNumber);
 
     }
-    private static Engineer EnginerrDetails(int id)
+    private static BO.Engineer EnginerrDetails(int id)
     {
         int salary;
         string name, mail, e;
@@ -133,20 +133,27 @@ internal class Program
         mail = Console.ReadLine();
         Console.WriteLine("Enter engineer experience");
         e = Console.ReadLine();
-        Experience exp = (Experience)Enum.Parse(typeof(Experience), e, true);
+        BO.Experience exp = (BO.Experience)Enum.Parse(typeof(BO.Experience), e, true);
         Console.WriteLine("Enter price per hour");
         salary = int.Parse(Console.ReadLine());
-        Engineer eng = new(id, name, mail, exp, salary);
-        return eng;
+        return new BO.Engineer()
+        {
+            IdEngineer = id,
+            Name = name,
+            Email = mail,
+            EngineerLevel = exp,
+            SalaryPerHour = salary,
+            CurrentTask = null,
+        };
     }
     private static void CreateEngineer()
     {
         int id;
         Console.WriteLine("Enter ID engineer");
         id = int.Parse(Console.ReadLine());
-        Engineer tempEng = EnginerrDetails(id);
-        Engineer newEng = new(id, tempEng.NameEngineer, tempEng.MailEnginerr, tempEng.EngineerRank, tempEng.PricePerHour);
-        Console.WriteLine(s_bl!.Engineer.Create(newEng));
+        BO.Engineer tempEng = EnginerrDetails(id);
+        s_bl!.Engineer.AddEngineer(tempEng);
+        Console.WriteLine(tempEng);
     }
 
     private static void ReadEngineer()
@@ -170,10 +177,35 @@ internal class Program
     {
         Console.WriteLine("Enter Engineer id: ");
         int idEngineer = int.Parse(Console.ReadLine());
-        s_dal!.Engineer.Delete(idEngineer);
+        s_bl!.Engineer.RemoveEngineer(idEngineer);
 
     }
-    private static void ShowEngineer()
+
+    private static Dependence DependenceDetails(int id)
+    {
+        int NumberDependence, NuberPrevious;
+        Console.WriteLine("Enter a number dependence task");
+        NumberDependence = int.Parse(Console.ReadLine());
+        Console.WriteLine("Enter a number previous task");
+        NuberPrevious = int.Parse(Console.ReadLine());
+        Dependence dep = new(id, NumberDependence, NuberPrevious);
+        return dep;
+    }
+
+    private static void ReadMilestone()
+    {
+        Console.WriteLine("Enter milestone ID ");
+        int id = int.Parse(Console.ReadLine());
+        Console.WriteLine(s_bl.Milestone.GetMilestoneDetails(id));
+    }
+
+    private static void UpdateMilestone()
+    {
+        Console.WriteLine("Enter Id milestone to update ");
+        int id = int.Parse(Console.ReadLine());
+        s_bl.Milestone.Update(id);
+    }
+    private static void ShowEngineers()
     {
         Console.WriteLine("Enter 0 to exist the main menu\nEnter 1 to create a new engineer \nEnter 2 to display a engineer\nEnter 3 to update a engineer \nEnter 4 to delete a engineer");
         int choice = int.Parse(Console.ReadLine());
@@ -181,7 +213,7 @@ internal class Program
         {
             switch (choice)
             {
-
+                case 0: { Menu(); break; };
                 case 1: { CreateEngineer(); break; };
                 case 2: { ReadEngineer(); break; };
                 case 3: { UpdateEngineer(); break; };
@@ -200,6 +232,7 @@ internal class Program
         {
             switch (choice)
             {
+                case 0: { Menu(); break; };
                 case 1: { CreateTask(); break; };
                 case 2: { ReadTask(); break; };
                 case 3: { UpdateTask(); break; };
@@ -208,7 +241,24 @@ internal class Program
             Console.WriteLine("Enter 0 to exist the main menu\nEnter 1 to create a new task \nEnter 2 to display a task\nEnter 3 to update a task \nEnter 4 to delete a task");
             choice = int.Parse(Console.ReadLine());
         }
-
+    }
+    private static void showMilestone()
+    {
+        Console.WriteLine("Enter 0 to exist the main menu\nEnter 1 to create milestone\nEnter 2 to display a milestone\nEnter 3 to update a milestone \nEnter 4 to delete a milestone");
+        int choice = int.Parse(Console.ReadLine());
+        while (choice != 0)
+        {
+            switch (choice)
+            {
+                case 0: { Menu();break; };
+               // case 1: { CreateMilestone(); break; };
+                case 2: { ReadMilestone(); break; };
+                case 3: { UpdateMilestone(); break; };
+               // case 4: { DeleteDependence(); break; };
+            }
+            Console.WriteLine("Enter 0 to exist the main menu\nEnter 1 to create a milestone\nEnter 2 to display a milestone\nEnter 3 to update a milestone\nEnter 4 to delete a milestone");
+            choice = int.Parse(Console.ReadLine());
+        }
     }
     private static void Menu()
     {
@@ -221,7 +271,7 @@ internal class Program
                 case 0: { Exit(); break; };
                 case 1: { ShowEngineers(); break; };
                 case 2: { ShowTasks(); break; };
-                 //case 3: { showDependence(); break; };
+                case 3: { showMilestone(); break; };
                 default: { Console.WriteLine("Incorrect input"); break; };
             };
             Console.WriteLine("Enter 0 to exist the main menu\nEnter 1 to Engineers\nEnter 2 to Tasks\nEnter 3 to Dependences");

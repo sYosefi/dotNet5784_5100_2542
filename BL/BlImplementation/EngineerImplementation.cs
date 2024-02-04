@@ -1,6 +1,7 @@
 ﻿
 using BlApi;
 using BO;
+using DO;
 using System;
 using System.Xml.Linq;
 namespace BlImplementation;
@@ -27,11 +28,11 @@ internal class EngineerImplementation : IEngineer
             }
             else
             {
-                throw new Exception();
+                throw new BlAlreadyExistException($" Engineer with ID={eng.IdEngineer} already exist ");
             }
 
         }
-        catch (DO.DalAlreayExistException)
+        catch (BO.BlAlreadyExistException)
         {
             //זריקת חריגה של מהנדס קיים מה-BO 
             // throw new BO.BlAlreadyExistsException($"Student with ID={boStudent.Id} already exists", ex);
@@ -44,7 +45,7 @@ internal class EngineerImplementation : IEngineer
         {
             //throw new Exception
             // Handle the case where the engineer is not found, for example, throw an exception
-            throw new Exception("Engineer not found");
+            throw new BlNullPropertyException("Engineer not found");
         }
         return new BO.Engineer()
         {
@@ -65,8 +66,8 @@ internal class EngineerImplementation : IEngineer
             Name = doEngineer.NameEngineer,
             Email = doEngineer.MailEnginerr,
             EngineerLevel = (BO.Experience)(int)Enum.Parse(typeof(BO.Experience), doEngineer.EngineerRank.ToString()),
-            SalaryPerHour = doEngineer.PricePerHour??0
-           // CurrentTask = null
+            SalaryPerHour = doEngineer.PricePerHour??0,
+            CurrentTask = null
         }) ;
     }
 
@@ -80,11 +81,11 @@ internal class EngineerImplementation : IEngineer
             }
             else
             {
-                throw new Exception();
+                throw new BlDoesNotExistException($"Engineer with id={idEng} not exist");
             }
 
         }
-        catch (DO.DalAlreayExistException)
+        catch (BO.BlDoesNotExistException)
         {
             //זריקת חריגה של מהנדס קיים מה-BO 
             // throw new BO.BlAlreadyExistsException($"Student with ID={boStudent.Id} already exists", ex);
@@ -109,14 +110,12 @@ internal class EngineerImplementation : IEngineer
             }
             else
             {
-                throw new Exception();
+                throw new BlAlreadyExistException($" Enginerr with ID={eng.IdEngineer} is not exist ");
             }
 
         }
-        catch (DO.DalAlreayExistException)
+        catch (BO.BlAlreadyExistException)
         {
-            //זריקת חריגה של מהנדס קיים מה-BO 
-            // throw new BO.BlAlreadyExistsException($"Student with ID={boStudent.Id} already exists", ex);
         }
     }
 }

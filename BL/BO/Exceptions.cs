@@ -22,8 +22,8 @@ public class BlDeletionImpossible : Exception
     public BlDeletionImpossible(string? message) : base(message) { }
 }
 
-public class BlInvalidVValueException:Exception
+public class BlInvalidValueException:Exception
 {
-    public BlInvalidVValueException(string? message) : base(message) { }
+    public BlInvalidValueException(string? message) : base(message) { }
 }
 
