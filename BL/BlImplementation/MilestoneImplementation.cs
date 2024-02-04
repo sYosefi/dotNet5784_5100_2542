@@ -122,11 +122,11 @@ internal class MilestoneImplementation : IMilestone
                  currentTask.eng.IdEngineer,
                 (DO.Levels?)Enum.Parse(typeof(DO.Levels), currentTask.DifficultyLevel.ToString())
                 );
-        };
+        
 
             if (currentTask!=null)
             {
-                _dal.Task.Update(task);
+                _dal.Task.Update(doTask);
                 
             }
            
@@ -155,5 +155,8 @@ internal class MilestoneImplementation : IMilestone
 
     }
 
-  
+    public Milestone Update(int milestoneNum)
+    {
+        throw new NotImplementedException();
+    }
 }
