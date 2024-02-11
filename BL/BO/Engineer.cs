@@ -13,4 +13,8 @@ public class Engineer
     public Experience EngineerLevel { get; set; }
     public int SalaryPerHour { get; set; }
     public Task? CurrentTask { get; set; }
+    public override string ToString()
+    {
+        return this.ToStringProperty();
+    }
 }

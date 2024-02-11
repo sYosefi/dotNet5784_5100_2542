@@ -27,7 +27,8 @@ internal class Program
     {
         Levels level;
         string desc, nick, product, note;
-        DateTime start, end, estimatedCompletion, finalDate, actualEndDate;
+        DateTime start, end, estimatedStartDate, finalDate;
+        int requiredEffortTime;
         int engId;
         Console.WriteLine("Enter description of the task");
         desc = Console.ReadLine();
@@ -36,21 +37,23 @@ internal class Program
         Console.WriteLine("Enter start date for the task");
         start = DateTime.Parse(Console.ReadLine());
         Console.WriteLine("Enter an estimated end date");
-        estimatedCompletion = DateTime.Parse(Console.ReadLine());
+        estimatedStartDate = DateTime.Parse(Console.ReadLine());
+        Console.WriteLine("Enter an requried effort time for the task");
+        requiredEffortTime = int.Parse(Console.ReadLine());
         Console.WriteLine("Enter Final date for the task");
         finalDate = DateTime.Parse(Console.ReadLine());
-        Console.WriteLine("Enter a actual end date of the task product");
-        actualEndDate = DateTime.Parse(Console.ReadLine());
+        //Console.WriteLine("Enter a actual end date of the task product");
+        //actualEndDate = DateTime.Parse(Console.ReadLine());
         Console.WriteLine("Enter a description of the task product");
         product = Console.ReadLine();
         Console.WriteLine("Enter notes on the task");
         note = Console.ReadLine();
-        Console.WriteLine("Enter engineer id");
-        engId=int.Parse(Console.ReadLine());
+        //Console.WriteLine("Enter engineer id");
+        //engId=int.Parse(Console.ReadLine());
         Console.WriteLine("Enter level of the task");
         //(Levels)Enum.Parse(typeof(Levels), taskElem.Element("DifficultyLevel").Value)
         level =(Levels)Enum.Parse(typeof(Levels), Console.ReadLine());
-        DO.Task t = new(id, desc, nick, false, DateTime.Now, start, estimatedCompletion, finalDate, actualEndDate, product, note, engId, level);
+        DO.Task t = new(id, desc, nick, DateTime.Now, start, estimatedStartDate, requiredEffortTime, finalDate, null, product, note, null, level);
         return t;
     }
     private static void CreateTask()
@@ -68,11 +71,15 @@ internal class Program
     }
     private static void UpdateTask()
     {
-        Console.WriteLine("Enter task number");
-        int taskNumber = int.Parse(Console.ReadLine());
-        Console.WriteLine(s_dal!.Task.Read(t => t.TaskNumber == taskNumber));
-        DO.Task tempTask = TaskDetails(taskNumber);
-        s_dal!.Task.Update(tempTask);
+        try {
+            Console.WriteLine("Enter task number");
+            int taskNumber = int.Parse(Console.ReadLine());
+            Console.WriteLine(s_dal!.Task.Read(t => t.TaskNumber == taskNumber));
+            DO.Task tempTask = TaskDetails(taskNumber);
+            s_dal!.Task.Update(tempTask);
+        }
+        catch (Exception ex) { }
+
     }
     private static void DeleteTask()
     {
@@ -250,8 +257,10 @@ internal class Program
             Console.Write("Would you like to create Initial data? (Y/N)"); //stage 3
             string? ans = Console.ReadLine() ?? throw new FormatException("Wrong input"); //stage 3
             if (ans == "Y") //stage 3
-                //Initialization.Do(s_dal);//stage 2 
+            {
                 Initialization.Do(); //stage 4
+                Menu();
+            }
             else
             {
                 Menu();

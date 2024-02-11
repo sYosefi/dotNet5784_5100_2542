@@ -20,7 +20,10 @@ internal class Program
     BO.Levels level;
         string desc, nick, product, note;
         DateTime production, start, end, estimatedCompletion, finalDate, actualEndDate, actualStartDate;
-        int engId, milstoneId;
+        int engId;
+        int requiredEffortTime;
+            //milstoneId
+            ;
         Status s;
         Console.WriteLine("Enter description of the task");
         desc = Console.ReadLine();
@@ -31,26 +34,28 @@ internal class Program
         Console.WriteLine("Enter status of the task");
         s = (BO.Status)Enum.Parse(typeof(BO.Status), Console.ReadLine());
         List<BO.TaskOnList> DependenciesList = inputDependencyList();
-        Console.WriteLine("Enter number of related milstone");
-        milstoneId= int.Parse(Console.ReadLine());
-        BO.MilestoneInTask relatedMilestone = s_bl.Task.getRelatedMilestoneInTask(milstoneId);//getRelaedMilestone(milstoneId);
+        //Console.WriteLine("Enter number of related milstone");
+        //milstoneId= int.Parse(Console.ReadLine());
+        //BO.MilestoneInTask relatedMilestone = s_bl.Task.getRelatedMilestoneInTask(milstoneId);//getRelaedMilestone(milstoneId);
         Console.WriteLine("Enter estimated start date for the task");
         start = DateTime.Parse(Console.ReadLine());
         Console.WriteLine("Enter actual start date");
         actualStartDate = DateTime.Parse(Console.ReadLine());
-        Console.WriteLine("Enter an estimated completion date date");
+        Console.WriteLine("Enter required effort time for the task");
+        requiredEffortTime = int.Parse(Console.ReadLine());
+        Console.WriteLine("Enter an estimated completion  date");
         estimatedCompletion = DateTime.Parse(Console.ReadLine());
         Console.WriteLine("Enter Final date for the task");
         finalDate = DateTime.Parse(Console.ReadLine());
         Console.WriteLine("Enter a actual end date of the task product");
-        actualEndDate = DateTime.Parse(Console.ReadLine());
-        Console.WriteLine("Enter a ptoduct of the task product");
+        //actualEndDate = DateTime.Parse(Console.ReadLine());
+        //Console.WriteLine("Enter a ptoduct of the task product");
         product = Console.ReadLine();
         Console.WriteLine("Enter notes on the task");
         note = Console.ReadLine();
-        Console.WriteLine("Enter engineer id");
-        engId = int.Parse(Console.ReadLine());
-        BO.Engineer eng=s_bl.Engineer.GetEngineerDetails(engId);
+        //Console.WriteLine("Enter engineer id");
+        //engId = int.Parse(Console.ReadLine());
+        //BO.Engineer eng=s_bl.Engineer.GetEngineerDetails(engId);
         Console.WriteLine("Enter level of the task");
         level = (BO.Levels)Enum.Parse(typeof(BO.Levels), Console.ReadLine());
         //BO.Task t = new (id, desc, nick, production, s, DependenciesList, relatedMilestone, start, actualStartDate, estimatedCompletion,
@@ -60,24 +65,22 @@ internal class Program
             TaskNumber = id,
             Description = desc,
             Nickname = nick,
-            ProductionDate = production,
             Status = s,
             DependenciesList = DependenciesList,
-            RelatedMileStone = relatedMilestone,
+            ProductionDate = production,
+            //RelatedMileStone = relatedMilestone,
             EstimatedStartDate = start,
             ActualStartDate = actualStartDate,
-            EstimatedCompletionDate = estimatedCompletion,
-            FinalDateForCompletion = finalDate,
-            ActualEndDate = actualEndDate,
+            RequiredEffortTime = requiredEffortTime,
+            EstimatedCompletionDate = s_bl.Task.GetEstimatedCompletionDate(start, actualStartDate, requiredEffortTime),
+            //FinalDateForCompletion = 
+            ActualEndDate = null,
             Product = product,
             Notes = note,
-            eng = eng,
+            eng = null,
             DifficultyLevel = level
         };
-
     }
-
-  
 
     private static List<BO.TaskOnList> inputDependencyList()
     {
@@ -192,19 +195,19 @@ internal class Program
         return dep;
     }
 
-    private static void ReadMilestone()
-    {
-        Console.WriteLine("Enter milestone ID ");
-        int id = int.Parse(Console.ReadLine());
-        Console.WriteLine(s_bl.Milestone.GetMilestoneDetails(id));
-    }
+    //private static void ReadMilestone()
+    //{
+    //    Console.WriteLine("Enter milestone ID ");
+    //    int id = int.Parse(Console.ReadLine());
+    //    Console.WriteLine(s_bl.Milestone.GetMilestoneDetails(id));
+    //}
 
-    private static void UpdateMilestone()
-    {
-        Console.WriteLine("Enter Id milestone to update ");
-        int id = int.Parse(Console.ReadLine());
-        s_bl.Milestone.Update(id);
-    }
+    //private static void UpdateMilestone()
+    //{
+    //    Console.WriteLine("Enter Id milestone to update ");
+    //    int id = int.Parse(Console.ReadLine());
+    //    s_bl.Milestone.Update(id);
+    //}
     private static void ShowEngineers()
     {
         Console.WriteLine("Enter 0 to exist the main menu\nEnter 1 to create a new engineer \nEnter 2 to display a engineer\nEnter 3 to update a engineer \nEnter 4 to delete a engineer");
@@ -242,24 +245,24 @@ internal class Program
             choice = int.Parse(Console.ReadLine());
         }
     }
-    private static void showMilestone()
-    {
-        Console.WriteLine("Enter 0 to exist the main menu\nEnter 1 to create milestone\nEnter 2 to display a milestone\nEnter 3 to update a milestone \nEnter 4 to delete a milestone");
-        int choice = int.Parse(Console.ReadLine());
-        while (choice != 0)
-        {
-            switch (choice)
-            {
-                case 0: { Menu();break; };
-               // case 1: { CreateMilestone(); break; };
-                case 2: { ReadMilestone(); break; };
-                case 3: { UpdateMilestone(); break; };
-               // case 4: { DeleteDependence(); break; };
-            }
-            Console.WriteLine("Enter 0 to exist the main menu\nEnter 1 to create a milestone\nEnter 2 to display a milestone\nEnter 3 to update a milestone\nEnter 4 to delete a milestone");
-            choice = int.Parse(Console.ReadLine());
-        }
-    }
+    //private static void showMilestone()
+    //{
+    //    Console.WriteLine("Enter 0 to exist the main menu\nEnter 1 to create milestone\nEnter 2 to display a milestone\nEnter 3 to update a milestone \nEnter 4 to delete a milestone");
+    //    int choice = int.Parse(Console.ReadLine());
+    //    while (choice != 0)
+    //    {
+    //        switch (choice)
+    //        {
+    //            case 0: { Menu();break; };
+    //           // case 1: { CreateMilestone(); break; };
+    //            //case 2: { ReadMilestone(); break; };
+    //            case 3: { UpdateMilestone(); break; };
+    //           // case 4: { DeleteDependence(); break; };
+    //        }
+    //        Console.WriteLine("Enter 0 to exist the main menu\nEnter 1 to create a milestone\nEnter 2 to display a milestone\nEnter 3 to update a milestone\nEnter 4 to delete a milestone");
+    //        choice = int.Parse(Console.ReadLine());
+    //    }
+    //}
     private static void Menu()
     {
         Console.WriteLine("Enter 0 to exist the main menu\nEnter 1 to Engineers\nEnter 2 to Tasks\nEnter 3 to Dependences");
@@ -271,7 +274,7 @@ internal class Program
                 case 0: { Exit(); break; };
                 case 1: { ShowEngineers(); break; };
                 case 2: { ShowTasks(); break; };
-                case 3: { showMilestone(); break; };
+                //case 3: { showMilestone(); break; };
                 default: { Console.WriteLine("Incorrect input"); break; };
             };
             Console.WriteLine("Enter 0 to exist the main menu\nEnter 1 to Engineers\nEnter 2 to Tasks\nEnter 3 to Dependences");

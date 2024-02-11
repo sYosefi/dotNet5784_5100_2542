@@ -1,5 +1,4 @@
-﻿
-namespace Dal;
+﻿namespace Dal;
 using DalApi;
 using DO;
 using System.Linq;
@@ -17,10 +16,11 @@ internal class TaskImplementation : ITask
             new XElement("TaskNumber", nextId),
             new XElement("Description", item.Description),
             new XElement("Nickname", item.Nickname),
-            new XElement("Milestone", item.Milestone),
-            new XElement("ProductionDate", item.ProductionDate),
+            //new XElement("Milestone", item.Milestone),
+            new XElement("CreatedAtDate", item.CreatedAtDate),
             new XElement("StartDate", item.StartDate),
-            new XElement("EstimatedCompletionDate", item.EstimatedCompletionDate),
+            new XElement("EstimatedStartDate", item.EstimatedStartDate),
+            new XElement("RequiredEffortTime", item.RequiredEffortTime),
             new XElement("FinalDateForCompletion", item.FinalDateForCompletion),
             new XElement("ActualEndDate", item.ActualEndDate),
             new XElement("Product", item.Product),
@@ -57,10 +57,11 @@ internal class TaskImplementation : ITask
             TaskNumber = int.Parse(taskElem.Element("TaskNumber").Value),
             Description = taskElem.Element("Description").Value,
             Nickname = taskElem.Element("Nickname").Value,
-            Milestone = bool.Parse(taskElem.Element("Milestone").Value),
-            ProductionDate = taskElem.ToDateTimeNullable("ProductionDate"),
+            //Milestone = bool.Parse(taskElem.Element("Milestone").Value),
+            CreatedAtDate = (DateTime)taskElem.ToDateTimeNullable("CreatedAtDate"),
             StartDate = taskElem.ToDateTimeNullable("StartDate"),
-            EstimatedCompletionDate = taskElem.ToDateTimeNullable("EstimatedCompletionDate"),
+            EstimatedStartDate = taskElem.ToDateTimeNullable("EstimatedStartDate"),
+            RequiredEffortTime = int.Parse(taskElem.Element("RequiredEffortTime")?.Value),
             FinalDateForCompletion = taskElem.ToDateTimeNullable("FinalDateForCompletion"),
             ActualEndDate = taskElem.ToDateTimeNullable("ActualEndDate"),
             Product = taskElem.Element("Product").Value,
@@ -68,7 +69,6 @@ internal class TaskImplementation : ITask
             EngineerId = taskElem.ToIntNullable("EngineerId"),
             DifficultyLevel = (Levels)Enum.Parse(typeof(Levels), taskElem.Element("DifficultyLevel").Value),
         };
-
     }
     public void Delete(int id)
     {
@@ -119,10 +119,11 @@ internal class TaskImplementation : ITask
             new XElement("TaskNumber", taskNum),
             new XElement("Description",task.Description),
             new XElement("Nickname",task.Nickname),
-            new XElement("Milestone",task.Milestone),
-            new XElement("ProductionDate",task.ProductionDate),
+            //new XElement("Milestone",task.Milestone),
+            new XElement("CreatedAtDate", task.CreatedAtDate),
             new XElement("StartDate",task.StartDate),
-            new XElement("EstimatedCompletionDate",task.EstimatedCompletionDate),
+            new XElement("EstimatedStartDate", task.EstimatedStartDate),
+            new XElement("RequiredEffortTime",task.RequiredEffortTime),
             new XElement("FinalDateForCompletion",task.FinalDateForCompletion),
             new XElement("ActualEndDate",task.ActualEndDate),
             new XElement("Product",task.Product),

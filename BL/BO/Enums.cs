@@ -11,6 +11,7 @@ public enum Levels
 
 public enum Experience
 {
+    None,
     Novice,
     AdvancedBeginner,
     Competent,
@@ -20,9 +21,10 @@ public enum Experience
 
 public enum Status
 {
-    Unscheduled,
-    Scheduled,
-    OnTrack,
-    InJeopardy
+    Unscheduled,//לא מתוכנן
+    Scheduled, //מתוזמן
+    OnTrack, //במעקב
+    //InJeopardy,
+    Done //בוצע
 }
 

@@ -1,90 +1,90 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <tasks>
   <tasks>
-    <TaskNumber>81</TaskNumber>
+    <TaskNumber>112</TaskNumber>
     <Description>ניתוח סיכונים בפרויקט</Description>
     <Nickname>Risk Analysis</Nickname>
-    <Milestone>false</Milestone>
-    <ProductionDate>2024-01-07T17:56:12.1112025+02:00</ProductionDate>
-    <StartDate>2024-01-07T17:56:12.1162978+02:00</StartDate>
-    <EstimatedCompletionDate>2024-01-07T17:56:12.1162995+02:00</EstimatedCompletionDate>
-    <FinalDateForCompletion>2024-01-07T17:56:12.1162998+02:00</FinalDateForCompletion>
-    <ActualEndDate>2024-01-07T17:56:12.1162999+02:00</ActualEndDate>
+    <CreatedAtDate>2024-02-11T19:50:48.3602212+02:00</CreatedAtDate>
+    <StartDate>2024-02-11T19:50:48.3651617+02:00</StartDate>
+    <EstimatedStartDate>2024-02-11T19:50:48.3651696+02:00</EstimatedStartDate>
+    <RequiredEffortTime>30</RequiredEffortTime>
+    <FinalDateForCompletion>2024-02-11T19:50:48.3651743+02:00</FinalDateForCompletion>
+    <ActualEndDate>2024-02-11T19:50:48.3651745+02:00</ActualEndDate>
     <Product />
     <Notes />
     <EngineerId />
     <DifficultyLevel>Proficient</DifficultyLevel>
   </tasks>
   <tasks>
-    <TaskNumber>82</TaskNumber>
+    <TaskNumber>113</TaskNumber>
     <Description>אופטימיזיציה של המערכת</Description>
     <Nickname>BM#</Nickname>
-    <Milestone>false</Milestone>
-    <ProductionDate>2024-01-07T17:56:12.1165042+02:00</ProductionDate>
-    <StartDate>2024-01-07T17:56:12.1165055+02:00</StartDate>
-    <EstimatedCompletionDate>2024-01-07T17:56:12.1165057+02:00</EstimatedCompletionDate>
-    <FinalDateForCompletion>2024-01-07T17:56:12.1165059+02:00</FinalDateForCompletion>
-    <ActualEndDate>2024-01-07T17:56:12.116506+02:00</ActualEndDate>
+    <CreatedAtDate>2024-02-11T19:50:48.3653418+02:00</CreatedAtDate>
+    <StartDate>2024-02-11T19:50:48.365343+02:00</StartDate>
+    <EstimatedStartDate>2024-02-11T19:50:48.3653432+02:00</EstimatedStartDate>
+    <RequiredEffortTime>30</RequiredEffortTime>
+    <FinalDateForCompletion>2024-02-11T19:50:48.3653434+02:00</FinalDateForCompletion>
+    <ActualEndDate>2024-02-11T19:50:48.3653436+02:00</ActualEndDate>
     <Product />
     <Notes />
     <EngineerId />
     <DifficultyLevel>AdvancedBeginner</DifficultyLevel>
   </tasks>
   <tasks>
-    <TaskNumber>83</TaskNumber>
+    <TaskNumber>114</TaskNumber>
     <Description>ביקורת קוד</Description>
     <Nickname>AA</Nickname>
-    <Milestone>false</Milestone>
-    <ProductionDate>2024-01-07T17:56:12.1165063+02:00</ProductionDate>
-    <StartDate>2024-01-07T17:56:12.1165064+02:00</StartDate>
-    <EstimatedCompletionDate>2024-01-07T17:56:12.1165065+02:00</EstimatedCompletionDate>
-    <FinalDateForCompletion>2024-01-07T17:56:12.1165067+02:00</FinalDateForCompletion>
-    <ActualEndDate>2024-01-07T17:56:12.1165069+02:00</ActualEndDate>
+    <CreatedAtDate>2024-02-11T19:50:48.3653438+02:00</CreatedAtDate>
+    <StartDate>2024-02-11T19:50:48.3653439+02:00</StartDate>
+    <EstimatedStartDate>2024-02-11T19:50:48.3653441+02:00</EstimatedStartDate>
+    <RequiredEffortTime>30</RequiredEffortTime>
+    <FinalDateForCompletion>2024-02-11T19:50:48.3653442+02:00</FinalDateForCompletion>
+    <ActualEndDate>2024-02-11T19:50:48.3653444+02:00</ActualEndDate>
     <Product />
     <Notes />
     <EngineerId />
     <DifficultyLevel>Expert</DifficultyLevel>
   </tasks>
-  <Task>
-    <TaskNumber />
-    <Description>Check</Description>
-    <Nickname>#C</Nickname>
-    <Milestone>false</Milestone>
-    <ProductionDate>2024-01-07T20:16:05.1710478+02:00</ProductionDate>
-    <StartDate>2025-08-21T00:00:00</StartDate>
-    <EstimatedCompletionDate>2025-08-21T00:00:00</EstimatedCompletionDate>
-    <FinalDateForCompletion>2025-08-21T00:00:00</FinalDateForCompletion>
-    <ActualEndDate />
-    <Product>21/8/2025</Product>
-    <Notes>there is no notes</Notes>
-    <EngineerId />
-    <DifficultyLevel />
-  </Task>
   <tasks>
-    <TaskNumber>85</TaskNumber>
+    <TaskNumber>115</TaskNumber>
+    <Description>מחקר ויישום טכנולוגיות חדשות</Description>
+    <Nickname>Research</Nickname>
+    <CreatedAtDate>2024-02-11T19:50:48.3653445+02:00</CreatedAtDate>
+    <StartDate>2024-02-11T19:50:48.3653447+02:00</StartDate>
+    <EstimatedStartDate>2024-02-11T19:50:48.3653448+02:00</EstimatedStartDate>
+    <RequiredEffortTime>30</RequiredEffortTime>
+    <FinalDateForCompletion>2024-02-11T19:50:48.365345+02:00</FinalDateForCompletion>
+    <ActualEndDate>2024-02-11T19:50:48.3653451+02:00</ActualEndDate>
+    <Product />
+    <Notes />
+    <EngineerId />
+    <DifficultyLevel>Novice</DifficultyLevel>
+  </tasks>
+  <tasks>
+    <TaskNumber>116</TaskNumber>
     <Description>הטמעת אמצעי אבטחה</Description>
     <Nickname>Implementation-SM</Nickname>
-    <Milestone>false</Milestone>
-    <ProductionDate>2024-01-07T17:56:12.1165079+02:00</ProductionDate>
-    <StartDate>2024-01-07T17:56:12.116508+02:00</StartDate>
-    <EstimatedCompletionDate>2024-01-07T17:56:12.1165082+02:00</EstimatedCompletionDate>
-    <FinalDateForCompletion>2024-01-07T17:56:12.1165083+02:00</FinalDateForCompletion>
-    <ActualEndDate>2024-01-07T17:56:12.1165085+02:00</ActualEndDate>
+    <CreatedAtDate>2024-02-11T19:50:48.3653453+02:00</CreatedAtDate>
+    <StartDate>2024-02-11T19:50:48.3653454+02:00</StartDate>
+    <EstimatedStartDate>2024-02-11T19:50:48.3653456+02:00</EstimatedStartDate>
+    <RequiredEffortTime>30</RequiredEffortTime>
+    <FinalDateForCompletion>2024-02-11T19:50:48.3653457+02:00</FinalDateForCompletion>
+    <ActualEndDate>2024-02-11T19:50:48.3653458+02:00</ActualEndDate>
     <Product />
     <Notes />
     <EngineerId />
     <DifficultyLevel>Competent</DifficultyLevel>
   </tasks>
   <tasks>
-    <TaskNumber>86</TaskNumber>
+    <TaskNumber>117</TaskNumber>
     <Description>הכנת דרישות לא פונקציונאליות</Description>
     <Nickname>T8</Nickname>
-    <Milestone>false</Milestone>
-    <ProductionDate>2024-01-07T17:56:12.1165087+02:00</ProductionDate>
-    <StartDate>2024-01-07T17:56:12.1165088+02:00</StartDate>
-    <EstimatedCompletionDate>2024-01-07T17:56:12.1165089+02:00</EstimatedCompletionDate>
-    <FinalDateForCompletion>2024-01-07T17:56:12.1165091+02:00</FinalDateForCompletion>
-    <ActualEndDate>2024-01-07T17:56:12.1165092+02:00</ActualEndDate>
+    <CreatedAtDate>2024-02-11T19:50:48.365346+02:00</CreatedAtDate>
+    <StartDate>2024-02-11T19:50:48.3653462+02:00</StartDate>
+    <EstimatedStartDate>2024-02-11T19:50:48.3653463+02:00</EstimatedStartDate>
+    <RequiredEffortTime>30</RequiredEffortTime>
+    <FinalDateForCompletion>2024-02-11T19:50:48.3653464+02:00</FinalDateForCompletion>
+    <ActualEndDate>2024-02-11T19:50:48.3653466+02:00</ActualEndDate>
     <Product />
     <Notes />
     <EngineerId />
