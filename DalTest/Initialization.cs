@@ -6,19 +6,12 @@ using System;
 
 public static class Initialization
 {
-    //private static ITask? t_dalTask;
-    //private static IEngineer? e_dalEngineer;
-    //private static IDependence? d_dalDependence;
+
     private static readonly Random s_rand = new();
     private static IDal? s_dal;
 
-    //public static void Do(IDal dal) //stage 2
     public static void Do()//stage 4
     {
-        //e_dalEngineer = dalEngineer ?? throw new NullReferenceException("DAL can not be null!");
-        //t_dalTask = dalTask ?? throw new NullReferenceException("DAL can not be null!");
-        //d_dalDependence = dalDependence ?? throw new NullReferenceException("DAL can not be null!");
-        //s_dal=dal?? throw new NullReferenceException("DAL object can not be null!");//Stage 2
         s_dal = DalApi.Factory.Get; //stage 4
         createTasks();
         createEngineers();
@@ -43,18 +36,7 @@ public static class Initialization
 
     private static void createEngineers()
     {
-        /* string[] engineerNames = { "Elad Arison", "Aviran Asor", "Alon Barnea", "Carmela Avner", "Ravit Bohan" };
-         foreach(var engineerName in engineerNames) 
-         {
-             int id;
-             do id = s_rand.Next(MIN_ID, MAX_ID);
-             while (e_dalEngineer!.Read(id) != null);
 
-             int index = s_rand.Next(Enum.GetValues(typeof(Experience)).Length);
-             Experience experience = (Experience)Enum.GetValues(typeof(Experience)).GetValue(index);
-
-
-         }*/
         Engineer e1 = new(227355056, "Elad Arison", "eladA@gmai.com", Experience.Expert, 50);
       
         Engineer e2 = new(218796347, "Aviran Asor", "avirn2187@gmai.com", Experience.Novice, 30);
@@ -74,11 +56,11 @@ public static class Initialization
 
     private static void createDependences()
     {
-        Dependence d1 = new(0, 1, 2);
-        Dependence d2 = new(0, 2, 3);
-        Dependence d3 = new(0, 1, 6);
-        Dependence d4 = new(0, 5, 4);
-        Dependence d5 = new(0, 5, 3);
+        Dependence d1 = new(0, 122, 123);
+        Dependence d2 = new(0,121, 122);
+        Dependence d3 = new(0, 124, 123);
+        Dependence d4 = new(0, 123, 122);
+        Dependence d5 = new(0, 122, 125);
         s_dal!.Dependence.Create(d1);
         s_dal!.Dependence.Create(d2);
         s_dal!.Dependence.Create(d3);

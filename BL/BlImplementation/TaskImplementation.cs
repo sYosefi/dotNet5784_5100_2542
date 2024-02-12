@@ -16,9 +16,6 @@ internal class TaskImplementation : ITask
         {
             List<Dependence> allDependencies = new List<Dependence>();
             allDependencies = _dal.Dependence.ReadAll().Where(d => d.NumberDependenceTask == taskNumber).ToList();
-
-
-            //return allDependencies.Select(d => GetTaskDetails(d.NuberPreviousTask)).ToList();
             return allDependencies.Select(d => GetTaskOnListDetails(d.NuberPreviousTask)).ToList();
         }
         catch (Exception ex) 
@@ -48,9 +45,7 @@ internal class TaskImplementation : ITask
     public BO.Status getStatus(
      DateTime estimatedStartDate, //תאריך משוער להתחלה
      DateTime actualStartDate, // תאריך התחלה בפועל
-     ///*DateTime estimatedCompletionDate*/,
      DateTime finalDateForCompletion //תאריך סופי לסיום
-        //,DateTime actualEndDate 
         )
     {
         //לא מתוכנן
@@ -73,26 +68,21 @@ internal class TaskImplementation : ITask
     {
         try
         {
-            if (task.TaskNumber > 0 &&
-                task.Nickname != ""
-                //&& !string.IsNullOrEmpty(task.Nickname)
-                )
+            if (task.TaskNumber >=0 && task.Nickname != "")
             {
                 DO.Task doTask = new DO.Task(
                     task.TaskNumber,
                     task.Description,
                     task.Nickname,
-                    //true,
                     task.ProductionDate,
                     task.ActualStartDate,
                     task.EstimatedStartDate,
                     task.RequiredEffortTime,
                     task.EstimatedCompletionDate,
-                    //task.FinalDateForCompletion,
-                    task.ActualEndDate,
+                    null,
                     task.Product,
                     task.Notes,
-                    task.eng!.IdEngineer,
+                    null,
                     (DO.Levels)(int)Enum.Parse(typeof(DO.Levels),task.DifficultyLevel.ToString())    
                     );
                     int numTask = _dal.Task.Create(doTask);
@@ -130,66 +120,17 @@ internal class TaskImplementation : ITask
                     Status = getStatus((DateTime)doTask.EstimatedStartDate, (DateTime)doTask.StartDate, (DateTime)doTask.FinalDateForCompletion),
                     DependenciesList=getDependenciesList(doTask.TaskNumber),
                     ProductionDate = (DateTime)doTask.CreatedAtDate,
-                    //RelatedMileStone = getRelatedMilestoneInTask(doTask.TaskNumber),
                     EstimatedStartDate = (DateTime)doTask.EstimatedStartDate,
                     ActualStartDate = (DateTime)doTask.StartDate,
                     EstimatedCompletionDate = GetEstimatedCompletionDate((DateTime)doTask.EstimatedStartDate, (DateTime)doTask.StartDate, (int)doTask.RequiredEffortTime),
-                    //FinalDateForCompletion = (DateTime)doTask.FinalDateForCompletion,
                     ActualEndDate = (DateTime)doTask.ActualEndDate,
                     RequiredEffortTime=(int)doTask.RequiredEffortTime,
                     Product=doTask.Product,
                     Notes = doTask.Notes,
-                    eng = engineerImplementation.GetEngineerDetails(doTask.EngineerId ?? 0),
+                    eng = engineerImplementation.GetEngineerInTask(doTask.EngineerId ?? 0),
                     DifficultyLevel =(BO.Levels)Enum.Parse(typeof(BO.Levels),doTask.DifficultyLevel.ToString())
                 }) ;
     }
-
-    //public MilestoneOnList getRelatedMilestone(int taskNumber)
-    //{
-    //    try
-    //    {
-    //        var depenedcies = (from dep in _dal.Dependence.ReadAll(d => d.NuberPreviousTask == taskNumber).ToList()
-    //                          let id = dep.NuberPreviousTask
-    //                          where _dal.Task.Read(t => t.TaskNumber == id).Milestone
-    //                          select _dal.Task.Read(t => t.TaskNumber == id)
-    //                          ).FirstOrDefault();
-    //        return new MilestoneOnList() {
-    //            Id = depenedcies.TaskNumber,
-    //            Description = depenedcies.Description, 
-    //            Nickname = depenedcies.Nickname,
-    //            ProductionDate = (DateTime)depenedcies.ProductionDate,
-    //            progressPercentage = 0, 
-    //            Status = getStatus((DateTime)depenedcies.EstimatedCompletionDate, 
-    //            (DateTime)depenedcies.ActualEndDate,
-    //            (DateTime)depenedcies.FinalDateForCompletion) };
-
-    //    }
-    //    catch(Exception ex)
-    //    {
-    //        throw new Exception();
-    //    }
-    //}
-    //public MilestoneInTask getRelatedMilestoneInTask(int taskNumber)
-    //{
-    //    try
-    //    {
-    //        var depenedcies = (from dep in _dal.Dependence.ReadAll(d => d.NuberPreviousTask == taskNumber).ToList()
-    //                           let id = dep.NuberPreviousTask
-    //                           where _dal.Task.Read(t => t.TaskNumber == id).Milestone
-    //                           select _dal.Task.Read(t => t.TaskNumber == id)
-    //                          ).FirstOrDefault();
-    //        return new MilestoneInTask()
-    //        {
-    //            MilestoneNum = taskNumber,
-    //            Nickname = depenedcies.Nickname
-    //        };
-
-    //    }
-    //    catch (Exception ex)
-    //    {
-    //        throw new Exception();
-    //    }
-    //}
 
     public BO.Task GetTaskDetails(int taskNumber)
     {
@@ -206,16 +147,14 @@ internal class TaskImplementation : ITask
             Status = getStatus((DateTime)doTask.EstimatedStartDate, (DateTime)doTask.StartDate, (DateTime)doTask.FinalDateForCompletion),
             DependenciesList = getDependenciesList(doTask.TaskNumber),
             ProductionDate = (DateTime)doTask.CreatedAtDate,
-            //RelatedMileStone = getRelatedMilestoneInTask(doTask.TaskNumber),
             EstimatedStartDate = (DateTime)doTask.EstimatedStartDate,
             ActualStartDate = (DateTime)doTask.StartDate,
             EstimatedCompletionDate = GetEstimatedCompletionDate((DateTime)doTask.EstimatedStartDate, (DateTime)doTask.StartDate, (int)doTask.RequiredEffortTime),
-            //FinalDateForCompletion = (DateTime)doTask.FinalDateForCompletion,
             ActualEndDate = (DateTime)doTask.ActualEndDate,
             RequiredEffortTime = (int)doTask.RequiredEffortTime,
             Product = doTask.Product,
             Notes = doTask.Notes,
-            eng = engineerImplementation.GetEngineerDetails(doTask.EngineerId ?? 0),
+            eng = engineerImplementation.GetEngineerInTask(doTask.EngineerId ?? 0),
             DifficultyLevel = (BO.Levels)Enum.Parse(typeof(BO.Levels), doTask.DifficultyLevel.ToString())
         };
     }
@@ -250,17 +189,16 @@ internal class TaskImplementation : ITask
                     task.EstimatedStartDate,
                     task.RequiredEffortTime,
                     task.EstimatedCompletionDate,
-                    //task.FinalDateForCompletion,
                     task.ActualEndDate,
                     task.Product,
                     task.Notes,
-                    task.eng!.IdEngineer,
+                    task.eng == null? null: task.eng.IdEngineer,
                     (DO.Levels)(int)Enum.Parse(typeof(DO.Levels), task.DifficultyLevel.ToString())
                   ) ;
                 _dal.Task.Update(doTask);
             }
                
         }
-        catch { }
+        catch (Exception ex) {  }
     }
 }

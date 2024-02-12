@@ -5,8 +5,6 @@ public record Task
   int TaskNumber,
   string Description,
   string Nickname,
-  //bool Milestone,
-  //TimeSpan RequiredEffortTime,
   DateTime CreatedAtDate,
   DateTime? StartDate=null,
   DateTime? EstimatedStartDate = null,

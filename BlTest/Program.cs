@@ -4,6 +4,7 @@ using BO;
 using DalApi;
 using DO;
 using System.ComponentModel.Design;
+using System.Reflection.Emit;
 
 namespace BlTest;
 
@@ -14,66 +15,47 @@ internal class Program
     {
         Console.WriteLine("You have successfully exited the program");
     }
-  
+
+    /// <summary>
+    /// a function which gets id of task and return all the task details by creating new task in BO.
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
     public static BO.Task TaskDetails(int id)
     {
-    BO.Levels level;
+        BO.Levels level;
         string desc, nick, product, note;
-        DateTime production, start, end, estimatedCompletion, finalDate, actualEndDate, actualStartDate;
-        int engId;
+        DateTime production, start, end, finalDate;
         int requiredEffortTime;
-            //milstoneId
-            ;
-        Status s;
+    
         Console.WriteLine("Enter description of the task");
         desc = Console.ReadLine();
         Console.WriteLine("Enter a nickname for the task");
         nick = Console.ReadLine();
-        Console.WriteLine("Enter production date");
-        production =DateTime.Parse( Console.ReadLine());  
-        Console.WriteLine("Enter status of the task");
-        s = (BO.Status)Enum.Parse(typeof(BO.Status), Console.ReadLine());
         List<BO.TaskOnList> DependenciesList = inputDependencyList();
-        //Console.WriteLine("Enter number of related milstone");
-        //milstoneId= int.Parse(Console.ReadLine());
-        //BO.MilestoneInTask relatedMilestone = s_bl.Task.getRelatedMilestoneInTask(milstoneId);//getRelaedMilestone(milstoneId);
         Console.WriteLine("Enter estimated start date for the task");
         start = DateTime.Parse(Console.ReadLine());
-        Console.WriteLine("Enter actual start date");
-        actualStartDate = DateTime.Parse(Console.ReadLine());
-        Console.WriteLine("Enter required effort time for the task");
+        Console.WriteLine("Enter required effort time for the task in days");
         requiredEffortTime = int.Parse(Console.ReadLine());
-        Console.WriteLine("Enter an estimated completion  date");
-        estimatedCompletion = DateTime.Parse(Console.ReadLine());
-        Console.WriteLine("Enter Final date for the task");
-        finalDate = DateTime.Parse(Console.ReadLine());
-        Console.WriteLine("Enter a actual end date of the task product");
-        //actualEndDate = DateTime.Parse(Console.ReadLine());
-        //Console.WriteLine("Enter a ptoduct of the task product");
+        Console.WriteLine("Enter a ptoduct of the task ");
         product = Console.ReadLine();
         Console.WriteLine("Enter notes on the task");
         note = Console.ReadLine();
-        //Console.WriteLine("Enter engineer id");
-        //engId = int.Parse(Console.ReadLine());
-        //BO.Engineer eng=s_bl.Engineer.GetEngineerDetails(engId);
         Console.WriteLine("Enter level of the task");
         level = (BO.Levels)Enum.Parse(typeof(BO.Levels), Console.ReadLine());
-        //BO.Task t = new (id, desc, nick, production, s, DependenciesList, relatedMilestone, start, actualStartDate, estimatedCompletion,
-        //    finalDate, actualEndDate, product, note, eng, level);
+
         return new BO.Task()
         {
             TaskNumber = id,
             Description = desc,
             Nickname = nick,
-            Status = s,
+            Status = BO.Status.Unscheduled,
             DependenciesList = DependenciesList,
-            ProductionDate = production,
-            //RelatedMileStone = relatedMilestone,
+            ProductionDate = DateTime.Now,
             EstimatedStartDate = start,
-            ActualStartDate = actualStartDate,
-            RequiredEffortTime = requiredEffortTime,
-            EstimatedCompletionDate = s_bl.Task.GetEstimatedCompletionDate(start, actualStartDate, requiredEffortTime),
-            //FinalDateForCompletion = 
+            ActualStartDate = null,
+            RequiredEffortTime =requiredEffortTime,
+            EstimatedCompletionDate = s_bl.Task.GetEstimatedCompletionDate(start, DateTime.Now, requiredEffortTime),
             ActualEndDate = null,
             Product = product,
             Notes = note,
@@ -82,11 +64,68 @@ internal class Program
         };
     }
 
+
+    /// <summary>
+    /// a function which gets id of task and gets all the propreties of the task that the user want to change.
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    public static BO.Task UpdateDetails(int id)
+    {
+
+        BO.Task tempTask = s_bl!.Task.GetTaskDetails(id);
+        BO.Levels level;
+        string desc, nick, product, note;
+        Status s;
+        DateTime  start, end, finalDate;
+        int requiredEffortTime;
+
+        Console.WriteLine("Enter description of the task");
+        desc = Console.ReadLine();
+        Console.WriteLine("Enter a nickname for the task");
+        nick = Console.ReadLine();
+        List<BO.TaskOnList> DependenciesList = inputDependencyList();
+        Console.WriteLine("Enter estimated start date for the task");
+        start = DateTime.Parse(Console.ReadLine());
+        Console.WriteLine("Enter required effort time for the task in days");
+        requiredEffortTime = int.Parse(Console.ReadLine());
+        Console.WriteLine("Enter a ptoduct of the task ");
+        product = Console.ReadLine();
+        Console.WriteLine("Enter notes on the task");
+        note = Console.ReadLine();
+        Console.WriteLine("Enter level of the task");
+        level = (BO.Levels)Enum.Parse(typeof(BO.Levels), Console.ReadLine());
+
+        return new BO.Task()
+        {
+            TaskNumber = id,
+            Description = desc,
+            Nickname = nick,
+            Status = BO.Status.Unscheduled,
+            DependenciesList = DependenciesList,
+            ProductionDate = tempTask.ProductionDate,
+            EstimatedStartDate = start,
+            ActualStartDate = tempTask.ActualStartDate,
+            RequiredEffortTime = requiredEffortTime,
+            EstimatedCompletionDate = s_bl.Task.GetEstimatedCompletionDate(start, DateTime.Now, requiredEffortTime),
+            ActualEndDate = tempTask.ActualEndDate,
+            Product = product,
+            Notes = note,
+            eng =tempTask.eng,
+            DifficultyLevel = level
+        };
+
+    }
+
+    /// <summary>
+    /// helper function for the dependent tasks of the task that the user want to add.
+    /// </summary>
+    /// <returns></returns>
     private static List<BO.TaskOnList> inputDependencyList()
     {
         int idDep;
         List<BO.TaskOnList> tasksOnList = new List<BO.TaskOnList>();
-        Console.WriteLine("Enter a dependency number, press 0 to finish");
+        Console.WriteLine("Enter a dependency number, in the end press 0");
         idDep = int.Parse(Console.ReadLine());
         while (idDep != 0)
         {
@@ -99,26 +138,40 @@ internal class Program
 
     }
 
+
+    /// <summary>
+    /// a function that calls the function AddTask from the BO.
+    /// </summary>
     private static void CreateTask()
     {
         BO.Task taskToCreate = TaskDetails(0);
         s_bl.Task.AddTask(taskToCreate);
     }
 
+    /// <summary>
+    /// a function that gets from the user number of task prints all of it details.
+    /// </summary>
     private static void ReadTask()
     {
         Console.WriteLine("Enter task number");
         int taskNumber = int.Parse(Console.ReadLine());
-       s_bl!.Task.GetTaskDetails(taskNumber); 
+        Console.WriteLine( s_bl!.Task.GetTaskDetails(taskNumber)?.ToString()); 
     }
+
+    /// <summary>
+    /// a function that gets number of task to update and send it to UpdateTask.
+    /// </summary>
     private static void UpdateTask()
     {
         Console.WriteLine("Enter task number");
         int taskNumber = int.Parse(Console.ReadLine());
-        //Console.WriteLine(s_bl!.Task.GetAllTasks());
-        BO.Task tempTask = TaskDetails(taskNumber);
+        BO.Task tempTask = UpdateDetails(taskNumber);
         s_bl!.Task.UpdateTask(tempTask);
     }
+
+    /// <summary>
+    /// a function that gets task number from the user and sends it to RemoveTask.
+    /// </summary>
     private static void DeleteTask()
     {
         Console.WriteLine("Enter task number");
@@ -126,6 +179,13 @@ internal class Program
          s_bl.Task.RemoveTask(taskNumber);
 
     }
+
+    /// <summary>
+    /// a function that gets id and gets all the other details from the user.
+    /// the function craetes new engineer in BO.
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
     private static BO.Engineer EnginerrDetails(int id)
     {
         int salary;
@@ -136,7 +196,7 @@ internal class Program
         mail = Console.ReadLine();
         Console.WriteLine("Enter engineer experience");
         e = Console.ReadLine();
-        BO.Experience exp = (BO.Experience)Enum.Parse(typeof(BO.Experience), e, true);
+        BO.Experience exp = (BO.Experience)Enum.Parse(typeof(BO.Experience), e.ToString());
         Console.WriteLine("Enter price per hour");
         salary = int.Parse(Console.ReadLine());
         return new BO.Engineer()
@@ -149,6 +209,12 @@ internal class Program
             CurrentTask = null,
         };
     }
+
+
+    /// <summary>
+    /// a function that grts engineer id from the user and use other function for the rest of the details.
+    /// the function sends the new task to the function AddTask.
+    /// </summary>
     private static void CreateEngineer()
     {
         int id;
@@ -195,19 +261,6 @@ internal class Program
         return dep;
     }
 
-    //private static void ReadMilestone()
-    //{
-    //    Console.WriteLine("Enter milestone ID ");
-    //    int id = int.Parse(Console.ReadLine());
-    //    Console.WriteLine(s_bl.Milestone.GetMilestoneDetails(id));
-    //}
-
-    //private static void UpdateMilestone()
-    //{
-    //    Console.WriteLine("Enter Id milestone to update ");
-    //    int id = int.Parse(Console.ReadLine());
-    //    s_bl.Milestone.Update(id);
-    //}
     private static void ShowEngineers()
     {
         Console.WriteLine("Enter 0 to exist the main menu\nEnter 1 to create a new engineer \nEnter 2 to display a engineer\nEnter 3 to update a engineer \nEnter 4 to delete a engineer");
@@ -245,40 +298,28 @@ internal class Program
             choice = int.Parse(Console.ReadLine());
         }
     }
-    //private static void showMilestone()
-    //{
-    //    Console.WriteLine("Enter 0 to exist the main menu\nEnter 1 to create milestone\nEnter 2 to display a milestone\nEnter 3 to update a milestone \nEnter 4 to delete a milestone");
-    //    int choice = int.Parse(Console.ReadLine());
-    //    while (choice != 0)
-    //    {
-    //        switch (choice)
-    //        {
-    //            case 0: { Menu();break; };
-    //           // case 1: { CreateMilestone(); break; };
-    //            //case 2: { ReadMilestone(); break; };
-    //            case 3: { UpdateMilestone(); break; };
-    //           // case 4: { DeleteDependence(); break; };
-    //        }
-    //        Console.WriteLine("Enter 0 to exist the main menu\nEnter 1 to create a milestone\nEnter 2 to display a milestone\nEnter 3 to update a milestone\nEnter 4 to delete a milestone");
-    //        choice = int.Parse(Console.ReadLine());
-    //    }
-    //}
+
     private static void Menu()
     {
-        Console.WriteLine("Enter 0 to exist the main menu\nEnter 1 to Engineers\nEnter 2 to Tasks\nEnter 3 to Dependences");
+        Console.WriteLine("Enter 0 to exist the main menu\nEnter 1 to Engineers\nEnter 2 to Tasks");
         int choice = int.Parse(Console.ReadLine());
         while (choice != 0)
         {
-            switch (choice)
+            try
             {
-                case 0: { Exit(); break; };
-                case 1: { ShowEngineers(); break; };
-                case 2: { ShowTasks(); break; };
-                //case 3: { showMilestone(); break; };
-                default: { Console.WriteLine("Incorrect input"); break; };
-            };
-            Console.WriteLine("Enter 0 to exist the main menu\nEnter 1 to Engineers\nEnter 2 to Tasks\nEnter 3 to Dependences");
-            choice = int.Parse(Console.ReadLine());
+                switch (choice)
+                {
+                    case 0: { Exit(); break; };
+                    case 1: { ShowEngineers(); break; };
+                    case 2: { ShowTasks(); break; };
+                    //case 3: { showMilestone(); break; };
+                    default: { Console.WriteLine("Incorrect input"); break; };
+                };
+                Console.WriteLine("Enter 0 to exist the main menu\nEnter 1 to Engineers\nEnter 2 to Tasks");
+                choice = int.Parse(Console.ReadLine());
+            }
+            catch (Exception ex) { Console.WriteLine(ex.ToString()); }
+        
         }
     }
     static void Main(string[] args)
@@ -287,8 +328,12 @@ internal class Program
         {
             Console.Write("Would you like to create Initial data? (Y/N)"); 
             string? ans = Console.ReadLine() ?? throw new FormatException("Wrong input");
-            if (ans == "Y") 
+            if (ans == "Y")
+            {
                 DalTest.Initialization.Do(); //stage 4
+                Menu();
+            }
+
             else
             {
                 Menu();

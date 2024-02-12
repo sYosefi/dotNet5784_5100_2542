@@ -1,5 +1,4 @@
-﻿
-using BlApi;
+﻿using BlApi;
 using BO;
 using DO;
 using System;
@@ -20,8 +19,8 @@ internal class EngineerImplementation : IEngineer
                     eng.IdEngineer,
                     eng.Name,
                     eng.Email,
-                    // Convert BO.Experience to DO.Experience?
-                    (DO.Experience?)eng.EngineerLevel,
+                    // Convert BO.Experience to DO.Experience
+                    (DO.Experience?)Enum.Parse(typeof(DO.Experience), eng.EngineerLevel.ToString()),
                     eng.SalaryPerHour
                     );
                 int idEng = _dal.Engineer.Create(doEng);
@@ -38,8 +37,9 @@ internal class EngineerImplementation : IEngineer
             // throw new BO.BlAlreadyExistsException($"Student with ID={boStudent.Id} already exists", ex);
         }
     }
-    public BO.Engineer GetEngineerDetails(int? idEng)
+    public BO.Engineer? GetEngineerDetails(int? idEng)
     {
+        if(idEng == 0) return null;
         DO.Engineer? doEng = _dal.Engineer.Read(e => e.IdEngineer == idEng);
         if(doEng==null) 
         {
@@ -53,8 +53,23 @@ internal class EngineerImplementation : IEngineer
             Name = doEng.NameEngineer,
             Email = doEng.MailEnginerr,
             EngineerLevel = (BO.Experience)(int)Enum.Parse(typeof(BO.Experience), doEng.EngineerRank.ToString()),
-            // Use ?? with a default value, adjust as needed
             SalaryPerHour = doEng.PricePerHour ?? 0   
+        };
+    }
+    public BO.EngineerInTask? GetEngineerInTask(int? idEng)
+    {
+        if (idEng == 0) return null;
+        DO.Engineer? doEng = _dal.Engineer.Read(e => e.IdEngineer == idEng);
+        if (doEng == null)
+        {
+            //throw new Exception
+            // Handle the case where the engineer is not found, for example, throw an exception
+            throw new BlNullPropertyException("Engineer not found");
+        }
+        return new BO.EngineerInTask()
+        {
+            IdEngineer = idEng ?? 0,
+            Name = doEng.NameEngineer,
         };
     }
 
@@ -103,7 +118,7 @@ internal class EngineerImplementation : IEngineer
                     eng.Name,
                     eng.Email,
                     // Convert BO.Experience to DO.Experience?
-                    (DO.Experience?)eng.EngineerLevel,
+                    (DO.Experience?)Enum.Parse(typeof(DO.Experience), eng.EngineerLevel.ToString()),
                     eng.SalaryPerHour
                     );
                 _dal.Engineer.Update(doEng);

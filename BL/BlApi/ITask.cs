@@ -15,7 +15,5 @@ public interface ITask
     public DateTime GetEstimatedCompletionDate(DateTime EstimatedStartDate,
       DateTime ActualStartDate, int RequiredEffortTime);
     public List<BO.TaskOnList> getDependenciesList(int taskNumber);
-    //public MilestoneOnList getRelatedMilestone(int taskNumber);
-    //public MilestoneInTask getRelatedMilestoneInTask(int taskNumber);
 
 }
