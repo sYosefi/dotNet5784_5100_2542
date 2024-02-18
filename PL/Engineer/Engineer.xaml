@@ -6,21 +6,49 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.Engineer"
         mc:Ignorable="d"
-        Title="Engineer" Height="640" Width="800">
+        Title="Engineer" Height="640" Width="800"
+        DataContext="{Binding EngineerItem, RelativeSource={RelativeSource Self}, Mode=TwoWay}">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="1.5*"/>
         </Grid.ColumnDefinitions>
-        <Label Grid.Column="0" HorizontalAlignment="Left" Margin="101,361,0,0" VerticalAlignment="Top" Content="Label" ></Label>
-        <TextBlock Grid.Column="1" ></TextBlock>
-        <Label Grid.Column="0" HorizontalAlignment="Left" Margin="101,0,0,0" VerticalAlignment="Center" Content="Label"></Label>
-        <TextBox Grid.Column="1"></TextBox>
-        <Label Grid.Column="0" HorizontalAlignment="Left" Margin="101,423,0,0" VerticalAlignment="Top" Content="Label"></Label>
-        <TextBox Grid.Column="1"></TextBox>
-        <Label Grid.Column="0" HorizontalAlignment="Left" Margin="101,482,0,0" VerticalAlignment="Top" Content="Label"></Label>
-        <ComboBox Grid.Column="1"></ComboBox>
-        <Label Grid.Column="0" HorizontalAlignment="Left" Margin="101,545,0,0" VerticalAlignment="Top" Content="Label"></Label>
-        <TextBox Grid.Column="1"></TextBox>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Label Grid.Column="0" Grid.Row="1" HorizontalAlignment="Right"  VerticalAlignment="Center" FontSize="20" FontFamily="David" Content="ID:" ></Label>
+        <TextBox Grid.Column="1" Grid.Row="1"  Height="50" Width="300" HorizontalAlignment="Left" TextAlignment="Center" BorderBrush="Green" BorderThickness="4" FontSize="20" FontFamily="David" IsEnabled="{Binding Id, Mode=OneTime, Converter={StaticResource ConvertIdToBoolKey}}"
+                   Text="{Binding IdEngineer, Mode=TwoWay, NotifyOnValidationError=true,
+                   ValidatesOnExceptions=true}"></TextBox>
+        <Label Grid.Column="0" Grid.Row="2" HorizontalAlignment="Right"  VerticalAlignment="Center" FontSize="20" FontFamily="David" Content="Name:"></Label>
+        <TextBox Grid.Column="1" Grid.Row="2" Height="50" Width="300" HorizontalAlignment="Left" TextAlignment="Center" BorderBrush="Green" BorderThickness="4" FontSize="20" FontFamily="David"
+                 Text="{Binding Name, Mode=TwoWay, NotifyOnValidationError=true,
+                 ValidatesOnExceptions=true}"></TextBox>
+        <Label Grid.Column="0" Grid.Row="3" HorizontalAlignment="Right"  VerticalAlignment="Center" FontSize="20" FontFamily="David" Content="Email:"></Label>
+        <TextBox Grid.Column="1" Grid.Row="3" Height="50" Width="300" HorizontalAlignment="Left" TextAlignment="Center" BorderBrush="Green" BorderThickness="4" FontSize="20" FontFamily="David"
+                 Text="{Binding Email, Mode=TwoWay, NotifyOnValidationError=true,
+                 ValidatesOnExceptions=true}"></TextBox>
+        <Label Grid.Column="0" Grid.Row="4" HorizontalAlignment="Right"  VerticalAlignment="Center" FontSize="20" FontFamily="David" Content="Level:"></Label>
+        <ComboBox Grid.Column="1" Grid.Row="4" Height="50" Width="300" HorizontalAlignment="Left"  Background="White" BorderBrush="Green" BorderThickness="4" FontSize="20" FontFamily="David"
+                  ItemsSource="{Binding Source={StaticResource ExperienceCollectionKey}}"
+                  SelectedValue="{Binding EngineerLevel, Mode=TwoWay, NotifyOnValidationError=true,
+                  ValidatesOnExceptions=true}"></ComboBox>
+        <Label Grid.Column="0" Grid.Row="5" HorizontalAlignment="Right"  VerticalAlignment="Center" FontSize="20" FontFamily="David" Content="Cost:"></Label>
+        <TextBox Grid.Column="1" Grid.Row="5" Height="50" Width="300" HorizontalAlignment="Left" TextAlignment="Center" BorderBrush="Green" BorderThickness="4" FontSize="20" FontFamily="David"
+                   Text="{Binding SalaryPerHour, Mode=TwoWay, NotifyOnValidationError=true,
+                   ValidatesOnExceptions=true}"/>
+        <Label Grid.Column="0" Grid.Row="6" HorizontalAlignment="Right"  VerticalAlignment="Center" FontSize="20" FontFamily="David" Content="Task:"></Label>
+        <TextBox Grid.Column="1" Grid.Row="6" Height="50" Width="300" HorizontalAlignment="Left" TextAlignment="Center" BorderBrush="Green" BorderThickness="4"  Text="{Binding CurrentTask, Mode=TwoWay, NotifyOnValidationError=true,
+                   ValidatesOnExceptions=true}"/>
+        <Button Grid.ColumnSpan="2" Grid.Row="7" Background="Green" Foreground="White"  Height="60" Width="200" FontSize="20" FontFamily="David"
+                Content="{Binding IdEngineer, Mode=OneTime, Converter={StaticResource ConverIdToContentKey}}"
+                Click="btnAddUpdate_Click" Margin="281,8,319,10"></Button>
     </Grid>
 </Window>
