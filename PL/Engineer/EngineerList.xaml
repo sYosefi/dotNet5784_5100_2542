@@ -13,26 +13,26 @@
             <RowDefinition Height="500*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Grid HorizontalAlignment="Stretch" Height="auto" Grid.Row="0" VerticalAlignment="Stretch" Width="auto">
+        <Grid HorizontalAlignment="Stretch" Height="auto" Grid.Row="0" VerticalAlignment="Stretch" Width="300">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <!--פקד להצגת תוית טקסט-->
-            <Label Grid.Column="0" Content="Label" HorizontalAlignment="Left" Margin="101,0,0,0" VerticalAlignment="Center"/>
+            <Label Grid.Column="0" Content="Engineer Level" HorizontalAlignment="Left" FontSize="15" FontFamily="David" VerticalAlignment="Center"/>
             <!--פקד שמאפשר בחירה למשתמש עי בחירה מתוך רשימה נפתחת-->
-            <ComboBox SelectedValue="{Binding Path=EngineerExperience,Mode=TwoWay}" ItemsSource="{Binding Source={StaticResource ExperienceCollectionKey}}"
-                      Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" SelectionChanged="SortByExperience" />
+            <ComboBox Background="White" BorderBrush="Green" BorderThickness="3" HorizontalAlignment="Stretch" Margin="2" SelectedValue="{Binding Path=EngineerExperience,Mode=TwoWay}" ItemsSource="{Binding Source={StaticResource ExperienceCollectionKey}}"
+                      Grid.Column="1"  SelectionChanged="SortByExperience" />
         </Grid>
-        <ListView Margin="5" Grid.Row="1" ItemsSource="{Binding Path=EngineersList}">
-            <ListView.View>
+        <ListView FontSize="15" FontFamily="David" BorderBrush="Green" Margin="5" Grid.Row="1" ItemsSource="{Binding Path=EngineersList}" MouseDoubleClick="ListView_MouseDoubleClick">
+            <ListView.View >
                 <GridView>
                     <GridViewColumn/>
                 </GridView>
             </ListView.View>
 
         </ListView>
-        <Button Content="Add" Grid.Row="2" HorizontalAlignment="Center" Height="50" Width="100" />
+        <Button Background="Green" Foreground="White" FontFamily="David" FontSize="20" Content="Add" Grid.Row="2" HorizontalAlignment="Center" Height="50" Width="100" Click="Add_button" />
 
 
     </Grid>

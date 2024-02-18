@@ -48,5 +48,21 @@ namespace PL.Engineer
             EngineersList = temp == null ? new() : new(temp);
 
         }
+
+        private void Add_button(object sender, RoutedEventArgs e)
+        {
+            new Engineer().ShowDialog();
+            var temp = s_bl?.Engineer.GetListOfEngineers();
+            EngineersList = temp == null ? new() : new(temp);
+
+        }
+
+        private void ListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            BO.Engineer? eng=(sender as ListView)?.SelectedItem as BO.Engineer;
+            new Engineer(eng.IdEngineer).ShowDialog();
+            var temp = s_bl?.Engineer.GetListOfEngineers();
+            EngineersList = temp == null ? new() : new(temp);
+        }
     }
 }
