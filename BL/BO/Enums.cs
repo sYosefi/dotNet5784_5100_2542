@@ -2,6 +2,7 @@
 namespace BO;
 public enum Levels
 {
+    None,
     Novice,
     AdvancedBeginner,
     Competent,

@@ -18,6 +18,19 @@ public static class Initialization
         createDependences();
     }
 
+    public static void ResetData()
+    {
+        deleteAllTasks();
+        deleteAllEngineers();
+        deleteAllDependences();
+    }
+
+    public static void ResetByManeger()
+    {
+        resetDates();
+        resetEngineerAssignment();
+    }
+
     private static void createTasks()
     {
         Task t1 = new(1, "ניתוח סיכונים בפרויקט", "Risk Analysis", DateTime.Now, DateTime.Now, DateTime.Now, 30, DateTime.Now, DateTime.Now, null, null, null, Levels.Proficient);
@@ -38,11 +51,11 @@ public static class Initialization
     {
 
         Engineer e1 = new(227355056, "Elad Arison", "eladA@gmai.com", Experience.Expert, 50);
-      
+
         Engineer e2 = new(218796347, "Aviran Asor", "avirn2187@gmai.com", Experience.Novice, 30);
-        
+
         Engineer e3 = new(219975145, "Carmela Avner", "Carmela@gmai.com", Experience.AdvancedBeginner, 32);
-       
+
         Engineer e4 = new(354871125, "Alon Barnea", "aBarnea@gmai.com", Experience.Expert, 55);
 
         Engineer e5 = new(375942451, "Ravit Bohan", "RB451@gmail.com", Experience.Proficient, 40);
@@ -57,7 +70,7 @@ public static class Initialization
     private static void createDependences()
     {
         Dependence d1 = new(0, 122, 123);
-        Dependence d2 = new(0,121, 122);
+        Dependence d2 = new(0, 121, 122);
         Dependence d3 = new(0, 124, 123);
         Dependence d4 = new(0, 123, 122);
         Dependence d5 = new(0, 122, 125);
@@ -66,5 +79,41 @@ public static class Initialization
         s_dal!.Dependence.Create(d3);
         s_dal!.Dependence.Create(d4);
         s_dal!.Dependence.Create(d5);
+    }
+
+    private static void deleteAllTasks()
+    {
+      List<Task> tasks =s_dal!.Task.ReadAll().ToList();
+      foreach (Task task in tasks) 
+      {
+            s_dal!.Task.Delete(task.TaskNumber);
+      }
+
+    }
+    private static void deleteAllDependences()
+    {
+        List<Dependence> dependences=s_dal!.Dependence.ReadAll().ToList();
+        foreach(Dependence d in dependences)
+        {
+            s_dal!.Dependence.Delete(d.IdDependence);
+        }
+    }
+    private static void deleteAllEngineers()
+    {
+        List<Engineer> engineers=s_dal!.Engineer.ReadAll().ToList();
+        foreach(Engineer engineer in engineers)
+        {
+            s_dal!.Engineer.Delete(engineer.IdEngineer??0);
+        }
+    }
+
+    private static void resetDates()
+    {
+        List<Task> tasks=s_dal!.Task?.ReadAll().ToList();
+        foreach (Task t in tasks)
+        {
+            s_dal!.Task.Update()
+        }
+
     }
 }

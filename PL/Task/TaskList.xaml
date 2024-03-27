@@ -1,0 +1,37 @@
+﻿<Window x:Class="PL.Task.TaskList"
+        DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PL.Task"
+        mc:Ignorable="d"
+        Title="TaskList" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40*"/>
+            <RowDefinition Height="500*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid HorizontalAlignment="Stretch" Height="auto" Grid.Row="0" VerticalAlignment="Stretch" Width="300">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Label Grid.Column="0" Content="Task Level" HorizontalAlignment="Left" FontSize="15"  VerticalAlignment="Center"/>
+
+            <ComboBox Background="White" BorderBrush="Green" BorderThickness="3" HorizontalAlignment="Stretch" Margin="2" SelectedValue="{Binding Path=EngineerExperience,Mode=TwoWay}" ItemsSource="{Binding Source={StaticResource ExperienceCollectionKey}}"
+                      Grid.Column="1"  SelectionChanged="SortByExperience" />
+        </Grid>
+        <ListView FontSize="15" FontFamily="David" BorderBrush="Green" Margin="5" Grid.Row="1" ItemsSource="{Binding Path=TasksList}" MouseDoubleClick="ListView_MouseDoubleClick">
+            <ListView.View >
+                <GridView>
+                    <GridViewColumn/>
+                </GridView>
+            </ListView.View>
+
+        </ListView>
+        <Button Background="Green" Foreground="White" FontSize="20" Content="Add" Grid.Row="2" HorizontalAlignment="Center" Height="50" Width="100" Click="add_button"/>
+    </Grid>
+</Window>

@@ -1,4 +1,4 @@
-﻿<Window Background="AntiqueWhite"  x:Class="PL.MainWindow" 
+﻿<Window   x:Class="PL.MainWindow" 
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -10,9 +10,14 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="1.5*"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <TextBlock Grid.ColumnSpan="2" FontSize="30" FontFamily="David" Foreground="Black" HorizontalAlignment="Center" Margin="20">Welcome</TextBlock>
-        <Button Background="Green" Foreground="White"  BorderBrush="Black"  FontSize="20" FontFamily="David" Content="Show Engineers"   Grid.Column="0" Height="50" Width="150" HorizontalAlignment="Right" Margin="20" Click="ShowList_click"/>
-        <Button Background="Green" Foreground="White" BorderBrush="Black" FontSize="20" FontFamily="David" Content="init DB" Grid.Column="1"  Height="50" Width="100" HorizontalAlignment="Left" Margin="20,0,0,0"  VerticalAlignment="Center" Click="Initializatoin_Click"/>
+        <TextBlock Grid.ColumnSpan="4" FontSize="30" FontFamily="David" Foreground="Black" HorizontalAlignment="Center" Margin="20">Welcome</TextBlock>
+        <Button Background="Green" Foreground="White"  BorderBrush="Black"  FontSize="20" FontFamily="Candara Light"  Content="Show Engineers"   Grid.Column="0" Height="50" Width="150" HorizontalAlignment="Right"  Click="ShowList_click"/>
+        <Button Background="Green" Foreground="White"  BorderBrush="Black"  FontSize="20" FontFamily="Candara Light"  Content="Show Tasks"   Grid.Column="1" Height="50" Width="150"  Margin="20" Click="ShowTaskList_click"/>
+        <!--<Button Background="Green" Foreground="White" BorderBrush="Black" FontSize="20"  FontFamily="Candara Light" Content="init DB" Grid.Column="2"  Height="50" Width="100" HorizontalAlignment="Left"   VerticalAlignment="Center" Click="Initializatoin_Click"/>-->
+        <Button Background="Green" Foreground="White" BorderBrush="Black" FontSize="20"  FontFamily="Candara Light" Content="Creating a Gantt chart" Grid.Column="2"  Height="50" Width="200" HorizontalAlignment="Left"   VerticalAlignment="Center" Click="makeChart_button"/>
+        <Button Background="Green" Foreground="White" BorderBrush="Black" FontSize="20"  FontFamily="Candara Light" Content="Reset" Grid.Column="3"  Height="50" Width="100" HorizontalAlignment="Left"   VerticalAlignment="Center"  Click="reset_button"/>
     </Grid>
 </Window>

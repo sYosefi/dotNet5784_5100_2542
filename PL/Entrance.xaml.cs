@@ -1,8 +1,5 @@
-﻿using PL.Engineer;
-using PL.Task;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,55 +10,37 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace PL
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for Entrance.xaml
     /// </summary>
-    public partial class MainWindow : Window
-
+    public partial class Entrance : Window
     {
-        
-        public MainWindow()
-        { 
+        public Entrance()
+        {
             InitializeComponent();
         }
 
-        private void ShowList_click(object sender, RoutedEventArgs e)
+        private void initalize_button(object sender, RoutedEventArgs e)
         {
-            new EngineerList().Show();
-        }
-
-        private void Initializatoin_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBoxResult mbresult=
+            MessageBoxResult mbresult =
                 MessageBox.Show("Do you want to initialize the DB?",
                              "Initialization",
                              MessageBoxButton.YesNoCancel,
                              MessageBoxImage.Question,
                              MessageBoxResult.Cancel);
-            switch (mbresult) 
+            switch (mbresult)
             {
                 case MessageBoxResult.Yes:
                     DalTest.Initialization.Do();
                     break;
-                case MessageBoxResult.No:break;
-                case MessageBoxResult.Cancel:break;
-                default:break;
+                case MessageBoxResult.No: break;
+                case MessageBoxResult.Cancel: break;
+                default: break;
             }
-        }
-
-        private void ShowTaskList_click(object sender, RoutedEventArgs e)
-        {
-            new TaskList().Show();
-        }
-
-        private void makeChart_button(object sender, RoutedEventArgs e)
-        {
-
         }
 
         private void reset_button(object sender, RoutedEventArgs e)
@@ -81,6 +60,17 @@ namespace PL
                 case MessageBoxResult.Cancel: break;
                 default: break;
             }
+        }
+
+        private void adminLogin_button(object sender, RoutedEventArgs e)
+        {
+            new MainWindow().Show();
+            this.Close();
+        }
+
+        private void engineerLogin_button(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

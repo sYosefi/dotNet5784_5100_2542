@@ -34,24 +34,6 @@ internal class TaskImplementation : ITask
     }
     private static Task CreateTaskFromElement(XElement taskElem)
     {
-        //Task newTask = new Task(
-        //    taskElem.Element("TaskNumber") != null ? (int)int.Parse(taskElem.Element("TaskNumber").Value) : 0,
-        //    taskElem.Element("Description")?.Value,
-        //    taskElem.Element("Nickname")?.Value,
-        //    (bool)taskElem.Element("Milestone"),
-        //    taskElem.Element("ProductionDate") != null ? (DateTime?)DateTime.Parse(taskElem.Element("ProductionDate").Value) : DateTime.Now,
-        //     taskElem.Element("StartDate") != null ? (DateTime?)DateTime.Parse(taskElem.Element("StartDate").Value) : DateTime.Now,
-        //     taskElem.Element("EstimatedCompletionDate") != null ? (DateTime?)DateTime.Parse(taskElem.Element("EstimatedCompletionDate").Value) : DateTime.Now,
-        //    taskElem.Element("FinalDateForCompletion") != null ? (DateTime?)DateTime.Parse(taskElem.Element("FinalDateForCompletion").Value) : DateTime.Now,
-        //    taskElem.Element("ActualEndDate") != null ? (DateTime?)DateTime.Parse(taskElem.Element("ActualEndDate").Value) : DateTime.Now,
-        //    taskElem.Element("Product")?.Value,
-        //    taskElem.Element("Notes")?.Value,
-        //    taskElem.Element("EngineerId") != null ? (int?)int.Parse(taskElem.Element("EngineerId").Value) : null,
-        //    taskElem.Element("DifficultyLevel") != null ? (Levels)Enum.Parse(typeof(Levels), taskElem.Element("DifficultyLevel").Value) : null
-
-        //);
-
-        //return newTask;
         return new Task()
         {
             TaskNumber = int.Parse(taskElem.Element("TaskNumber").Value),
@@ -147,30 +129,5 @@ internal class TaskImplementation : ITask
         {
             throw new DalDoesNotExistException($" Task with ID={item.TaskNumber} is not exist ");
         }
-    //    if (taskToUpdate != null)
-    //    {
-    //        int taskNum=int.Parse(taskToUpdate.Element("TaskNumber").Value);
-    //        taskToUpdate.Remove();
-    //        taskToUpdate.Element("TaskNumber").SetValue(taskNum);
-    //        taskToUpdate.Element("Description").SetValue(item.Description);
-    //        taskToUpdate.Element("Nickname").SetValue(item.Nickname);
-    //        taskToUpdate.Element("Milestone").SetValue(item.Milestone);
-    //        taskToUpdate.Element("ProductionDate").SetValue(item.ProductionDate);
-    //        taskToUpdate.Element("StartDate").SetValue(item.StartDate);
-    //        taskToUpdate.Element("EstimatedCompletionDate").SetValue(item.EstimatedCompletionDate);
-    //        taskToUpdate.Element("FinalDateForCompletion").SetValue(item.FinalDateForCompletion);
-    //        taskToUpdate.Element("ActualEndDate").SetValue(item.ActualEndDate);
-    //        taskToUpdate.Element("Product").SetValue(item.Product);
-    //        taskToUpdate.Element("Notes").SetValue(item.Notes);
-    //        taskToUpdate.Element("EngineerId").SetValue(item.EngineerId);
-    //        taskToUpdate.Element("DifficultyLevel").SetValue(item.DifficultyLevel);
-    //        XMLTools.SaveListToXMLElement(taskToUpdate, "tasks");
-
-    //    }
-    //    else
-    //    {
-    //        throw new DalDoesNotExistException($" Task with ID={item.TaskNumber} is not exist ");
-    //    }
-    //
     }
 }
