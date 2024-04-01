@@ -57,7 +57,7 @@ internal class DependenceImplementation : IDependence
         //יוצר רשימה ריקה ומכניס אותה במקום הרשימה הנוכחית
         List<Dependence> emptyDependenceList = new List<Dependence>();
         XMLTools.SaveListToXMLSerializer<Dependence>(emptyDependenceList, "dependences");
-        XMLTools.ResetConfig("data - config", "NextDependenceId");
+        XMLTools.ResetConfig("data-config", "NextDependenceId");
 
 
     }

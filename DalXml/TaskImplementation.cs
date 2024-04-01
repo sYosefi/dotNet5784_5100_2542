@@ -140,7 +140,7 @@ internal class TaskImplementation : ITask
         //יוצר רשימה ריקה ומכניס אותה במקום הרשימה הנוכחית
         List<Task> emptyTaskList = new List<Task>();
         XMLTools.SaveListToXMLSerializer<Task>(emptyTaskList, "tasks");
-        XMLTools.ResetConfig("data - config", "TaskNumber");
+        XMLTools.ResetConfig("data-config","TaskNumber");
 
     }
 }
