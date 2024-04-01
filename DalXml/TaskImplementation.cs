@@ -4,6 +4,7 @@ using DO;
 using System.Linq;
 using System.Xml;
 using System.Xml.Linq;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 internal class TaskImplementation : ITask
 {
@@ -84,6 +85,9 @@ internal class TaskImplementation : ITask
         return null;
     }
 
+
+
+
     public IEnumerable<DO.Task?> ReadAll(Func<DO.Task, bool>? filter = null)
     {
         XElement root = XMLTools.LoadListFromXMLElement("tasks");
@@ -129,5 +133,14 @@ internal class TaskImplementation : ITask
         {
             throw new DalDoesNotExistException($" Task with ID={item.TaskNumber} is not exist ");
         }
+    }
+
+    public void Reset()
+    {
+        //יוצר רשימה ריקה ומכניס אותה במקום הרשימה הנוכחית
+        List<Task> emptyTaskList = new List<Task>();
+        XMLTools.SaveListToXMLSerializer<Task>(emptyTaskList, "tasks");
+        XMLTools.ResetConfig("data - config", "TaskNumber");
+
     }
 }

@@ -14,7 +14,11 @@ sealed internal class DalXml : IDal
 
     public ITask Task => new TaskImplementation();
 
-
-   
+    public void Reset()
+    {
+        Engineer.Reset();
+        Task.Reset();
+        Dependence.Reset();
+    }
 }
 

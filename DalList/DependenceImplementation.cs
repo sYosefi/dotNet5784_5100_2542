@@ -44,6 +44,11 @@ internal class DependenceImplementation : IDependence
                select item;
     }
 
+    public void Reset()
+    {
+        DataSource.Dependences.Clear();
+    }
+
     public void Update(Dependence item)
     {
         Dependence dependence = DataSource.Dependences.FirstOrDefault(d => d.IdDependence == item.IdDependence)!;

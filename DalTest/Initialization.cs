@@ -27,8 +27,13 @@ public static class Initialization
 
     public static void ResetByManeger()
     {
-        resetDates();
-        resetEngineerAssignment();
+
+        List<Task> tasks = s_dal!.Task?.ReadAll().ToList();
+        foreach (Task t in tasks)
+        {
+            Task newTask = new Task(t.TaskNumber, t.Description, t.Nickname, t.CreatedAtDate, null, null, t.RequiredEffortTime, null, null, t.Product, t.Notes, null, t.DifficultyLevel);
+            s_dal!.Task.Update(newTask);
+        }
     }
 
     private static void createTasks()
@@ -83,7 +88,7 @@ public static class Initialization
 
     private static void deleteAllTasks()
     {
-      List<Task> tasks =s_dal!.Task.ReadAll().ToList();
+        List<Task> tasks = s_dal!.Task.ReadAll().ToList();
       foreach (Task task in tasks) 
       {
             s_dal!.Task.Delete(task.TaskNumber);
@@ -105,15 +110,5 @@ public static class Initialization
         {
             s_dal!.Engineer.Delete(engineer.IdEngineer??0);
         }
-    }
-
-    private static void resetDates()
-    {
-        List<Task> tasks=s_dal!.Task?.ReadAll().ToList();
-        foreach (Task t in tasks)
-        {
-            s_dal!.Task.Update()
-        }
-
     }
 }

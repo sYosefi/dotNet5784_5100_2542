@@ -65,6 +65,11 @@ internal class EngineerImplementation : IEngineer
                select item;
     }
 
+    public void Reset()
+    {
+        DataSource.Engineers.Clear();
+    }
+
     public void Update(Engineer item)
     {
         Engineer eng = DataSource.Engineers.FirstOrDefault(e => e.IdEngineer == item.IdEngineer)!;

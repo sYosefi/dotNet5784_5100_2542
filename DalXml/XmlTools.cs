@@ -14,6 +14,14 @@ static class XMLTools
             Directory.CreateDirectory(s_xml_dir);
     }
 
+    public static void ResetConfig(string data_config_xml, string elemName)
+    {
+        XElement root = XMLTools.LoadListFromXMLElement(data_config_xml);
+        root.Element(elemName)?.SetValue((1).ToString());
+        XMLTools.SaveListToXMLElement(root, data_config_xml);
+
+    }
+
     #region Extension Fuctions
     public static T? ToEnumNullable<T>(this XElement element, string name) where T : struct, Enum =>
         Enum.TryParse<T>((string?)element.Element(name), out var result) ? (T?)result : null;

@@ -63,6 +63,11 @@ internal class TaskImplementation : ITask
                select item;
     }
 
+    public void Reset()
+    {
+        DataSource.Tasks.Clear();
+    }
+
     /// <summary>
     /// The function gets Task and updated the task in the data source
     /// </summary>

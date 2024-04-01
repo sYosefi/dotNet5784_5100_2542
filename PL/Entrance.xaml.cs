@@ -19,6 +19,7 @@ namespace PL
     /// </summary>
     public partial class Entrance : Window
     {
+        static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
         public Entrance()
         {
             InitializeComponent();
@@ -54,7 +55,7 @@ namespace PL
             switch (mbresult)
             {
                 case MessageBoxResult.Yes:
-                    DalTest.Initialization.ResetData();
+                    s_bl.Reset();
                     break;
                 case MessageBoxResult.No: break;
                 case MessageBoxResult.Cancel: break;
@@ -70,7 +71,8 @@ namespace PL
 
         private void engineerLogin_button(object sender, RoutedEventArgs e)
         {
-
+            new Login().Show();
+            this.Close();
         }
     }
 }

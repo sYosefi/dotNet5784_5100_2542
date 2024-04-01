@@ -2,7 +2,7 @@
 using DO;
 public interface IDependence:ICrud<Dependence>
 {
-
+    void Reset();
 }
 
 

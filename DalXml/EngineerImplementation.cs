@@ -56,6 +56,14 @@ internal class EngineerImplementation : IEngineer
                select item;
     }
 
+    public void Reset()
+    {
+        //יוצר רשימה ריקה ומכניס אותה במקום הרשימה הנוכחית
+        List<Engineer> emptyEngineerList = new List<Engineer>();
+        XMLTools.SaveListToXMLSerializer<Engineer>(emptyEngineerList, "engineers");
+
+    }
+
     public void Update(Engineer item)
     {
         List<Engineer> allEng = XMLTools.LoadListFromXMLSerializer<Engineer>("engineers");

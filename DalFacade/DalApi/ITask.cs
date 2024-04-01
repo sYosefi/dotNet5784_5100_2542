@@ -2,4 +2,5 @@
 using DO;
 public interface ITask:ICrud<Task>
 {
+    void Reset();
 }

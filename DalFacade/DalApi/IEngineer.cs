@@ -2,4 +2,5 @@
 using DO;
 public interface IEngineer:ICrud<Engineer>
 {
+    void Reset();
 }

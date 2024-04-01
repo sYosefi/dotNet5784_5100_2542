@@ -75,7 +75,7 @@ namespace PL
             switch (mbresult)
             {
                 case MessageBoxResult.Yes:
-                    DalTest.Initialization.ResetData();
+                    DalTest.Initialization.ResetByManeger();
                     break;
                 case MessageBoxResult.No: break;
                 case MessageBoxResult.Cancel: break;

@@ -1,5 +1,5 @@
 ﻿using DalApi;
-
+using DO;
 
 namespace Dal
 {
@@ -14,5 +14,12 @@ namespace Dal
         public IDependence Dependence =>  new DependenceImplementation();
 
         public ITask Task => new TaskImplementation();
+
+        public void Reset()
+        {
+            Engineer.Reset();
+            Task.Reset();
+            Dependence.Reset();
+        }
     }
 }
