@@ -65,7 +65,7 @@ namespace PL
 
         private void adminLogin_button(object sender, RoutedEventArgs e)
         {
-            new MainWindow().Show();
+            new ManagerView().Show();
             this.Close();
         }
 

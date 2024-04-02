@@ -21,11 +21,12 @@ namespace PL
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class ManagerView : Window
 
     {
-        
-        public MainWindow()
+        static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
+
+        public ManagerView()
         { 
             InitializeComponent();
         }
@@ -75,7 +76,7 @@ namespace PL
             switch (mbresult)
             {
                 case MessageBoxResult.Yes:
-                    DalTest.Initialization.ResetByManeger();
+                    s_bl.Reset();
                     break;
                 case MessageBoxResult.No: break;
                 case MessageBoxResult.Cancel: break;

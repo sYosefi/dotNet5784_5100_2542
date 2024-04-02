@@ -1,2 +1,93 @@
-<?xml version="1.0" encoding="utf-8"?>
-<ArrayOfTask xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfTask xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <tasks>
+    <TaskNumber>1</TaskNumber>
+    <Description>ניתוח סיכונים בפרויקט</Description>
+    <Nickname>Risk Analysis</Nickname>
+    <CreatedAtDate>2024-04-01T16:42:31.1205101+03:00</CreatedAtDate>
+    <StartDate>2024-04-01T16:42:31.1205152+03:00</StartDate>
+    <EstimatedStartDate>2024-04-01T16:42:31.1205296+03:00</EstimatedStartDate>
+    <RequiredEffortTime>30</RequiredEffortTime>
+    <FinalDateForCompletion>2024-04-01T16:42:31.1205304+03:00</FinalDateForCompletion>
+    <ActualEndDate>2024-04-01T16:42:31.1205313+03:00</ActualEndDate>
+    <Product />
+    <Notes />
+    <EngineerId />
+    <DifficultyLevel>Proficient</DifficultyLevel>
+  </tasks>
+  <tasks>
+    <TaskNumber>2</TaskNumber>
+    <Description>אופטימיזיציה של המערכת</Description>
+    <Nickname>BM#</Nickname>
+    <CreatedAtDate>2024-04-01T16:42:31.1206816+03:00</CreatedAtDate>
+    <StartDate>2024-04-01T16:42:31.1206828+03:00</StartDate>
+    <EstimatedStartDate>2024-04-01T16:42:31.120683+03:00</EstimatedStartDate>
+    <RequiredEffortTime>30</RequiredEffortTime>
+    <FinalDateForCompletion>2024-04-01T16:42:31.1206832+03:00</FinalDateForCompletion>
+    <ActualEndDate>2024-04-01T16:42:31.120684+03:00</ActualEndDate>
+    <Product />
+    <Notes />
+    <EngineerId />
+    <DifficultyLevel>AdvancedBeginner</DifficultyLevel>
+  </tasks>
+  <tasks>
+    <TaskNumber>3</TaskNumber>
+    <Description>ביקורת קוד</Description>
+    <Nickname>AA</Nickname>
+    <CreatedAtDate>2024-04-01T16:42:31.1206842+03:00</CreatedAtDate>
+    <StartDate>2024-04-01T16:42:31.1206844+03:00</StartDate>
+    <EstimatedStartDate>2024-04-01T16:42:31.1206846+03:00</EstimatedStartDate>
+    <RequiredEffortTime>30</RequiredEffortTime>
+    <FinalDateForCompletion>2024-04-01T16:42:31.1206848+03:00</FinalDateForCompletion>
+    <ActualEndDate>2024-04-01T16:42:31.1206861+03:00</ActualEndDate>
+    <Product />
+    <Notes />
+    <EngineerId />
+    <DifficultyLevel>Expert</DifficultyLevel>
+  </tasks>
+  <tasks>
+    <TaskNumber>4</TaskNumber>
+    <Description>מחקר ויישום טכנולוגיות חדשות</Description>
+    <Nickname>Research</Nickname>
+    <CreatedAtDate>2024-04-01T16:42:31.1206863+03:00</CreatedAtDate>
+    <StartDate>2024-04-01T16:42:31.1206865+03:00</StartDate>
+    <EstimatedStartDate>2024-04-01T16:42:31.1206867+03:00</EstimatedStartDate>
+    <RequiredEffortTime>30</RequiredEffortTime>
+    <FinalDateForCompletion>2024-04-01T16:42:31.1206869+03:00</FinalDateForCompletion>
+    <ActualEndDate>2024-04-01T16:42:31.120687+03:00</ActualEndDate>
+    <Product />
+    <Notes />
+    <EngineerId />
+    <DifficultyLevel>Novice</DifficultyLevel>
+  </tasks>
+  <tasks>
+    <TaskNumber>5</TaskNumber>
+    <Description>הטמעת אמצעי אבטחה</Description>
+    <Nickname>Implementation-SM</Nickname>
+    <CreatedAtDate>2024-04-01T16:42:31.1206872+03:00</CreatedAtDate>
+    <StartDate>2024-04-01T16:42:31.1206874+03:00</StartDate>
+    <EstimatedStartDate>2024-04-01T16:42:31.1206875+03:00</EstimatedStartDate>
+    <RequiredEffortTime>30</RequiredEffortTime>
+    <FinalDateForCompletion>2024-04-01T16:42:31.1206877+03:00</FinalDateForCompletion>
+    <ActualEndDate>2024-04-01T16:42:31.1206879+03:00</ActualEndDate>
+    <Product />
+    <Notes />
+    <EngineerId />
+    <DifficultyLevel>Competent</DifficultyLevel>
+  </tasks>
+  <tasks>
+    <TaskNumber>6</TaskNumber>
+    <Description>הכנת דרישות לא פונקציונאליות</Description>
+    <Nickname>T8</Nickname>
+    <CreatedAtDate>2024-04-01T16:42:31.1206881+03:00</CreatedAtDate>
+    <StartDate>2024-04-01T16:42:31.1206882+03:00</StartDate>
+    <EstimatedStartDate>2024-04-01T16:42:31.1206884+03:00</EstimatedStartDate>
+    <RequiredEffortTime>30</RequiredEffortTime>
+    <FinalDateForCompletion>2024-04-01T16:42:31.1206889+03:00</FinalDateForCompletion>
+    <ActualEndDate>2024-04-01T16:42:31.1206922+03:00</ActualEndDate>
+    <Product />
+    <Notes />
+    <EngineerId />
+    <DifficultyLevel>Competent</DifficultyLevel>
+  </tasks>
+</ArrayOfTask>

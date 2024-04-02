@@ -21,6 +21,6 @@
         <Button Grid.Column="0" Grid.Row="1" Width="200" Height="100" FontSize="20" FontFamily="Candara Light"  Background="Green" Foreground="White"  BorderBrush="Black" Content="Manager View" Click="adminLogin_button"></Button>
         <Button Grid.Column="1" Grid.Row="1" Width="200" Height="100" FontSize="20" FontFamily="Candara Light"  Background="Green" Foreground="White"  BorderBrush="Black" Content="Engineer View" Click="engineerLogin_button"></Button>
         <Button Grid.Column="0" Grid.Row="2" Width="200" Height="100" FontSize="20" FontFamily="Candara Light" Background="Green" Foreground="White"  BorderBrush="Black" Content="Initialization" Click="initalize_button"></Button>
-        <Button Grid.Column="1" Grid.Row="2" Width="200" Height="100" FontSize="20" FontFamily="Candara Light"  Background="Green" Foreground="White"  BorderBrush="Black" Content="Reset" Click="reset_button"></Button>
+        <!--<Button Grid.Column="1" Grid.Row="2" Width="200" Height="100" FontSize="20" FontFamily="Candara Light"  Background="Green" Foreground="White"  BorderBrush="Black" Content="Reset" Click="reset_button"></Button>-->
     </Grid>
 </Window>

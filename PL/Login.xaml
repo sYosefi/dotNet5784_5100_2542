@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
+        DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}"
         Title="Login" Height="450" Width="800">
     <Grid>
         <Grid x:Name="loginGrid" Width="400" Height="300" Background="LightGray">
@@ -12,12 +13,10 @@
                 <RowDefinition/>
                 <RowDefinition/>
                 <RowDefinition/>
-                <RowDefinition/>
             </Grid.RowDefinitions>
             <TextBlock Text="LOGIN" HorizontalAlignment="Center" TextAlignment="Center" FontSize="20" Margin="20"/>
-            <!--<TextBox Grid.Row="1" Height="50" Width="300" HorizontalAlignment="Center" TextAlignment="Center" BorderBrush="Green" BorderThickness="2" FontSize="20" />-->
-            <TextBox Grid.Row="2" Height="50" Width="300" HorizontalAlignment="Center" TextAlignment="Center" BorderBrush="Green" BorderThickness="2" FontSize="20"  />
-            <Button Grid.Row="3" Background="Green" Foreground="White"  BorderBrush="Black"  FontSize="20"   Content="Login"  Height="50" Width="150" HorizontalAlignment="Center" Click="login_button"/>
+            <TextBox Text="{Binding EngineerId, Mode=TwoWay}" Grid.Row="1" Height="50" Width="300" HorizontalAlignment="Center" TextAlignment="Center" BorderBrush="Green" BorderThickness="2" FontSize="20"  />
+            <Button Grid.Row="2" Background="Green" Foreground="White"  BorderBrush="Black"  FontSize="20"   Content="Login"  Height="50" Width="150" HorizontalAlignment="Center" Click="login_button"/>
         </Grid>
     </Grid>
 </Window>

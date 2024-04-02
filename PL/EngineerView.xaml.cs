@@ -19,9 +19,48 @@ namespace PL
     /// </summary>
     public partial class EngineerView : Window
     {
+        BO.Engineer current=new BO.Engineer();
+        static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
+
+        public string EngineerName
+        {
+            get { return (string)GetValue(EngineerNameProperty); }
+            set { SetValue(EngineerNameProperty, value); }
+        }
+
+        public BO.Task EngineerTask
+        {
+            get { return (BO.Task)GetValue(EngineerTaskProperty); }
+            set { SetValue(EngineerTaskProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty EngineerNameProperty =
+            DependencyProperty.Register("EngineerName", typeof(string), typeof(EngineerView), new PropertyMetadata(null));
+
+        public static readonly DependencyProperty EngineerTaskProperty =
+          DependencyProperty.Register("EngineerTask", typeof(string), typeof(EngineerView), new PropertyMetadata(null));
         public EngineerView()
         {
             InitializeComponent();
+
+        }
+
+        public EngineerView(BO.Engineer engineer)
+        {
+            current = s_bl.Engineer.GetEngineerDetails((engineer.IdEngineer));
+
+            InitializeComponent();
+            EngineerName = engineer.Name; // Assuming engineer has a property Name
+            EngineerTask = engineer.CurrentTask;
+
+
+        }
+
+        private void showAllTasks(object sender, RoutedEventArgs e)
+        {
+            new TasksForEngineer(current).Show();
+            Close();
         }
     }
 }

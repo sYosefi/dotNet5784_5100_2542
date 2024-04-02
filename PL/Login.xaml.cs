@@ -26,45 +26,35 @@ namespace PL
             InitializeComponent();
         }
 
-        //private void login_button(object sender, RoutedEventArgs e)
-        //{
-        //    TextBox textBox=sender as TextBox;
+        public string EngineerId
+        {
+            get { return (string)GetValue(EngineerIdProperty); }
+            set { SetValue(EngineerIdProperty, value); }
+        }
 
-        //    //int id = textBox.Text;
-        //    //string username = ((TextBox)loginGrid.Children[0]).Text;
-        //    int id = int.Parse(textBox.Text);
-        //    //int id = int.Parse(((TextBox)loginGrid.Children[1]).Text);
-        //    var user = s_bl.Engineer.GetEngineerDetails(id);
-        //    if(user!=null) 
-        //    {
-        //        new EngineerView().Show();
-        //        this.Close();
-        //    }
-        //    else
-        //    {
-        //        MessageBox.Show("engineer not found");
+        // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty EngineerIdProperty =
+            DependencyProperty.Register("EngineerId", typeof(string), typeof(Login), new PropertyMetadata(null));
 
-        //    }
 
-        //}
 
         private void login_button(object sender, RoutedEventArgs e)
         {
-            if (sender is TextBox textBox)
+            try
             {
-                if (!string.IsNullOrWhiteSpace(textBox.Text) && int.TryParse(textBox.Text, out int id))
-                {
-                    var user = s_bl.Engineer.GetEngineerDetails(id);
-                    if (user != null)
-                    {
-                        new EngineerView().Show();
-                        this.Close();
-                        return;
-                    }
-                }
+                BO.Engineer current = s_bl.Engineer.GetEngineerDetails(int.Parse(EngineerId));
+                new EngineerView(current).Show();
+                Close();
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                MessageBox.Show("Engineer not found or invalid ID", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+
             }
 
-            MessageBox.Show("Engineer not found or invalid ID", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+
         }
 
     }

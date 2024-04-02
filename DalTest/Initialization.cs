@@ -12,10 +12,16 @@ public static class Initialization
 
     public static void Do()//stage 4
     {
+        try { 
         s_dal = DalApi.Factory.Get; //stage 4
         createTasks();
         createEngineers();
-        createDependences();
+        createDependences(); 
+        }
+        catch (Exception ex) {
+            throw;
+        }
+      
     }
 
     public static void ResetData()
