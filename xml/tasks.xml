@@ -4,12 +4,12 @@
     <TaskNumber>1</TaskNumber>
     <Description>ניתוח סיכונים בפרויקט</Description>
     <Nickname>Risk Analysis</Nickname>
-    <CreatedAtDate>2024-04-01T16:42:31.1205101+03:00</CreatedAtDate>
-    <StartDate>2024-04-01T16:42:31.1205152+03:00</StartDate>
-    <EstimatedStartDate>2024-04-01T16:42:31.1205296+03:00</EstimatedStartDate>
+    <CreatedAtDate>2024-04-02T19:53:17.606859+03:00</CreatedAtDate>
+    <StartDate>2024-04-02T19:53:17.6068636+03:00</StartDate>
+    <EstimatedStartDate>2024-04-02T19:53:17.6068808+03:00</EstimatedStartDate>
     <RequiredEffortTime>30</RequiredEffortTime>
-    <FinalDateForCompletion>2024-04-01T16:42:31.1205304+03:00</FinalDateForCompletion>
-    <ActualEndDate>2024-04-01T16:42:31.1205313+03:00</ActualEndDate>
+    <FinalDateForCompletion>2024-04-02T19:53:17.6068816+03:00</FinalDateForCompletion>
+    <ActualEndDate>2024-04-02T19:53:17.6068818+03:00</ActualEndDate>
     <Product />
     <Notes />
     <EngineerId />
@@ -19,12 +19,12 @@
     <TaskNumber>2</TaskNumber>
     <Description>אופטימיזיציה של המערכת</Description>
     <Nickname>BM#</Nickname>
-    <CreatedAtDate>2024-04-01T16:42:31.1206816+03:00</CreatedAtDate>
-    <StartDate>2024-04-01T16:42:31.1206828+03:00</StartDate>
-    <EstimatedStartDate>2024-04-01T16:42:31.120683+03:00</EstimatedStartDate>
+    <CreatedAtDate>2024-04-02T19:53:17.6070401+03:00</CreatedAtDate>
+    <StartDate>2024-04-02T19:53:17.6070411+03:00</StartDate>
+    <EstimatedStartDate>2024-04-02T19:53:17.6070413+03:00</EstimatedStartDate>
     <RequiredEffortTime>30</RequiredEffortTime>
-    <FinalDateForCompletion>2024-04-01T16:42:31.1206832+03:00</FinalDateForCompletion>
-    <ActualEndDate>2024-04-01T16:42:31.120684+03:00</ActualEndDate>
+    <FinalDateForCompletion>2024-04-02T19:53:17.6070416+03:00</FinalDateForCompletion>
+    <ActualEndDate>2024-04-02T19:53:17.6070418+03:00</ActualEndDate>
     <Product />
     <Notes />
     <EngineerId />
@@ -34,12 +34,12 @@
     <TaskNumber>3</TaskNumber>
     <Description>ביקורת קוד</Description>
     <Nickname>AA</Nickname>
-    <CreatedAtDate>2024-04-01T16:42:31.1206842+03:00</CreatedAtDate>
-    <StartDate>2024-04-01T16:42:31.1206844+03:00</StartDate>
-    <EstimatedStartDate>2024-04-01T16:42:31.1206846+03:00</EstimatedStartDate>
+    <CreatedAtDate>2024-04-02T19:53:17.6070428+03:00</CreatedAtDate>
+    <StartDate>2024-04-02T19:53:17.607043+03:00</StartDate>
+    <EstimatedStartDate>2024-04-02T19:53:17.6070432+03:00</EstimatedStartDate>
     <RequiredEffortTime>30</RequiredEffortTime>
-    <FinalDateForCompletion>2024-04-01T16:42:31.1206848+03:00</FinalDateForCompletion>
-    <ActualEndDate>2024-04-01T16:42:31.1206861+03:00</ActualEndDate>
+    <FinalDateForCompletion>2024-04-02T19:53:17.6070434+03:00</FinalDateForCompletion>
+    <ActualEndDate>2024-04-02T19:53:17.6070435+03:00</ActualEndDate>
     <Product />
     <Notes />
     <EngineerId />
@@ -49,12 +49,12 @@
     <TaskNumber>4</TaskNumber>
     <Description>מחקר ויישום טכנולוגיות חדשות</Description>
     <Nickname>Research</Nickname>
-    <CreatedAtDate>2024-04-01T16:42:31.1206863+03:00</CreatedAtDate>
-    <StartDate>2024-04-01T16:42:31.1206865+03:00</StartDate>
-    <EstimatedStartDate>2024-04-01T16:42:31.1206867+03:00</EstimatedStartDate>
+    <CreatedAtDate>2024-04-02T19:53:17.6070449+03:00</CreatedAtDate>
+    <StartDate>2024-04-02T19:53:17.6070451+03:00</StartDate>
+    <EstimatedStartDate>2024-04-02T19:53:17.6070453+03:00</EstimatedStartDate>
     <RequiredEffortTime>30</RequiredEffortTime>
-    <FinalDateForCompletion>2024-04-01T16:42:31.1206869+03:00</FinalDateForCompletion>
-    <ActualEndDate>2024-04-01T16:42:31.120687+03:00</ActualEndDate>
+    <FinalDateForCompletion>2024-04-02T19:53:17.6070454+03:00</FinalDateForCompletion>
+    <ActualEndDate>2024-04-02T19:53:17.6070456+03:00</ActualEndDate>
     <Product />
     <Notes />
     <EngineerId />
@@ -64,12 +64,12 @@
     <TaskNumber>5</TaskNumber>
     <Description>הטמעת אמצעי אבטחה</Description>
     <Nickname>Implementation-SM</Nickname>
-    <CreatedAtDate>2024-04-01T16:42:31.1206872+03:00</CreatedAtDate>
-    <StartDate>2024-04-01T16:42:31.1206874+03:00</StartDate>
-    <EstimatedStartDate>2024-04-01T16:42:31.1206875+03:00</EstimatedStartDate>
+    <CreatedAtDate>2024-04-02T19:53:17.6070458+03:00</CreatedAtDate>
+    <StartDate>2024-04-02T19:53:17.6070459+03:00</StartDate>
+    <EstimatedStartDate>2024-04-02T19:53:17.6070461+03:00</EstimatedStartDate>
     <RequiredEffortTime>30</RequiredEffortTime>
-    <FinalDateForCompletion>2024-04-01T16:42:31.1206877+03:00</FinalDateForCompletion>
-    <ActualEndDate>2024-04-01T16:42:31.1206879+03:00</ActualEndDate>
+    <FinalDateForCompletion>2024-04-02T19:53:17.6070463+03:00</FinalDateForCompletion>
+    <ActualEndDate>2024-04-02T19:53:17.6070464+03:00</ActualEndDate>
     <Product />
     <Notes />
     <EngineerId />
@@ -79,12 +79,12 @@
     <TaskNumber>6</TaskNumber>
     <Description>הכנת דרישות לא פונקציונאליות</Description>
     <Nickname>T8</Nickname>
-    <CreatedAtDate>2024-04-01T16:42:31.1206881+03:00</CreatedAtDate>
-    <StartDate>2024-04-01T16:42:31.1206882+03:00</StartDate>
-    <EstimatedStartDate>2024-04-01T16:42:31.1206884+03:00</EstimatedStartDate>
+    <CreatedAtDate>2024-04-02T19:53:17.6070466+03:00</CreatedAtDate>
+    <StartDate>2024-04-02T19:53:17.6070467+03:00</StartDate>
+    <EstimatedStartDate>2024-04-02T19:53:17.6070469+03:00</EstimatedStartDate>
     <RequiredEffortTime>30</RequiredEffortTime>
-    <FinalDateForCompletion>2024-04-01T16:42:31.1206889+03:00</FinalDateForCompletion>
-    <ActualEndDate>2024-04-01T16:42:31.1206922+03:00</ActualEndDate>
+    <FinalDateForCompletion>2024-04-02T19:53:17.6070471+03:00</FinalDateForCompletion>
+    <ActualEndDate>2024-04-02T19:53:17.6070477+03:00</ActualEndDate>
     <Product />
     <Notes />
     <EngineerId />

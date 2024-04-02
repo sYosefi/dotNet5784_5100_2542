@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PL.Task;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -61,6 +62,14 @@ namespace PL
         {
             new TasksForEngineer(current).Show();
             Close();
+        }
+
+        private void showCurrentTask(object sender, RoutedEventArgs e)
+        {
+            
+            new Task().show();
+            //new CurrentTaskForEngineer(EngineerTaskProperty).Show();
+            Close() ;
         }
     }
 }

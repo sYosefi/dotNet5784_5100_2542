@@ -21,9 +21,18 @@
         </Grid.RowDefinitions>
         <TextBlock  Text="welcome" Grid.ColumnSpan="2" Grid.Row="0" FontSize="20"  HorizontalAlignment="Center" Margin="20"/>
         <TextBlock  Text="{Binding EngineerName, Mode=TwoWay}" Grid.Row="1" Grid.ColumnSpan="2" FontSize="20"  HorizontalAlignment="Center" />
-        <TextBlock  Text="{Binding EngineerTask, Mode=TwoWay}" Grid.Row="2" Grid.ColumnSpan="2" FontSize="20"  HorizontalAlignment="Center" Margin="50"/>
+        <TextBlock  Text="{Binding EngineerTask, Mode=TwoWay}" Grid.Row="2" Grid.ColumnSpan="2" FontSize="20"  HorizontalAlignment="Center" Margin="50" RenderTransformOrigin="0.5,0.5">
+            <TextBlock.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-0.653"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </TextBlock.RenderTransform>
+        </TextBlock>
         <Button Width="200" Grid.Row="3" Height="80" Background="Green" Foreground="White"  BorderBrush="Black"  FontSize="20"   Content="Go to task list" HorizontalAlignment="Center" Click="showAllTasks"/>
-        <Button Width="250" Grid.Row="3" Height="80" Grid.Column="1" Background="Green" Foreground="White"  BorderBrush="Black"  FontSize="20"   Content="Go to current task details" HorizontalAlignment="Center" />
+        <Button Width="250" Grid.Row="3" Height="80" Grid.Column="1" Background="Green" Foreground="White"  BorderBrush="Black"  FontSize="20"   Content="Go to current task details" HorizontalAlignment="Center" Click="showCurrentTask" />
 
     </Grid>
 </Window>
