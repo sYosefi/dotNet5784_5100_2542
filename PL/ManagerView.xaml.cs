@@ -83,5 +83,11 @@ namespace PL
                 default: break;
             }
         }
+
+        private void retern_back(object sender, RoutedEventArgs e)
+        {
+            new Entrance().Show();
+            Close();
+        }
     }
 }
