@@ -60,16 +60,19 @@ namespace PL
             //(Levels)((int)experience)
 
             InitializeComponent();
-           if(engineer.CurrentTask==null)
+           
+
+            if (engineer.CurrentTask==null)
             {
-                List<BO.Task> allTasks = new List<BO.Task>();
 
                 //List<BO.Task> taskFilter = new List<BO.Task>();
-
+                List<BO.Task> allTasks = new List<BO.Task>();
                 allTasks = s_bl.Task.GetAllTasks().ToList();
-                
+
+                //var taskFilter = allTasks.FindAll(task => task.eng.IdEngineer == engineer.IdEngineer
+                // && isDependendCompleted(task) && task.DifficultyLevel<=(BO.Levels)engineer.EngineerLevel);
                 var taskFilter = allTasks.FindAll(task => task.eng.IdEngineer == engineer.IdEngineer
-                 && isDependendCompleted(task) && task.DifficultyLevel<=(BO.Levels)engineer.EngineerLevel);
+                && isDependendCompleted(task) && (int)task.DifficultyLevel <= (int)engineer.EngineerLevel);
             }
             else
             {

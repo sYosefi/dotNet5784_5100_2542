@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
+
 namespace PL
 {
     /// <summary>
@@ -49,7 +50,10 @@ namespace PL
 
         public EngineerView(BO.Engineer engineer)
         {
-            current = s_bl.Engineer.GetEngineerDetails((engineer.IdEngineer));
+            //current = s_bl.Engineer.GetEngineerDetails((engineer.IdEngineer));
+            var tempTasks=s_bl.Task.GetAllTasks().Where(t=>t.eng.IdEngineer==engineer.IdEngineer).ToList();
+            var currentTask = tempTasks.FirstOrDefault(t => t.Status == BO.Status.OnTrack);
+
 
             InitializeComponent();
             EngineerName = engineer.Name; // Assuming engineer has a property Name
@@ -66,8 +70,8 @@ namespace PL
 
         private void showCurrentTask(object sender, RoutedEventArgs e)
         {
-            
-            new Task().show();
+
+            //new Task().show();
             //new CurrentTaskForEngineer(EngineerTaskProperty).Show();
             Close() ;
         }

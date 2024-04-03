@@ -11,28 +11,62 @@ internal class TaskImplementation : ITask
 
     public int Create(DO.Task item)
     {
-        XElement root = XMLTools.LoadListFromXMLElement("tasks");
-        int nextId = Config.NextTaskId;
-        XElement newTask = new XElement("tasks",
-            new XElement("TaskNumber", nextId),
-            new XElement("Description", item.Description),
-            new XElement("Nickname", item.Nickname),
-            //new XElement("Milestone", item.Milestone),
-            new XElement("CreatedAtDate", item.CreatedAtDate),
-            new XElement("StartDate", item.StartDate),
-            new XElement("EstimatedStartDate", item.EstimatedStartDate),
-            new XElement("RequiredEffortTime", item.RequiredEffortTime),
-            new XElement("FinalDateForCompletion", item.FinalDateForCompletion),
-            new XElement("ActualEndDate", item.ActualEndDate),
-            new XElement("Product", item.Product),
-            new XElement("Notes", item.Notes),
-            new XElement("EngineerId", item.EngineerId),
-            new XElement("DifficultyLevel", item.DifficultyLevel));
-        root.Add(newTask);
-        XMLTools.SaveListToXMLElement(root, "tasks");
-        return nextId;
-
+        try
+        {
+            XElement root = XMLTools.LoadListFromXMLElement("tasks");
+            int nextId = Config.NextTaskId;
+            XElement newTask = ConvertTaskToElement(item, nextId);
+            //XElement newTask = new XElement("tasks",
+            //new XElement("TaskNumber", nextId),
+            //new XElement("Description", item.Description),
+            //new XElement("Nickname", item.Nickname),
+            ////new XElement("Milestone", item.Milestone),
+            //new XElement("CreatedAtDate", item.CreatedAtDate),
+            //new XElement("StartDate", item.StartDate),
+            //new XElement("EstimatedStartDate", item.EstimatedStartDate),
+            //new XElement("RequiredEffortTime", item.RequiredEffortTime),
+            //new XElement("FinalDateForCompletion", item.FinalDateForCompletion),
+            //new XElement("ActualEndDate", item.ActualEndDate),
+            //new XElement("Product", item.Product),
+            //new XElement("Notes", item.Notes),
+            //new XElement("EngineerId", item.EngineerId),
+            //new XElement("DifficultyLevel", item.DifficultyLevel));
+            root.Add(newTask);
+            XMLTools.SaveListToXMLElement(root, "tasks");
+            return nextId;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"An error occurred during creation: {ex.Message}");
+            throw; // Re-throw the exception to propagate it
+        }
     }
+
+    //public int Create(DO.Task item)
+    //{
+    //    XElement root = XMLTools.LoadListFromXMLElement("tasks");
+    //    int nextId = Config.NextTaskId;
+    //    XElement newTask = new XElement("tasks",
+    //        new XElement("TaskNumber", nextId),
+    //        new XElement("Description", item.Description),
+    //        new XElement("Nickname", item.Nickname),
+    //        //new XElement("Milestone", item.Milestone),
+    //        new XElement("CreatedAtDate", item.CreatedAtDate),
+    //        new XElement("StartDate", item.StartDate),
+    //        new XElement("EstimatedStartDate", item.EstimatedStartDate),
+    //        new XElement("RequiredEffortTime", item.RequiredEffortTime),
+    //        new XElement("FinalDateForCompletion", item.FinalDateForCompletion),
+    //        new XElement("ActualEndDate", item.ActualEndDate),
+    //        new XElement("Product", item.Product),
+    //        new XElement("Notes", item.Notes),
+    //        new XElement("EngineerId", item.EngineerId),
+    //        new XElement("DifficultyLevel", item.DifficultyLevel));
+    //    root.Add(newTask);
+    //    XMLTools.SaveListToXMLElement(root, "tasks");
+    //    return nextId;
+    //}
+
+
     private static Task CreateTaskFromElement(XElement taskElem)
     {
         return new Task()
@@ -53,51 +87,119 @@ internal class TaskImplementation : ITask
             DifficultyLevel = (Levels)Enum.Parse(typeof(Levels), taskElem.Element("DifficultyLevel").Value),
         };
     }
+
     public void Delete(int id)
     {
-        XElement root = XMLTools.LoadListFromXMLElement("tasks");
-        XElement taskToDel = root.Elements("tasks").FirstOrDefault(t => (int)t.Element("TaskNumber") == id);
-        if (taskToDel == null)
+        try
         {
-            throw new DalDoesNotExistException($" Task with ID={id} is not exist ");
-
+            XElement root = XMLTools.LoadListFromXMLElement("tasks");
+            XElement taskToDel = root.Elements("tasks").FirstOrDefault(t => (int)t.Element("TaskNumber") == id);
+            if (taskToDel == null)
+            {
+                throw new DalDoesNotExistException($" Task with ID={id} does not exist ");
+            }
+            taskToDel.Remove();
+            XMLTools.SaveListToXMLElement(root, "tasks");
         }
-        taskToDel.Remove();
-        XMLTools.SaveListToXMLElement(root, "tasks");
+        catch (Exception ex)
+        {
+            Console.WriteLine($"An error occurred during deletion: {ex.Message}");
+            throw; // Re-throw the exception to propagate it
+        }
     }
+    //public void Delete(int id)
+    //{
+    //    XElement root = XMLTools.LoadListFromXMLElement("tasks");
+    //    XElement taskToDel = root.Elements("tasks").FirstOrDefault(t => (int)t.Element("TaskNumber") == id);
+    //    if (taskToDel == null)
+    //    {
+    //        throw new DalDoesNotExistException($" Task with ID={id} is not exist ");
+
+    //    }
+    //    taskToDel.Remove();
+    //    XMLTools.SaveListToXMLElement(root, "tasks");
+    //}
 
     public DO.Task? Read(Func<DO.Task, bool>? filter)
     {
-        XElement root = XMLTools.LoadListFromXMLElement("tasks");
-
-        // If a filter is provided, use it to filter the tasks
-        IEnumerable<XElement> filteredTasks = filter != null
-            ? root.Elements("tasks").Where(t => filter(CreateTaskFromElement(t)))
-            : root.Elements("tasks");
-
-        XElement taskElem = filteredTasks.FirstOrDefault();
-
-        if (taskElem != null)
+        try
         {
-            return CreateTaskFromElement(taskElem);
-        }
+            // Implementation of Read method
+            XElement root = XMLTools.LoadListFromXMLElement("tasks");
 
-        return null;
+            // If a filter is provided, use it to filter the tasks
+            IEnumerable<XElement> filteredTasks = filter != null
+                ? root.Elements("tasks").Where(t => filter(CreateTaskFromElement(t)))
+                : root.Elements("tasks");
+
+            XElement taskElem = filteredTasks.FirstOrDefault();
+
+            if (taskElem != null)
+            {
+                return CreateTaskFromElement(taskElem);
+            }
+
+            return null;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"An error occurred during reading: {ex.Message}");
+            throw; // Re-throw the exception to propagate it
+        }
     }
 
+    //public DO.Task? Read(Func<DO.Task, bool>? filter)
+    //{
+    //    XElement root = XMLTools.LoadListFromXMLElement("tasks");
 
+    //    // If a filter is provided, use it to filter the tasks
+    //    IEnumerable<XElement> filteredTasks = filter != null
+    //        ? root.Elements("tasks").Where(t => filter(CreateTaskFromElement(t)))
+    //        : root.Elements("tasks");
 
+    //    XElement taskElem = filteredTasks.FirstOrDefault();
+
+    //    if (taskElem != null)
+    //    {
+    //        return CreateTaskFromElement(taskElem);
+    //    }
+
+    //    return null;
+    //}
 
     public IEnumerable<DO.Task?> ReadAll(Func<DO.Task, bool>? filter = null)
     {
-        XElement root = XMLTools.LoadListFromXMLElement("tasks");
-        IEnumerable<XElement> allTasks = root.Elements("tasks");
-        if (filter != null)
+        try
         {
-            allTasks = allTasks.Where(t => filter(CreateTaskFromElement(t)));
+            // Implementation of ReadAll method
+            XElement root = XMLTools.LoadListFromXMLElement("tasks");
+            IEnumerable<XElement> allTasks = root.Elements("tasks");
+            if (filter != null)
+            {
+                allTasks = allTasks.Where(t => filter(CreateTaskFromElement(t)));
+            }
+            return allTasks.Select(t => CreateTaskFromElement(t));
         }
-        return allTasks.Select(t => CreateTaskFromElement(t));
+        catch (Exception ex)
+        {
+            Console.WriteLine($"An error occurred during reading all: {ex.Message}");
+            throw; // Re-throw the exception to propagate it
+        }
     }
+
+
+    //public IEnumerable<DO.Task?> ReadAll(Func<DO.Task, bool>? filter = null)
+    //{
+    //    XElement root = XMLTools.LoadListFromXMLElement("tasks");
+    //    IEnumerable<XElement> allTasks = root.Elements("tasks");
+    //    if (filter != null)
+    //    {
+    //        allTasks = allTasks.Where(t => filter(CreateTaskFromElement(t)));
+    //    }
+    //    return allTasks.Select(t => CreateTaskFromElement(t));
+    //}
+
+
 
     private static XElement ConvertTaskToElement(DO.Task task, int? taskNum) 
     {
@@ -121,26 +223,68 @@ internal class TaskImplementation : ITask
 
     public void Update(DO.Task item)
     {
-        XElement root = XMLTools.LoadListFromXMLElement("tasks");
+        try
+        {
+            // Implementation of Update method
+            XElement root = XMLTools.LoadListFromXMLElement("tasks");
 
-       XElement taskToUpdate = root.Elements("tasks").FirstOrDefault(t => (int)t.Element("TaskNumber") == item.TaskNumber);
-        if(taskToUpdate != null) 
-        {
-            taskToUpdate.ReplaceWith(ConvertTaskToElement(item,item.TaskNumber));
-            XMLTools.SaveListToXMLElement(root,"tasks");
+            XElement taskToUpdate = root.Elements("tasks").FirstOrDefault(t => (int)t.Element("TaskNumber") == item.TaskNumber);
+            if (taskToUpdate != null)
+            {
+                taskToUpdate.ReplaceWith(ConvertTaskToElement(item, item.TaskNumber));
+                XMLTools.SaveListToXMLElement(root, "tasks");
+            }
+            else
+            {
+                throw new DalDoesNotExistException($" Task with ID={item.TaskNumber} is not exist ");
+            }
         }
-        else
+        catch (Exception ex)
         {
-            throw new DalDoesNotExistException($" Task with ID={item.TaskNumber} is not exist ");
+            Console.WriteLine($"An error occurred during update: {ex.Message}");
+            throw; // Re-throw the exception to propagate it
         }
     }
+
+    //public void Update(DO.Task item)
+    //{
+    //    XElement root = XMLTools.LoadListFromXMLElement("tasks");
+
+    //   XElement taskToUpdate = root.Elements("tasks").FirstOrDefault(t => (int)t.Element("TaskNumber") == item.TaskNumber);
+    //    if(taskToUpdate != null) 
+    //    {
+    //        taskToUpdate.ReplaceWith(ConvertTaskToElement(item,item.TaskNumber));
+    //        XMLTools.SaveListToXMLElement(root,"tasks");
+    //    }
+    //    else
+    //    {
+    //        throw new DalDoesNotExistException($" Task with ID={item.TaskNumber} is not exist ");
+    //    }
+    //}
 
     public void Reset()
     {
-        //יוצר רשימה ריקה ומכניס אותה במקום הרשימה הנוכחית
-        List<Task> emptyTaskList = new List<Task>();
-        XMLTools.SaveListToXMLSerializer<Task>(emptyTaskList, "tasks");
-        XMLTools.ResetConfig("data-config","TaskNumber");
+        try
+        {
+            // Implementation of Reset method
+            //יוצר רשימה ריקה ומכניס אותה במקום הרשימה הנוכחית
+            List<Task> emptyTaskList = new List<Task>();
+            XMLTools.SaveListToXMLSerializer<Task>(emptyTaskList, "tasks");
+            XMLTools.ResetConfig("data-config", "TaskNumber");
 
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"An error occurred during reset: {ex.Message}");
+            throw; // Re-throw the exception to propagate it
+        }
     }
+    //public void Reset()
+    //{
+    //    //יוצר רשימה ריקה ומכניס אותה במקום הרשימה הנוכחית
+    //    List<Task> emptyTaskList = new List<Task>();
+    //    XMLTools.SaveListToXMLSerializer<Task>(emptyTaskList, "tasks");
+    //    XMLTools.ResetConfig("data-config","TaskNumber");
+
+    //}
 }
