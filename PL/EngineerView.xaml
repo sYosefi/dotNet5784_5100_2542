@@ -22,9 +22,9 @@
             <RowDefinition Height="2*"/>
         </Grid.RowDefinitions>
         <TextBlock  Text="welcome" Grid.ColumnSpan="2" Grid.Row="0" FontSize="20"  HorizontalAlignment="Center" Margin="20"/>
-        <TextBlock  Text="Id Task:" Grid.Row="1" FontSize="20"  HorizontalAlignment="Left" Margin="100,20,0,20"/>
-        <TextBlock  Text="Task name:" Grid.Row="2" FontSize="20"  HorizontalAlignment="Left" Margin="100,20,0,20"/>
-        <TextBlock  Text="Nicname:" Grid.Row="3" FontSize="20"  HorizontalAlignment="Left" Margin="100,20,0,20"/>
+        <!--<TextBlock  Text="Id Task:" Grid.Row="1" FontSize="20"  HorizontalAlignment="Left" Margin="100,20,0,20"/>-->
+        <!--<TextBlock  Text="Task name:" Grid.Row="2" FontSize="20"  HorizontalAlignment="Left" Margin="100,20,0,20"/>-->
+        <!--<TextBlock  Text="Nicname:" Grid.Row="3" FontSize="20"  HorizontalAlignment="Left" Margin="100,20,0,20"/>-->
         <TextBlock  Text="{Binding IdTask, Mode=TwoWay}" Grid.Row="1" FontSize="20"  HorizontalAlignment="Left" Margin="187,20,0,20"/>
         <TextBlock  Text="{Binding TaskName, Mode=TwoWay}" Grid.Row="2" FontSize="20"  HorizontalAlignment="Left" Margin="219,20,0,20"/>
         <TextBlock  Text="{Binding NicnameTask, Mode=TwoWay}" Grid.Row="3" FontSize="20"  HorizontalAlignment="Left" Margin="200,20,0,20"/>
@@ -41,7 +41,7 @@
             </TextBlock.RenderTransform>
         </TextBlock>
         <Button Width="200" Grid.Row="4" Height="80" Background="Green" Foreground="White"  BorderBrush="Black"  FontSize="20"   Content="Go to task list" HorizontalAlignment="Center" Click="showAllTasks"/>
-        <Button Width="250" Grid.Row="4" Height="80" Grid.Column="1" Background="Green" Foreground="White"  BorderBrush="Black"  FontSize="20"   Content="Go to current task details" HorizontalAlignment="Center" Click="showCurrentTask" />
+        <Button Width="250" Grid.Row="4" Height="80" Grid.Column="1" Background="Green" Foreground="White"  BorderBrush="Black"  FontSize="20"   Content="Update current task" HorizontalAlignment="Center" Click="updateCurrentTask" />
 
     </Grid>
 </Window>
