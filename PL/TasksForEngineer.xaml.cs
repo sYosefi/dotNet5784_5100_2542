@@ -24,6 +24,8 @@ namespace PL
     public partial class TasksForEngineer : Window
     {
         static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
+        BO.Engineer currentEngineer=new BO.Engineer();
+
         public ObservableCollection<BO.Task> TasksToEngineerList
         {
             get { return (ObservableCollection<BO.Task>)GetValue(TasksFEListProperty); }
@@ -49,6 +51,7 @@ namespace PL
         }
         public TasksForEngineer(BO.Engineer engineer)
         {
+            currentEngineer=engineer;
 
             if (engineer == null || engineer.IdEngineer==null)
             {
@@ -77,6 +80,10 @@ namespace PL
 
         }
 
+        private void setCurrentTask(object sender, MouseButtonEventArgs e)
 
+        {
+
+        }
     }
 }

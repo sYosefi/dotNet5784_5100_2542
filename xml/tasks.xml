@@ -12,7 +12,7 @@
     <ActualEndDate>2024-04-02T23:28:12.706173+03:00</ActualEndDate>
     <Product />
     <Notes />
-	  <EngineerId >227355056</EngineerId>
+    <EngineerId>227355056</EngineerId>
     <DifficultyLevel>Proficient</DifficultyLevel>
   </Task>
   <Task>
@@ -359,5 +359,20 @@
     <Notes />
     <EngineerId />
     <DifficultyLevel>Competent</DifficultyLevel>
+  </Task>
+  <Task>
+    <TaskNumber>25</TaskNumber>
+    <Description>to write the code</Description>
+    <Nickname>CODE</Nickname>
+    <CreatedAtDate>0001-01-01T00:00:00</CreatedAtDate>
+    <StartDate />
+    <EstimatedStartDate />
+    <RequiredEffortTime>30</RequiredEffortTime>
+    <FinalDateForCompletion />
+    <ActualEndDate />
+    <Product>write alghoritem that prints a setence</Product>
+    <Notes>the code should be nice</Notes>
+    <EngineerId />
+    <DifficultyLevel>Novice</DifficultyLevel>
   </Task>
 </ArrayOfTask>

@@ -19,7 +19,7 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
         </Grid>
-        <ListView FontSize="15" FontFamily="David" BorderBrush="Green" Margin="5" Grid.Row="1" ItemsSource="{Binding Path=TasksToEngineerList}" >
+        <ListView FontSize="15" FontFamily="David" BorderBrush="Green" Margin="5" Grid.Row="1" ItemsSource="{Binding Path=TasksToEngineerList}" MouseDoubleClick="setCurrentTask" >
             <ListView.View >
                 <GridView>
                     <GridViewColumn/>
