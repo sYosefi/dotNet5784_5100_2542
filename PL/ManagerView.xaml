@@ -8,10 +8,11 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid >
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="1.5*"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="9*"/>
+            <ColumnDefinition Width="169*"/>
+            <ColumnDefinition Width="178*"/>
+            <ColumnDefinition Width="267*"/>
+            <ColumnDefinition Width="178*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -20,13 +21,13 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <TextBlock Grid.ColumnSpan="4" Grid.RowSpan="1" FontSize="30" FontFamily="David" Foreground="Black" HorizontalAlignment="Center" Margin="20">Welcome</TextBlock>
-        <Button Background="Green" Grid.RowSpan="4" Foreground="White"  BorderBrush="Black"  FontSize="20" FontFamily="Candara Light"  Content="Show Engineers"   Grid.Column="0" Height="50" Width="150" HorizontalAlignment="Right"  Click="ShowList_click"/>
-        <Button Background="Green" Grid.RowSpan="4" Foreground="White"  BorderBrush="Black"  FontSize="20" FontFamily="Candara Light"  Content="Show Tasks"   Grid.Column="1" Height="50" Width="150"  Margin="20" Click="ShowTaskList_click"/>
+        <TextBlock Grid.ColumnSpan="2" Grid.RowSpan="1" FontSize="30" FontFamily="David" Foreground="Black" HorizontalAlignment="Left" Margin="165,20,0,20" Grid.Column="2">Welcome</TextBlock>
+        <Button Background="Green" Grid.RowSpan="2" Foreground="White"  BorderBrush="Black"  FontSize="20" FontFamily="Candara Light"  Content="Show Engineers"   Grid.Column="1" Height="50" Width="150" HorizontalAlignment="Left"  Click="ShowList_click" Grid.ColumnSpan="2" Margin="19,62,0,61" Grid.Row="1"/>
+        <Button Background="Green" Grid.RowSpan="2" Foreground="White"  BorderBrush="Black"  FontSize="20" FontFamily="Candara Light"  Content="Show Tasks"   Grid.Column="2" Height="50" Width="150"  Margin="20,62,8,61" Click="ShowTaskList_click" Grid.Row="1"/>
         <!--<Button Background="Green" Foreground="White" BorderBrush="Black" FontSize="20"  FontFamily="Candara Light" Content="init DB" Grid.Column="2"  Height="50" Width="100" HorizontalAlignment="Left"   VerticalAlignment="Center" Click="Initializatoin_Click"/>-->
-        <Button Background="Green" Grid.RowSpan="4" Foreground="White" BorderBrush="Black" FontSize="20"  FontFamily="Candara Light" Content="Creating a Gantt chart" Grid.Column="2"  Height="50" Width="200" HorizontalAlignment="Left"   VerticalAlignment="Center" Click="makeChart_button"/>
-        <Button Background="Green" Grid.RowSpan="4" Foreground="White" BorderBrush="Black" FontSize="20"  FontFamily="Candara Light" Content="Reset" Grid.Column="3"  Height="50" Width="100" HorizontalAlignment="Left"   VerticalAlignment="Center"  Click="reset_button"/>
-        <Button Background="Green" Foreground="White" BorderBrush="Black" FontSize="20"  FontFamily="Candara Light" Content="Going back" Grid.Column="1"  Height="50" Width="100" HorizontalAlignment="Left"   VerticalAlignment="Top"  Click="retern_back" Grid.ColumnSpan="2" Margin="141,10,0,0" Grid.Row="3"/>
+        <Button Background="Green" Grid.RowSpan="2" Foreground="White" BorderBrush="Black" FontSize="20"  FontFamily="Candara Light" Content="Creating a Gantt chart" Grid.Column="3"  Height="50" Width="200" HorizontalAlignment="Left"   VerticalAlignment="Center" Click="makeChart_button" Grid.Row="1"/>
+        <Button Background="Green" Grid.RowSpan="2" Foreground="White" BorderBrush="Black" FontSize="20"  FontFamily="Candara Light" Content="Reset" Grid.Column="3"  Height="50" Width="100" HorizontalAlignment="Left"   VerticalAlignment="Center"  Click="reset_button" Grid.ColumnSpan="2" Margin="266,0,0,0" Grid.Row="1"/>
+        <Button Background="Green" Foreground="White" BorderBrush="Black" FontSize="20"  FontFamily="Candara Light" Content="🏠" Grid.Column="2"  Height="50" Width="100" HorizontalAlignment="Left"   VerticalAlignment="Top"  Click="retern_back" Grid.ColumnSpan="2" Margin="141,10,0,0" Grid.Row="3"/>
 
     </Grid>
 </Window>

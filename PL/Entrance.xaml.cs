@@ -1,6 +1,8 @@
 ﻿
+using PL.Engineer;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,9 +23,19 @@ namespace PL
     public partial class Entrance : Window
     {
         static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
+        
+        public DateTime CurrentTime
+        {
+            get { return (DateTime)GetValue(CurrentTimeProperty); }
+            set { SetValue(CurrentTimeProperty, value); }
+        }
+
+        public static readonly DependencyProperty CurrentTimeProperty =
+            DependencyProperty.Register("s_bl.Clock", typeof(DateTime), typeof(Entrance), new PropertyMetadata(null));
         public Entrance()
         {
             InitializeComponent();
+
         }
 
         private void initalize_button(object sender, RoutedEventArgs e)

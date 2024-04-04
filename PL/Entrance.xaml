@@ -1,4 +1,5 @@
 ﻿<Window Background="AliceBlue"  x:Class="PL.Entrance"
+           DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -22,5 +23,8 @@
         <Button Grid.Column="1" Grid.Row="1" Width="200" Height="100" FontSize="20" FontFamily="Candara Light"  Background="Green" Foreground="White"  BorderBrush="Black" Content="Engineer View" Click="engineerLogin_button"></Button>
         <Button Grid.Column="0" Grid.Row="2" Width="200" Height="100" FontSize="20" FontFamily="Candara Light" Background="Green" Foreground="White"  BorderBrush="Black" Content="Initialization" Click="initalize_button"></Button>
         <!--<Button Grid.Column="1" Grid.Row="2" Width="200" Height="100" FontSize="20" FontFamily="Candara Light"  Background="Green" Foreground="White"  BorderBrush="Black" Content="Reset" Click="reset_button"></Button>-->
+        <Grid  Grid.Column="1" Grid.Row="2">
+            <TextBlock Text="{Binding CurrentTime}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
+        </Grid>
     </Grid>
 </Window>

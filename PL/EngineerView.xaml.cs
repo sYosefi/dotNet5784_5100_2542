@@ -24,6 +24,15 @@ namespace PL
         BO.Engineer current=new BO.Engineer();
         static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
 
+        //public BO.Task currentTask
+        //{
+        //    get { return (BO.Task)GetValue(currentTaskProperty); }
+        //    set { SetValue(currentTaskProperty, value); }
+        //}
+
+        //public static readonly DependencyProperty currentTaskProperty =
+        //    DependencyProperty.Register("currentTask", typeof(BO.Task), typeof(EngineerView), new PropertyMetadata(null));
+
         public string EngineerName
         {
             get { return (string)GetValue(EngineerNameProperty); }

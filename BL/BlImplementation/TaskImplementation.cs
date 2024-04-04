@@ -9,6 +9,9 @@ internal class TaskImplementation : ITask
     EngineerImplementation engineerImplementation = new EngineerImplementation();
     private DalApi.IDal _dal = DalApi.Factory.Get;
 
+    private readonly IBl _bl;
+    internal TaskImplementation(IBl bl) => _bl = bl;
+
     //פונקציית עזר שמחזירה רשימה של תלויות עבור מספר משימה
     public List<BO.TaskOnList> getDependenciesList(int taskNumber)
     {

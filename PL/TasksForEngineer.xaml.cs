@@ -1,6 +1,8 @@
-﻿using PL.Task;
+﻿using PL.Engineer;
+using PL.Task;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,6 +24,16 @@ namespace PL
     public partial class TasksForEngineer : Window
     {
         static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
+        public ObservableCollection<BO.Task> TasksToEngineerList
+        {
+            get { return (ObservableCollection<BO.Task>)GetValue(TasksFEListProperty); }
+            set { SetValue(TasksFEListProperty, value); }
+        }
+
+        public static readonly DependencyProperty TasksFEListProperty =
+            DependencyProperty.Register("TasksToEngineerList", typeof(ObservableCollection<BO.Task>), typeof(TasksForEngineer), new PropertyMetadata(null));
+
+       
         public TasksForEngineer()
         {
             InitializeComponent();
@@ -43,41 +55,26 @@ namespace PL
                 MessageBox.Show("Engineer not found.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            //if (engineer.CurrentTask == null)
-            //{
-            //    var temp = s_bl.Task.ReadAll(task => task.Engineer == null &&
-            //        (task.CopmlexityLevel == engineer.Level || task.CopmlexityLevel < engineer.Level)
-            //    );
 
-            //    TaskList = temp == null ? new() : new(temp);
-            //}
-            //else
-            //{
-            //    var task = s_bl.Task.Read(engineer.Task.Id);
-
-            //}
-
-            //(Levels)((int)experience)
-
-            InitializeComponent();
-           
-
-            if (engineer.CurrentTask==null)
+           if(engineer.CurrentTask==null)
             {
+                List<BO.Task> allTasks = new List<BO.Task>();
 
                 //List<BO.Task> taskFilter = new List<BO.Task>();
-                List<BO.Task> allTasks = new List<BO.Task>();
-                allTasks = s_bl.Task.GetAllTasks().ToList();
 
-                //var taskFilter = allTasks.FindAll(task => task.eng.IdEngineer == engineer.IdEngineer
-                // && isDependendCompleted(task) && task.DifficultyLevel<=(BO.Levels)engineer.EngineerLevel);
-                var taskFilter = allTasks.FindAll(task => task.eng.IdEngineer == engineer.IdEngineer
-                && isDependendCompleted(task) && (int)task.DifficultyLevel <= (int)engineer.EngineerLevel);
+                allTasks = s_bl.Task.GetAllTasks().ToList();
+                
+                var taskFiltered = allTasks.FindAll(task => task.eng.IdEngineer == engineer.IdEngineer
+                 && isDependendCompleted(task) && task.DifficultyLevel<=(BO.Levels)engineer.EngineerLevel).ToList();
+                TasksToEngineerList = new ObservableCollection<BO.Task>(taskFiltered);
+
             }
             else
             {
 
             }
+            InitializeComponent();
+
         }
 
 
