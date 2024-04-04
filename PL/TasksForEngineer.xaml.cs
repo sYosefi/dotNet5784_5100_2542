@@ -65,10 +65,11 @@ namespace PL
 
                 //List<BO.Task> taskFilter = new List<BO.Task>();
 
-                allTasks = s_bl.Task.GetAllTasks().ToList();
+               var allsTasks = s_bl.Task.GetAllTasks();
                 
                 var taskFiltered = allTasks.FindAll(task => task.eng.IdEngineer == engineer.IdEngineer
                  && isDependendCompleted(task) && task.DifficultyLevel<=(BO.Levels)engineer.EngineerLevel).ToList();
+            
                 TasksToEngineerList = new ObservableCollection<BO.Task>(taskFiltered);
 
             }
@@ -81,9 +82,9 @@ namespace PL
         }
 
         private void setCurrentTask(object sender, MouseButtonEventArgs e)
-
         {
-
+            currentEngineer.CurrentTask=(sender as ListView)?.SelectedItem as BO.Task;
+            s_bl.Engineer.UpdateEngineerDetails(currentEngineer);
         }
     }
 }

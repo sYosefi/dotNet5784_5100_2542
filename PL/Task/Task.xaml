@@ -49,9 +49,12 @@
                   SelectedValue="{Binding Status, Mode=TwoWay, NotifyOnValidationError=true,
                   ValidatesOnExceptions=true}"></ComboBox>
         <Label Grid.Column="0" Grid.Row="5" HorizontalAlignment="Right"  VerticalAlignment="Center" FontSize="15"  Content="Dependencies List:"></Label>
-        <TextBox Grid.Column="1" Grid.Row="5" Height="25" Width="300" HorizontalAlignment="Left" TextAlignment="Center" BorderBrush="Green" BorderThickness="2" FontSize="13"
+        <!--<TextBox Grid.Column="1" Grid.Row="5" Height="25" Width="300" HorizontalAlignment="Left" TextAlignment="Center" BorderBrush="Green" BorderThickness="2" FontSize="13"
                    Text="{Binding DependenciesList, Mode=TwoWay, NotifyOnValidationError=true,
-                   ValidatesOnExceptions=true}"/>
+                   ValidatesOnExceptions=true}"/>-->
+        <TextBox Grid.Column="1" Grid.Row="5" Height="25" Width="300" HorizontalAlignment="Left" 
+         Text="{Binding DependenciesInput, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+         BorderBrush="Green" BorderThickness="2" FontSize="13"/>
         <Label Grid.Column="0" Grid.Row="6" HorizontalAlignment="Right"  VerticalAlignment="Center" FontSize="15"  Content="Production Date:"></Label>
         <DatePicker Grid.Column="1" Grid.Row="6" Height="25" Width="300" HorizontalAlignment="Left"  BorderBrush="Green" BorderThickness="2" FontSize="13" 
                  Text="{Binding ProductionDate, Mode=TwoWay, NotifyOnValidationError=true,

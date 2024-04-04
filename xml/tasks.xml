@@ -27,7 +27,7 @@
     <ActualEndDate>2024-04-02T23:28:12.7063331+03:00</ActualEndDate>
     <Product />
     <Notes />
-    <EngineerId />
+    <EngineerId>227355056</EngineerId>
     <DifficultyLevel>AdvancedBeginner</DifficultyLevel>
   </Task>
   <Task>
@@ -42,7 +42,7 @@
     <ActualEndDate>2024-04-02T23:28:12.7063365+03:00</ActualEndDate>
     <Product />
     <Notes />
-    <EngineerId />
+    <EngineerId>227355056</EngineerId>
     <DifficultyLevel>Expert</DifficultyLevel>
   </Task>
   <Task>
@@ -57,7 +57,7 @@
     <ActualEndDate>2024-04-02T23:28:12.7063373+03:00</ActualEndDate>
     <Product />
     <Notes />
-    <EngineerId />
+    <EngineerId>227355056</EngineerId>
     <DifficultyLevel>Novice</DifficultyLevel>
   </Task>
   <Task>
@@ -72,7 +72,7 @@
     <ActualEndDate>2024-04-02T23:28:12.7063382+03:00</ActualEndDate>
     <Product />
     <Notes />
-    <EngineerId />
+    <EngineerId>227355056</EngineerId>
     <DifficultyLevel>Competent</DifficultyLevel>
   </Task>
   <Task>
@@ -372,6 +372,21 @@
     <ActualEndDate />
     <Product>write alghoritem that prints a setence</Product>
     <Notes>the code should be nice</Notes>
+    <EngineerId>227355056</EngineerId>
+    <DifficultyLevel>Novice</DifficultyLevel>
+  </Task>
+  <Task>
+    <TaskNumber>26</TaskNumber>
+    <Description>dh</Description>
+    <Nickname>jngc </Nickname>
+    <CreatedAtDate>0001-01-01T00:00:00</CreatedAtDate>
+    <StartDate />
+    <EstimatedStartDate />
+    <RequiredEffortTime>50</RequiredEffortTime>
+    <FinalDateForCompletion />
+    <ActualEndDate />
+    <Product>fdhb</Product>
+    <Notes>fzdh</Notes>
     <EngineerId />
     <DifficultyLevel>Novice</DifficultyLevel>
   </Task>

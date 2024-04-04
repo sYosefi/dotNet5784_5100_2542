@@ -30,6 +30,29 @@ namespace PL.Task
 
         public static readonly DependencyProperty TaskProperty =
        DependencyProperty.Register("TaskItem", typeof(BO.Task), typeof(Task), new PropertyMetadata(null));
+
+        private string _dependenciesInput;
+        public string DependenciesInput
+        {
+            get { return _dependenciesInput; }
+            set
+            {
+                _dependenciesInput = value;
+                // Parse the input string and update the array property
+                DependenciesList = ParseStringToArray(value);
+            }
+        }
+
+        private int[] _dependenciesList;
+        public int[] DependenciesList
+        {
+            get { return _dependenciesList; }
+            set
+            {
+                _dependenciesList = value;
+            }
+        }
+
         public Task(int id=0)
         {
             isAdd=(id==0)?true:false;
@@ -59,6 +82,20 @@ namespace PL.Task
                 }
             }
             catch (Exception ex) { }
+        }
+        private int[] ParseStringToArray(string input)
+        {
+            // Split the input string by commas and convert each part to an integer
+            string[] parts = input.Split(',');
+            List<int> numbers = new List<int>();
+            foreach (string part in parts)
+            {
+                if (int.TryParse(part.Trim(), out int number))
+                {
+                    numbers.Add(number);
+                }
+            }
+            return numbers.ToArray();
         }
     }
 }
