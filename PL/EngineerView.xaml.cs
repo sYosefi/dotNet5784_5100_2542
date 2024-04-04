@@ -23,6 +23,7 @@ namespace PL
     public partial class EngineerView : Window
     {
         BO.Engineer current=new BO.Engineer();
+        BO.Task currentTask= new BO.Task();
         static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
 
 
@@ -71,87 +72,187 @@ namespace PL
 
         public static readonly DependencyProperty NicnameTaskProperty =
           DependencyProperty.Register("NicnameTask", typeof(string), typeof(EngineerView), new PropertyMetadata(null));
+
         public EngineerView()
         {
-            InitializeComponent();
-
+            try
+            {
+                InitializeComponent();
+            }
+            catch (Exception ex)
+            {
+                // Handle or log the exception
+                MessageBox.Show("An error occurred while initializing EngineerView: " + ex.Message);
+            }
         }
+        //public EngineerView()
+        //{
+        //    InitializeComponent();
+
+        //}
 
         public EngineerView(BO.Engineer engineer)
         {
-            //current = s_bl.Engineer.GetEngineerDetails((engineer.IdEngineer));
-            var tempTasks=s_bl.Task.GetAllTasks().Where(t=>t.eng.IdEngineer==engineer.IdEngineer).ToList();
-            var currentTask = tempTasks.FirstOrDefault(t => t.Status == BO.Status.OnTrack);
-
-
-            InitializeComponent();
-            EngineerName = engineer.Name; // Assuming engineer has a property Name
-            EngineerTask = engineer.CurrentTask;
-
-
-            if (currentTask != null)
+            try
             {
-                //IdTask = currentTask != null ? currentTask.TaskNumber.ToString() : string.Empty;
+                //current = s_bl.Engineer.GetEngineerDetails((engineer.IdEngineer));
+                var tempTasks = s_bl.Task.GetAllTasks().Where(t => t.eng.IdEngineer == engineer.IdEngineer).ToList();
+                var currentTask = tempTasks.FirstOrDefault(t => t.Status == BO.Status.OnTrack);
 
-                IdTask = "Id Task: " + currentTask.TaskNumber.ToString();
-                TaskName = "Task Name: " + currentTask.Description;
-                NicnameTask = "Nicname Task: " + currentTask.Nickname;
+                InitializeComponent();
+                EngineerName = engineer.Name; // Assuming engineer has a property Name
+                EngineerTask = engineer.CurrentTask;
+
+                if (currentTask != null)
+                {
+                    //IdTask = currentTask != null ? currentTask.TaskNumber.ToString() : string.Empty;
+
+                    IdTask = "Id Task: " + currentTask.TaskNumber.ToString();
+                    TaskName = "Task Name: " + currentTask.Description;
+                    NicnameTask = "Nicname Task: " + currentTask.Nickname;
+                }
             }
-            
-
-
+            catch (Exception ex)
+            {
+                // Handle or log the exception
+                MessageBox.Show("An error occurred while initializing EngineerView: " + ex.Message);
+            }
         }
 
 
-        //public CurrentEngineerWindow(int idEngineer)
+
+        //public EngineerView(BO.Engineer engineer)
         //{
+        //    //current = s_bl.Engineer.GetEngineerDetails((engineer.IdEngineer));
+        //    var tempTasks=s_bl.Task.GetAllTasks().Where(t=>t.eng.IdEngineer==engineer.IdEngineer).ToList();
+        //    var currentTask = tempTasks.FirstOrDefault(t => t.Status == BO.Status.OnTrack);
 
-        //    try
+
+        //    InitializeComponent();
+        //    EngineerName = engineer.Name; // Assuming engineer has a property Name
+        //    EngineerTask = engineer.CurrentTask;
+
+
+        //    if (currentTask != null)
         //    {
-        //        // Appeler la méthode BL pour récupérer l'objet existant avec l'ID spécifié
-        //        //var currentTask = s_bl.Task.ReadTaskInEngineer(idEngineer);
-        //        _idEngineer = idEngineer;
-        //        var tasks = s_bl.Task.RequestListTask().Where(t => t.Engineer.Id == idEngineer).ToList();
-        //        var currentTask = tasks.FirstOrDefault(t => t.Status == STATUS.OnTrack);
+        //        //IdTask = currentTask != null ? currentTask.TaskNumber.ToString() : string.Empty;
 
-        //        // Vérifier si l'objet existe
-        //        if (currentTask != null)
-        //        {
-        //            CurrentTask = currentTask;
-        //            InitializeComponent();
-        //        }
-
-        //        else
-        //        {
-        //            // Gérer le cas où l'objet n'existe pas
-        //            MessageBox.Show($"Task of the Engineer with ID {idEngineer} not found.");
-        //            InitializeComponent();
-
-        //        }
-
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        // Gérer les exceptions, par exemple, afficher un message d'erreur
-        //        MessageBox.Show($"Error: {ex.Message}");
+        //        IdTask = "Id Task: " + currentTask.TaskNumber.ToString();
+        //        TaskName = "Task Name: " + currentTask.Description;
+        //        NicnameTask = "Nicname Task: " + currentTask.Nickname;
         //    }
         //}
 
-
-
-
         private void showAllTasks(object sender, RoutedEventArgs e)
         {
-            new TasksForEngineer(current).Show();
-            Close();
+            try
+            {
+                new TasksForEngineer(current).Show();
+                Close();
+            }
+            catch (Exception ex)
+            {
+                // Handle or log the exception
+                MessageBox.Show("An error occurred while showing all tasks: " + ex.Message);
+            }
         }
 
-       
+
+        //private void showAllTasks(object sender, RoutedEventArgs e)
+        //{
+        //    new TasksForEngineer(current).Show();
+        //    Close();
+        //}
 
         private void updateCurrentTask(object sender, RoutedEventArgs e)
         {
-            new Task.Task(int.Parse(IdTask)).Show();
-            Close() ;
+            try
+            {
+                new Task.Task(int.Parse(IdTask)).Show();
+                Close();
+            }
+            catch (Exception ex)
+            {
+                // Handle or log the exception
+                MessageBox.Show("An error occurred while updating the current task: " + ex.Message);
+            }
         }
+
+        private void EndofTask(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (currentTask != null)
+                {
+                currentTask = EngineerTask;
+                currentTask.Status = Status.Done;
+                currentTask.ActualEndDate = s_bl.Clock;
+
+                MessageBoxResult mbresult =
+                    MessageBox.Show("Are you sure you want to end a task?",
+                                 "Done",
+                                 MessageBoxButton.YesNoCancel,
+                                 MessageBoxImage.Question,
+                                 MessageBoxResult.Cancel);
+                switch (mbresult)
+                {
+                    case MessageBoxResult.Yes:
+                        try
+                        {
+                            s_bl.Task.UpdateTask(currentTask);
+                        }
+                        catch (Exception ex)
+                        {
+                            // Handle or log the exception
+                            MessageBox.Show("An error occurred while updating the task: " + ex.Message);
+                        }
+                        break;
+                    case MessageBoxResult.No: break;
+                    case MessageBoxResult.Cancel: break;
+                    default: break;
+                }
+                }
+                //אפשר לזרוק כאן שלא קיימת משימה נוכחית
+               
+            }
+            catch (Exception ex)
+            {
+                // Handle or log the exception
+                MessageBox.Show("An error occurred: " + ex.Message);
+            }
+        }
+
+        //private void EndofTask(object sender, RoutedEventArgs e)
+        //{
+
+        //    currentTask = EngineerTask;
+        //    currentTask.Status = Status.Done;
+        //    currentTask.ActualEndDate = s_bl.Clock;
+
+        //    MessageBoxResult mbresult =
+        //        MessageBox.Show("Are you sure you want to end a task?",
+        //                     "Done",
+        //                     MessageBoxButton.YesNoCancel,
+        //                     MessageBoxImage.Question,
+        //                     MessageBoxResult.Cancel);
+        //    switch (mbresult)
+        //    {
+        //        case MessageBoxResult.Yes:
+        //            s_bl.Task.UpdateTask(currentTask);
+        //            break;
+        //        case MessageBoxResult.No: break;
+        //        case MessageBoxResult.Cancel: break;
+        //        default: break;
+        //    }
+
+        //}
+
+        //private void updateCurrentTask(object sender, RoutedEventArgs e)
+        //{
+        //    new Task.Task(int.Parse(IdTask)).Show();
+        //    Close() ;
+        //}
     }
+
+    
 }
