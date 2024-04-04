@@ -1,4 +1,5 @@
-﻿using PL.Task;
+﻿using BO;
+using PL.Task;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,12 +38,39 @@ namespace PL
             set { SetValue(EngineerTaskProperty, value); }
         }
 
+        public string IdTask
+        {
+            get { return (string)GetValue(IdTaskProperty); }
+            set { SetValue(IdTaskProperty, value); }
+        }
+
+        public string TaskName
+        {
+            get { return (string)GetValue(TaskNameProperty); }
+            set { SetValue(TaskNameProperty, value); }
+        }
+
+        public string NicnameTask
+        {
+            get { return (string)GetValue(NicnameTaskProperty); }
+            set { SetValue(NicnameTaskProperty, value); }
+        }
+
         // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty EngineerNameProperty =
             DependencyProperty.Register("EngineerName", typeof(string), typeof(EngineerView), new PropertyMetadata(null));
 
         public static readonly DependencyProperty EngineerTaskProperty =
-          DependencyProperty.Register("EngineerTask", typeof(string), typeof(EngineerView), new PropertyMetadata(null));
+          DependencyProperty.Register("EngineerTask", typeof(BO.Task), typeof(EngineerView), new PropertyMetadata(null));
+
+        public static readonly DependencyProperty IdTaskProperty =
+          DependencyProperty.Register("IdTask", typeof(string), typeof(EngineerView), new PropertyMetadata(null));
+
+        public static readonly DependencyProperty TaskNameProperty =
+          DependencyProperty.Register("TaskName", typeof(string), typeof(EngineerView), new PropertyMetadata(null));
+
+        public static readonly DependencyProperty NicnameTaskProperty =
+          DependencyProperty.Register("NicnameTask", typeof(string), typeof(EngineerView), new PropertyMetadata(null));
         public EngineerView()
         {
             InitializeComponent();
@@ -61,7 +89,56 @@ namespace PL
             EngineerTask = engineer.CurrentTask;
 
 
+            if (currentTask != null)
+            {
+                //IdTask = currentTask != null ? currentTask.TaskNumber.ToString() : string.Empty;
+
+                IdTask = "Id Task: " + currentTask.TaskNumber.ToString();
+                TaskName = "Task Name: " + currentTask.Description;
+                NicnameTask = "Nicname Task: " + currentTask.Nickname;
+            }
+            
+
+
         }
+
+
+        //public CurrentEngineerWindow(int idEngineer)
+        //{
+
+        //    try
+        //    {
+        //        // Appeler la méthode BL pour récupérer l'objet existant avec l'ID spécifié
+        //        //var currentTask = s_bl.Task.ReadTaskInEngineer(idEngineer);
+        //        _idEngineer = idEngineer;
+        //        var tasks = s_bl.Task.RequestListTask().Where(t => t.Engineer.Id == idEngineer).ToList();
+        //        var currentTask = tasks.FirstOrDefault(t => t.Status == STATUS.OnTrack);
+
+        //        // Vérifier si l'objet existe
+        //        if (currentTask != null)
+        //        {
+        //            CurrentTask = currentTask;
+        //            InitializeComponent();
+        //        }
+
+        //        else
+        //        {
+        //            // Gérer le cas où l'objet n'existe pas
+        //            MessageBox.Show($"Task of the Engineer with ID {idEngineer} not found.");
+        //            InitializeComponent();
+
+        //        }
+
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        // Gérer les exceptions, par exemple, afficher un message d'erreur
+        //        MessageBox.Show($"Error: {ex.Message}");
+        //    }
+        //}
+
+
+
 
         private void showAllTasks(object sender, RoutedEventArgs e)
         {
@@ -69,11 +146,11 @@ namespace PL
             Close();
         }
 
-        private void showCurrentTask(object sender, RoutedEventArgs e)
-        {
+       
 
-            //new Task().show();
-            //new CurrentTaskForEngineer(EngineerTaskProperty).Show();
+        private void updateCurrentTask(object sender, RoutedEventArgs e)
+        {
+            new Task.Task(int.Parse(IdTask)).Show();
             Close() ;
         }
     }
