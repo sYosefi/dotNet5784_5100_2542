@@ -31,11 +31,10 @@ namespace PL
         }
 
         public static readonly DependencyProperty CurrentTimeProperty =
-            DependencyProperty.Register("s_bl.Clock", typeof(DateTime), typeof(Entrance), new PropertyMetadata(null));
+            DependencyProperty.Register("CurrentTime", typeof(DateTime), typeof(Entrance), new PropertyMetadata(null));
         public Entrance()
         {
             InitializeComponent();
-
         }
 
         private void initalize_button(object sender, RoutedEventArgs e)
