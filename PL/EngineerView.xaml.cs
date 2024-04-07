@@ -96,14 +96,13 @@ namespace PL
             try
             {
                 //current = s_bl.Engineer.GetEngineerDetails((engineer.IdEngineer));
-                var tempTasks = s_bl.Task.GetAllTasks().Where(t => t.eng.IdEngineer == engineer.IdEngineer).ToList();
-                var currentTask = tempTasks.FirstOrDefault(t => t.Status == BO.Status.OnTrack);
-
-                InitializeComponent();
+                //var tempTasks = s_bl.Task.GetAllTasks().Where(t => t.eng?.IdEngineer == engineer.IdEngineer).ToList();
+                //var currentTask = tempTasks.FirstOrDefault(t => t.Status == BO.Status.OnTrack);
+                current = engineer;
                 EngineerName = engineer.Name; // Assuming engineer has a property Name
                 EngineerTask = engineer.CurrentTask;
 
-                if (currentTask != null)
+                if (current.CurrentTask != null)
                 {
                     //IdTask = currentTask != null ? currentTask.TaskNumber.ToString() : string.Empty;
 
@@ -111,6 +110,9 @@ namespace PL
                     TaskName = "Task Name: " + currentTask.Description;
                     NicnameTask = "Nicname Task: " + currentTask.Nickname;
                 }
+
+                InitializeComponent();
+
             }
             catch (Exception ex)
             {
