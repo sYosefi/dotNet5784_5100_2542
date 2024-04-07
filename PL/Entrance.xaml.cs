@@ -35,6 +35,7 @@ namespace PL
         public Entrance()
         {
             InitializeComponent();
+            CurrentTime = s_bl.Clock;
         }
 
         private void initalize_button(object sender, RoutedEventArgs e)
@@ -138,6 +139,21 @@ namespace PL
         {
             new Login().Show();
             this.Close();
+        }
+
+        private void addYear(object sender, RoutedEventArgs e)
+        {
+            s_bl.InsertYear(1);
+        }
+
+        private void addMonth(object sender, RoutedEventArgs e)
+        {
+            s_bl.InsertMonth(1);
+        }
+
+        private void addDay(object sender, RoutedEventArgs e)
+        {
+            s_bl.InsertDay(1);
         }
     }
 }

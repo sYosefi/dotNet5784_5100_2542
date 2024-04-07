@@ -31,15 +31,15 @@ namespace PL.Task
         public static readonly DependencyProperty TaskProperty =
        DependencyProperty.Register("TaskItem", typeof(BO.Task), typeof(Task), new PropertyMetadata(null));
 
-        private string _dependenciesInput;
-        public string DependenciesInput
+        private List<BO.TaskOnList> _dependenciesInput;
+        public List<BO.TaskOnList> DependenciesInput
         {
             get { return _dependenciesInput; }
             set
             {
                 _dependenciesInput = value;
-                // Parse the input string and update the array property
-                DependenciesList = ParseStringToArray(value);
+                // No need to parse the input string, as it's already a List<BO.TaskOnList>
+                DependenciesList = value.Select(task => task.TaskNumber).ToArray();
             }
         }
 
@@ -83,11 +83,13 @@ namespace PL.Task
             }
             catch (Exception ex) { }
         }
-        private int[] ParseStringToArray(string input)
+        private List<BO.TaskOnList> ParseStringToList(string input)
         {
             // Split the input string by commas and convert each part to an integer
             string[] parts = input.Split(',');
             List<int> numbers = new List<int>();
+            List<BO.Task> allTasks = s_bl.Task.GetAllTasks().ToList();
+            List<BO.TaskOnList> dependence = new List<BO.TaskOnList>();
             foreach (string part in parts)
             {
                 if (int.TryParse(part.Trim(), out int number))
@@ -95,7 +97,20 @@ namespace PL.Task
                     numbers.Add(number);
                 }
             }
-            return numbers.ToArray();
+            foreach (int number in numbers)
+            {
+                BO.Task task = allTasks.Find(t => t.TaskNumber == number);
+                if (task != null)
+                {
+                    BO.TaskOnList taskOnList = new BO.TaskOnList
+                    {
+                        TaskNumber = task.TaskNumber,
+                        Description = task.Description // You can add other properties as needed
+                    };
+                    dependence.Add(taskOnList);
+                }
+            }
+            return dependence;
         }
     }
 }

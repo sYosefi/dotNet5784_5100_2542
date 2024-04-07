@@ -13,18 +13,25 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="2.5*"/>
+            <RowDefinition Height="2.5*"/>
+            <RowDefinition Height="2*"/>
             <RowDefinition Height="*"/>
 
         </Grid.RowDefinitions>
         <Button Grid.Column="0" Grid.Row="1" Width="200" Height="100" FontSize="20" FontFamily="Candara Light"  Background="Green" Foreground="White"  BorderBrush="Black" Content="Manager View" Click="adminLogin_button"></Button>
         <Button Grid.Column="1" Grid.Row="1" Width="200" Height="100" FontSize="20" FontFamily="Candara Light"  Background="Green" Foreground="White"  BorderBrush="Black" Content="Engineer View" Click="engineerLogin_button"></Button>
-        <Button Grid.Column="0" Grid.Row="2" Width="200" Height="100" FontSize="20" FontFamily="Candara Light" Background="Green" Foreground="White"  BorderBrush="Black" Content="Initialization" Click="initalize_button"></Button>
-        <!--<Button Grid.Column="1" Grid.Row="2" Width="200" Height="100" FontSize="20" FontFamily="Candara Light"  Background="Green" Foreground="White"  BorderBrush="Black" Content="Reset" Click="reset_button"></Button>-->
-        <Grid  Grid.Column="1" Grid.Row="2">
-            <TextBlock Text="{Binding CurrentTime}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
+        <Button Grid.ColumnSpan="3" Grid.Row="2" Width="200" Height="80" FontSize="20" FontFamily="Candara Light" Background="Green" Foreground="White"  BorderBrush="Black" Content="Initialization" Click="initalize_button"></Button>
+        <Grid  Grid.ColumnSpan="3" Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="{Binding CurrentTime}" Height="80" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="20" Grid.Column="1" Margin="0,10,0,0" />
+            <Button  Width="150" Height="50" FontSize="15" FontFamily="Candara Light" Background="Green" Foreground="White" HorizontalAlignment="Right" VerticalAlignment="Bottom" BorderBrush="Black" Content="Add Year" Click="addYear"/>
+            <Button Grid.Column="1" Width="150" Height="50" FontSize="15" FontFamily="Candara Light" Background="Green" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Bottom" BorderBrush="Black" Content="Add Month" Click="addMonth"/>
+            <Button Grid.Column="2"  Width="150" Height="50" FontSize="15" FontFamily="Candara Light" Background="Green" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Bottom" BorderBrush="Black" Content="Add Day" Click="addDay"/>
         </Grid>
     </Grid>
 </Window>
