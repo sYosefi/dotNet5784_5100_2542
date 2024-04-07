@@ -42,8 +42,8 @@ namespace PL
         }
         private bool isDependendCompleted(BO.Task task)
         {
-            var dependentTasks=task.DependenciesList.FindAll(t => t.Status != BO.Status.Done);
-            if (dependentTasks!=null)
+            var dependentTasks = task.DependenciesList.Where(t => t?.Status != BO.Status.Done);
+            if (dependentTasks!=null && dependentTasks.Count() > 0)
             {
                 return false;
             }
@@ -66,11 +66,27 @@ namespace PL
                 //List<BO.Task> taskFilter = new List<BO.Task>();
 
                var allsTasks = s_bl.Task.GetAllTasks();
+
+                //var taskFiltered = allTasks.
+                //    Where(task => task.eng == null || task.eng.IdEngineer == 0).Select(t=> t).ToList();
+
+                var taskDeps = allsTasks.Where(task =>
+                  isDependendCompleted(task)).ToList();
+
+                //var allEngineers = allsTasks.Select(t => t.eng).ToList();
+
+
+                var dificalt = taskDeps.Where(task =>
+                 task?.DifficultyLevel <= (BO.Levels)engineer.EngineerLevel
+                 && task?.ActualEndDate == null
+                 ).ToList();
+
+
+
+
                 
-                var taskFiltered = allTasks.FindAll(task => task.eng.IdEngineer == engineer.IdEngineer
-                 && isDependendCompleted(task) && task.DifficultyLevel<=(BO.Levels)engineer.EngineerLevel).ToList();
             
-                TasksToEngineerList = new ObservableCollection<BO.Task>(taskFiltered);
+                TasksToEngineerList = new ObservableCollection<BO.Task>(dificalt);
 
             }
             else
@@ -83,8 +99,18 @@ namespace PL
 
         private void setCurrentTask(object sender, MouseButtonEventArgs e)
         {
-            currentEngineer.CurrentTask=(sender as ListView)?.SelectedItem as BO.Task;
-            s_bl.Engineer.UpdateEngineerDetails(currentEngineer);
+            try
+            {
+                currentEngineer.CurrentTask = (sender as ListView)?.SelectedItem as BO.Task;
+
+                s_bl.Engineer.UpdateEngineerDetails(currentEngineer);
+                new EngineerView(currentEngineer).Show();
+                Close();
+            }
+            catch
+            {
+                MessageBox.Show("Couldn't add this task");
+            }
         }
     }
 }

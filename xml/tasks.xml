@@ -1,93 +1,81 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <ArrayOfTask xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <Task>
-    <TaskNumber>1</TaskNumber>
-    <Description>ניתוח סיכונים בפרויקט</Description>
-    <Nickname>Risk Analysis</Nickname>
-    <CreatedAtDate>2024-04-07T16:13:59.5906199+03:00</CreatedAtDate>
-    <StartDate>2024-04-07T16:13:59.5906269+03:00</StartDate>
-    <EstimatedStartDate>2024-04-07T16:13:59.590647+03:00</EstimatedStartDate>
-    <RequiredEffortTime>30</RequiredEffortTime>
-    <FinalDateForCompletion>2024-04-07T16:13:59.5906479+03:00</FinalDateForCompletion>
-    <ActualEndDate>2024-04-07T16:13:59.5906481+03:00</ActualEndDate>
-    <Product />
-    <Notes />
-    <EngineerId />
-    <DifficultyLevel>Proficient</DifficultyLevel>
-  </Task>
   <Task>
     <TaskNumber>2</TaskNumber>
     <Description>אופטימיזיציה של המערכת</Description>
     <Nickname>BM#</Nickname>
-    <CreatedAtDate>2024-04-07T16:13:59.5908111+03:00</CreatedAtDate>
-    <StartDate>2024-04-07T16:13:59.5908128+03:00</StartDate>
-    <EstimatedStartDate>2024-04-07T16:13:59.590813+03:00</EstimatedStartDate>
+    <CreatedAtDate>2024-04-07T19:10:04.2624333+03:00</CreatedAtDate>
+    <StartDate>2024-04-07T19:10:04.2624355+03:00</StartDate>
+    <EstimatedStartDate>2024-04-07T19:10:04.2624368+03:00</EstimatedStartDate>
     <RequiredEffortTime>30</RequiredEffortTime>
-    <FinalDateForCompletion>2024-04-07T16:13:59.5908133+03:00</FinalDateForCompletion>
-    <ActualEndDate>2024-04-07T16:13:59.5908134+03:00</ActualEndDate>
-    <Product />
-    <Notes />
-    <EngineerId />
+    <FinalDateForCompletion>2024-04-07T19:10:04.2624371+03:00</FinalDateForCompletion>
+    <ActualEndDate xsi:nil="true" />
+    <EngineerId xsi:nil="true" />
     <DifficultyLevel>AdvancedBeginner</DifficultyLevel>
   </Task>
   <Task>
     <TaskNumber>3</TaskNumber>
     <Description>ביקורת קוד</Description>
     <Nickname>AA</Nickname>
-    <CreatedAtDate>2024-04-07T16:13:59.5908137+03:00</CreatedAtDate>
-    <StartDate>2024-04-07T16:13:59.5908153+03:00</StartDate>
-    <EstimatedStartDate>2024-04-07T16:13:59.5908155+03:00</EstimatedStartDate>
+    <CreatedAtDate>2024-04-07T19:10:04.2624374+03:00</CreatedAtDate>
+    <StartDate>2024-04-07T19:10:04.2624376+03:00</StartDate>
+    <EstimatedStartDate>2024-04-07T19:10:04.2624377+03:00</EstimatedStartDate>
     <RequiredEffortTime>30</RequiredEffortTime>
-    <FinalDateForCompletion>2024-04-07T16:13:59.5908157+03:00</FinalDateForCompletion>
-    <ActualEndDate>2024-04-07T16:13:59.5908159+03:00</ActualEndDate>
-    <Product />
-    <Notes />
-    <EngineerId />
+    <FinalDateForCompletion>2024-04-07T19:10:04.2624411+03:00</FinalDateForCompletion>
+    <ActualEndDate xsi:nil="true" />
+    <EngineerId xsi:nil="true" />
     <DifficultyLevel>Expert</DifficultyLevel>
   </Task>
   <Task>
     <TaskNumber>4</TaskNumber>
     <Description>מחקר ויישום טכנולוגיות חדשות</Description>
     <Nickname>Research</Nickname>
-    <CreatedAtDate>2024-04-07T16:13:59.5908161+03:00</CreatedAtDate>
-    <StartDate>2024-04-07T16:13:59.5908162+03:00</StartDate>
-    <EstimatedStartDate>2024-04-07T16:13:59.5908164+03:00</EstimatedStartDate>
+    <CreatedAtDate>2024-04-07T19:10:04.2624413+03:00</CreatedAtDate>
+    <StartDate>2024-04-07T19:10:04.2624415+03:00</StartDate>
+    <EstimatedStartDate>2024-04-07T19:10:04.2624416+03:00</EstimatedStartDate>
     <RequiredEffortTime>30</RequiredEffortTime>
-    <FinalDateForCompletion>2024-04-07T16:13:59.5908166+03:00</FinalDateForCompletion>
-    <ActualEndDate>2024-04-07T16:13:59.5908167+03:00</ActualEndDate>
-    <Product />
-    <Notes />
-    <EngineerId />
+    <FinalDateForCompletion>2024-04-07T19:10:04.2624418+03:00</FinalDateForCompletion>
+    <ActualEndDate xsi:nil="true" />
+    <EngineerId xsi:nil="true" />
     <DifficultyLevel>Novice</DifficultyLevel>
   </Task>
   <Task>
     <TaskNumber>5</TaskNumber>
     <Description>הטמעת אמצעי אבטחה</Description>
     <Nickname>Implementation-SM</Nickname>
-    <CreatedAtDate>2024-04-07T16:13:59.5908169+03:00</CreatedAtDate>
-    <StartDate>2024-04-07T16:13:59.5908171+03:00</StartDate>
-    <EstimatedStartDate>2024-04-07T16:13:59.5908172+03:00</EstimatedStartDate>
+    <CreatedAtDate>2024-04-07T19:10:04.262442+03:00</CreatedAtDate>
+    <StartDate>2024-04-07T19:10:04.2624422+03:00</StartDate>
+    <EstimatedStartDate>2024-04-07T19:10:04.2624424+03:00</EstimatedStartDate>
     <RequiredEffortTime>30</RequiredEffortTime>
-    <FinalDateForCompletion>2024-04-07T16:13:59.5908174+03:00</FinalDateForCompletion>
-    <ActualEndDate>2024-04-07T16:13:59.5908176+03:00</ActualEndDate>
-    <Product />
-    <Notes />
-    <EngineerId />
+    <FinalDateForCompletion>2024-04-07T19:10:04.2624425+03:00</FinalDateForCompletion>
+    <ActualEndDate xsi:nil="true" />
+    <EngineerId xsi:nil="true" />
     <DifficultyLevel>Competent</DifficultyLevel>
   </Task>
   <Task>
     <TaskNumber>6</TaskNumber>
     <Description>הכנת דרישות לא פונקציונאליות</Description>
     <Nickname>T8</Nickname>
-    <CreatedAtDate>2024-04-07T16:13:59.5908181+03:00</CreatedAtDate>
-    <StartDate>2024-04-07T16:13:59.5908215+03:00</StartDate>
-    <EstimatedStartDate>2024-04-07T16:13:59.5908218+03:00</EstimatedStartDate>
+    <CreatedAtDate>2024-04-07T19:10:04.2624427+03:00</CreatedAtDate>
+    <StartDate>2024-04-07T19:10:04.2624429+03:00</StartDate>
+    <EstimatedStartDate>2024-04-07T19:10:04.2624431+03:00</EstimatedStartDate>
     <RequiredEffortTime>30</RequiredEffortTime>
-    <FinalDateForCompletion>2024-04-07T16:13:59.590822+03:00</FinalDateForCompletion>
-    <ActualEndDate>2024-04-07T16:13:59.5908221+03:00</ActualEndDate>
-    <Product />
-    <Notes />
-    <EngineerId />
+    <FinalDateForCompletion>2024-04-07T19:10:04.2624432+03:00</FinalDateForCompletion>
+    <ActualEndDate xsi:nil="true" />
+    <EngineerId xsi:nil="true" />
     <DifficultyLevel>Competent</DifficultyLevel>
+  </Task>
+  <Task>
+    <TaskNumber>1</TaskNumber>
+    <Description>ניתוח סיכונים בפרויקט</Description>
+    <Nickname>Risk Analysis</Nickname>
+    <CreatedAtDate>2024-04-07T19:10:04.2621061+03:00</CreatedAtDate>
+    <StartDate>2024-04-07T19:10:04.2621208+03:00</StartDate>
+    <EstimatedStartDate>2024-04-07T19:10:04.2621654+03:00</EstimatedStartDate>
+    <RequiredEffortTime>30</RequiredEffortTime>
+    <FinalDateForCompletion>2024-04-07T19:10:04.2621684+03:00</FinalDateForCompletion>
+    <ActualEndDate xsi:nil="true" />
+    <EngineerId>375942451</EngineerId>
+    <DifficultyLevel>Proficient</DifficultyLevel>
   </Task>
 </ArrayOfTask>

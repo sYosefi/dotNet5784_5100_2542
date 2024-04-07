@@ -24,7 +24,7 @@
             <ComboBox Background="White" BorderBrush="Green" BorderThickness="3" HorizontalAlignment="Stretch" Margin="2" SelectedValue="{Binding Path=EngineerExperience,Mode=TwoWay}" ItemsSource="{Binding Source={StaticResource ExperienceCollectionKey}}"
                       Grid.Column="1"  SelectionChanged="SortByExperience" />
         </Grid>
-        <ListView FontSize="15" FontFamily="David" BorderBrush="Green" Margin="5" Grid.Row="1" ItemsSource="{Binding Path=TasksList}" MouseDoubleClick="ListView_MouseDoubleClick">
+        <ListView FontSize="15" FontFamily="David" BorderBrush="Green" Margin="5" Grid.Row="1" ItemsSource="{Binding Path=TasksList,Mode=TwoWay}" MouseDoubleClick="ListView_MouseDoubleClick">
             <ListView.View >
                 <GridView>
                     <GridViewColumn/>

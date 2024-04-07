@@ -144,16 +144,20 @@ namespace PL
         private void addYear(object sender, RoutedEventArgs e)
         {
             s_bl.InsertYear(1);
+            CurrentTime = s_bl.Clock;
+
         }
 
         private void addMonth(object sender, RoutedEventArgs e)
         {
             s_bl.InsertMonth(1);
+            CurrentTime = s_bl.Clock;
         }
 
         private void addDay(object sender, RoutedEventArgs e)
         {
             s_bl.InsertDay(1);
+            CurrentTime = s_bl.Clock;
         }
     }
 }

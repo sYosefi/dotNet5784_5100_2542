@@ -249,11 +249,11 @@ internal class TaskImplementation : ITask
                 EstimatedStartDate = (DateTime)doTask.EstimatedStartDate,
                 ActualStartDate = (DateTime)doTask.StartDate,
                 EstimatedCompletionDate = GetEstimatedCompletionDate((DateTime)doTask.EstimatedStartDate, (DateTime)doTask.StartDate, (int)doTask.RequiredEffortTime),
-                ActualEndDate = (DateTime)doTask.ActualEndDate,
+                ActualEndDate = doTask.ActualEndDate == null ? null : (DateTime)doTask.ActualEndDate,
                 RequiredEffortTime = (int)doTask.RequiredEffortTime,
                 Product = doTask.Product,
                 Notes = doTask.Notes,
-                eng = engineerImplementation.GetEngineerInTask(doTask.EngineerId ?? 0),
+                eng = engineerImplementation.GetEngineerInTask(doTask?.EngineerId ?? 0),
                 DifficultyLevel = (BO.Levels)Enum.Parse(typeof(BO.Levels), doTask.DifficultyLevel.ToString())
             });
         }

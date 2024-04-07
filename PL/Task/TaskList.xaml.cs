@@ -36,7 +36,7 @@ namespace PL.Task
 
         public TaskList()
         {
-            var temp = s_bl?.Task.GetAllTasks();
+            var temp = s_bl?.Task.GetAllTasks().ToList();
             TasksList = temp == null ? new() : new(temp);
             InitializeComponent();
         }

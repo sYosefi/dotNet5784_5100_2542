@@ -12,7 +12,7 @@ public  class Task
     public DateTime? EstimatedStartDate { get; set; }
     public DateTime? ActualStartDate { get; set; }
     public DateTime? EstimatedCompletionDate { get; set; }
-    public DateTime? ActualEndDate { get; set; }
+    public DateTime? ActualEndDate { get; set; } = null;
     public int? RequiredEffortTime { get; set; }
     public string Product { get; set; }
     public string Notes { get; set; }

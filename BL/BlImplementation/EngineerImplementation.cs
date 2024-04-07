@@ -53,12 +53,49 @@ internal class EngineerImplementation : IEngineer
             Name = doEng.NameEngineer,
             Email = doEng.MailEnginerr,
             EngineerLevel = (BO.Experience)(int)Enum.Parse(typeof(BO.Experience), doEng.EngineerRank.ToString()),
-            SalaryPerHour = doEng.PricePerHour ?? 0   
+            SalaryPerHour = doEng.PricePerHour ?? 0  ,
+            CurrentTask = findTask((int)idEng)
         };
     }
+
+    BO.Task? findTask(int engId)
+    {
+        try
+        {
+            DO.Task? task = _dal.Task.Read(t => t.EngineerId == engId && t.ActualEndDate == null);
+            if(task == null)
+                return null;
+            TaskImplementation t = new(Factory.Get());
+
+            return new BO.Task
+            {
+                TaskNumber = task.TaskNumber,
+                Description = task.Description,
+                Nickname = task.Nickname,
+                Status = t.getStatus((DateTime)task.EstimatedStartDate, (DateTime)task.StartDate, (DateTime)task.FinalDateForCompletion),
+                DependenciesList = t.getDependenciesList(task.TaskNumber),
+                ProductionDate = (DateTime)task.CreatedAtDate,
+                EstimatedStartDate = (DateTime)task.EstimatedStartDate,
+                ActualStartDate = (DateTime)task.StartDate,
+                EstimatedCompletionDate = t.GetEstimatedCompletionDate((DateTime)task.EstimatedStartDate, (DateTime)task.StartDate, (int)task.RequiredEffortTime),
+                ActualEndDate = (DateTime)task.ActualEndDate,
+                RequiredEffortTime = (int)task.RequiredEffortTime,
+                Product = task.Product,
+                Notes = task.Notes,
+                //eng = engineerImplementation.GetEngineerInTask(task.EngineerId ?? 0),
+                DifficultyLevel = (BO.Levels)Enum.Parse(typeof(BO.Levels), task.DifficultyLevel.ToString())
+            };
+        }
+        catch (Exception ex)
+        {
+            throw new Exception("Couldn't read this Engineer details.");
+        }
+    }
+
     public BO.EngineerInTask? GetEngineerInTask(int? idEng)
     {
         if (idEng == 0) return null;
+        if(idEng == null) return null;
         DO.Engineer? doEng = _dal.Engineer.Read(e => e.IdEngineer == idEng);
         if (doEng == null)
         {
@@ -123,6 +160,15 @@ internal class EngineerImplementation : IEngineer
                     eng.SalaryPerHour
                     );
                 _dal.Engineer.Update(doEng);
+            }
+            if(eng.CurrentTask != null)
+            {
+                DO.Task copy = _dal.Task.Read(t => t.TaskNumber == eng.CurrentTask.TaskNumber) with {EngineerId  = eng.IdEngineer};
+                _dal.Task.Update(copy);
+
+
+
+
             }
             else
             {
