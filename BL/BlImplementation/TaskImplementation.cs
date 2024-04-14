@@ -438,7 +438,7 @@ internal class TaskImplementation : ITask
     //              ) ;
     //            _dal.Task.Update(doTask);
     //        }
-               
+
     //    }
     //    catch (Exception ex) {  }
     //}

@@ -39,9 +39,9 @@ internal class EngineerImplementation : IEngineer
     }
     public BO.Engineer? GetEngineerDetails(int? idEng)
     {
-        if(idEng == 0) return null;
+        if (idEng == 0) return null;
         DO.Engineer? doEng = _dal.Engineer.Read(e => e.IdEngineer == idEng);
-        if(doEng==null) 
+        if (doEng == null)
         {
             //throw new Exception
             // Handle the case where the engineer is not found, for example, throw an exception
@@ -49,11 +49,11 @@ internal class EngineerImplementation : IEngineer
         }
         return new BO.Engineer()
         {
-            IdEngineer = idEng??0,
+            IdEngineer = idEng ?? 0,
             Name = doEng.NameEngineer,
             Email = doEng.MailEnginerr,
             EngineerLevel = (BO.Experience)(int)Enum.Parse(typeof(BO.Experience), doEng.EngineerRank.ToString()),
-            SalaryPerHour = doEng.PricePerHour ?? 0  ,
+            SalaryPerHour = doEng.PricePerHour ?? 0,
             CurrentTask = findTask((int)idEng)
         };
     }
@@ -63,7 +63,7 @@ internal class EngineerImplementation : IEngineer
         try
         {
             DO.Task? task = _dal.Task.Read(t => t.EngineerId == engId && t.ActualEndDate == null);
-            if(task == null)
+            if (task == null)
                 return null;
             TaskImplementation t = new(Factory.Get());
 
@@ -95,7 +95,7 @@ internal class EngineerImplementation : IEngineer
     public BO.EngineerInTask? GetEngineerInTask(int? idEng)
     {
         if (idEng == 0) return null;
-        if(idEng == null) return null;
+        if (idEng == null) return null;
         DO.Engineer? doEng = _dal.Engineer.Read(e => e.IdEngineer == idEng);
         if (doEng == null)
         {
@@ -112,15 +112,16 @@ internal class EngineerImplementation : IEngineer
 
     public IEnumerable<BO.Engineer> GetListOfEngineers()
     {
-        return (from DO.Engineer doEngineer in _dal.Engineer.ReadAll() select new BO.Engineer
-        {
-            IdEngineer = doEngineer.IdEngineer??0,
-            Name = doEngineer.NameEngineer,
-            Email = doEngineer.MailEnginerr,
-            EngineerLevel = (BO.Experience)(int)Enum.Parse(typeof(BO.Experience), doEngineer.EngineerRank.ToString()),
-            SalaryPerHour = doEngineer.PricePerHour??0,
-            CurrentTask = null
-        }) ;
+        return (from DO.Engineer doEngineer in _dal.Engineer.ReadAll()
+                select new BO.Engineer
+                {
+                    IdEngineer = doEngineer.IdEngineer ?? 0,
+                    Name = doEngineer.NameEngineer,
+                    Email = doEngineer.MailEnginerr,
+                    EngineerLevel = (BO.Experience)(int)Enum.Parse(typeof(BO.Experience), doEngineer.EngineerRank.ToString()),
+                    SalaryPerHour = doEngineer.PricePerHour ?? 0,
+                    CurrentTask = null
+                });
     }
 
     public void RemoveEngineer(int idEng)
@@ -161,9 +162,9 @@ internal class EngineerImplementation : IEngineer
                     );
                 _dal.Engineer.Update(doEng);
             }
-            if(eng.CurrentTask != null)
+            if (eng.CurrentTask != null)
             {
-                DO.Task copy = _dal.Task.Read(t => t.TaskNumber == eng.CurrentTask.TaskNumber) with {EngineerId  = eng.IdEngineer};
+                DO.Task copy = _dal.Task.Read(t => t.TaskNumber == eng.CurrentTask.TaskNumber) with { EngineerId = eng.IdEngineer };
                 _dal.Task.Update(copy);
 
 
