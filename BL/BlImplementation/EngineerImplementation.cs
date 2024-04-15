@@ -34,7 +34,7 @@ internal class EngineerImplementation : IEngineer
         catch (BO.BlAlreadyExistException)
         {
             //זריקת חריגה של מהנדס קיים מה-BO 
-            // throw new BO.BlAlreadyExistsException($"Student with ID={boStudent.Id} already exists", ex);
+             throw new BO.BlAlreadyExistException($"Engineer with ID={eng.IdEngineer} already exists");
         }
     }
     public BO.Engineer? GetEngineerDetails(int? idEng)

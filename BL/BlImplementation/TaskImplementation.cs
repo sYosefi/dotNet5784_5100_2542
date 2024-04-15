@@ -27,20 +27,6 @@ internal class TaskImplementation : ITask
         }
     }
 
-    //public List<BO.TaskOnList> getDependenciesList(int taskNumber)
-    //{
-    //    try
-    //    {
-    //        List<Dependence> allDependencies = new List<Dependence>();
-    //        allDependencies = _dal.Dependence.ReadAll().Where(d => d.NumberDependenceTask == taskNumber).ToList();
-    //        return allDependencies.Select(d => GetTaskOnListDetails(d.NuberPreviousTask)).ToList();
-    //    }
-    //    catch (Exception ex) 
-    //    {
-    //        throw new Exception("");
-    //    }
-    //}
-
     public BO.TaskOnList GetTaskOnListDetails(int numberPreviousTask)
     {
         try
@@ -66,22 +52,7 @@ internal class TaskImplementation : ITask
         }
     }
 
-    //public BO.TaskOnList GetTaskOnListDetails(int numberPreviousTask)
-    //{
-    //    DO.Task? doTask = _dal.Task.Read(t => t.TaskNumber == numberPreviousTask);
-    //    if (doTask == null)
-    //    {
-    //        throw new Exception("Task not found");
-    //    }
-    //    return new BO.TaskOnList()
-    //    {
-    //        TaskNumber = doTask.TaskNumber,
-    //        Description = doTask.Description,
-    //        Nickname = doTask.Nickname,
-    //        Status = getStatus((DateTime)doTask.EstimatedStartDate, (DateTime)doTask.StartDate, (DateTime)doTask.FinalDateForCompletion),
-
-    //    };
-    //}
+    
 
     //פונקציית עזר להחזרת הסטטוס המתאים עבור כל משימה בהתאם לתאריכים של המשימה ולתאריך של היום
     public BO.Status getStatus(
@@ -173,39 +144,7 @@ internal class TaskImplementation : ITask
             throw; // Re-throw the exception to propagate it
         }
     }
-    //public void AddTask(BO.Task task)
-    //{
-    //    try
-    //    {
-    //        if (task.TaskNumber >=0 && task.Nickname != "")
-    //        {
-    //            DO.Task doTask = new DO.Task(
-    //                task.TaskNumber,
-    //                task.Description,
-    //                task.Nickname,
-    //                task.ProductionDate,
-    //                task.ActualStartDate,
-    //                task.EstimatedStartDate,
-    //                task.RequiredEffortTime,
-    //                task.EstimatedCompletionDate,
-    //                null,
-    //                task.Product,
-    //                task.Notes,
-    //                null,
-    //                (DO.Levels)(int)Enum.Parse(typeof(DO.Levels),task.DifficultyLevel.ToString())    
-    //                );
-    //                int numTask = _dal.Task.Create(doTask);
-    //        }
-    //        else
-    //        {
-    //            throw new NotImplementedException();
-    //        }
-    //    }
-    //    catch (DO.DalAlreayExistException)
-    //    {
-
-    //    }
-    //}
+  
 
     public DateTime GetEstimatedCompletionDate(DateTime EstimatedStartDate, DateTime ActualStartDate, int RequiredEffortTime)
     {
@@ -223,16 +162,7 @@ internal class TaskImplementation : ITask
             throw; // Re-throw the exception to propagate it
         }
     }
-    //public DateTime GetEstimatedCompletionDate(DateTime EstimatedStartDate,
-    //   DateTime ActualStartDate, int RequiredEffortTime)
-    //{
-    //    TimeSpan timeToAdd = TimeSpan.FromHours(RequiredEffortTime); // אם RequiredEffortTime מייצג שעות
-    //    if (EstimatedStartDate > ActualStartDate)
-    //        return EstimatedStartDate.Add(timeToAdd);
-    //    else
-    //        return ActualStartDate.Add(timeToAdd);
 
-    //}
 
     public IEnumerable<BO.Task> GetAllTasks()
     {
@@ -263,29 +193,7 @@ internal class TaskImplementation : ITask
             throw; // Re-throw the exception to propagate it
         }
     }
-    //public IEnumerable<BO.Task> GetAllTasks()
-    //{
-    //    return (from DO.Task doTask in _dal.Task.ReadAll()
 
-    //            select new BO.Task
-    //            {
-    //                TaskNumber = doTask.TaskNumber,
-    //                Description = doTask.Description,
-    //                Nickname = doTask.Nickname,
-    //                Status = getStatus((DateTime)doTask.EstimatedStartDate, (DateTime)doTask.StartDate, (DateTime)doTask.FinalDateForCompletion),
-    //                DependenciesList=getDependenciesList(doTask.TaskNumber),
-    //                ProductionDate = (DateTime)doTask.CreatedAtDate,
-    //                EstimatedStartDate = (DateTime)doTask.EstimatedStartDate,
-    //                ActualStartDate = (DateTime)doTask.StartDate,
-    //                EstimatedCompletionDate = GetEstimatedCompletionDate((DateTime)doTask.EstimatedStartDate, (DateTime)doTask.StartDate, (int)doTask.RequiredEffortTime),
-    //                ActualEndDate = (DateTime)doTask.ActualEndDate,
-    //                RequiredEffortTime=(int)doTask.RequiredEffortTime,
-    //                Product=doTask.Product,
-    //                Notes = doTask.Notes,
-    //                eng = engineerImplementation.GetEngineerInTask(doTask.EngineerId ?? 0),
-    //                DifficultyLevel =(BO.Levels)Enum.Parse(typeof(BO.Levels),doTask.DifficultyLevel.ToString())
-    //            }) ;
-    //}
 
     public BO.Task GetTaskDetails(int taskNumber)
     {
@@ -322,32 +230,7 @@ internal class TaskImplementation : ITask
         }
     }
 
-    //public BO.Task GetTaskDetails(int taskNumber)
-    //{
-    //    DO.Task? doTask=_dal.Task.Read(t=>t.TaskNumber == taskNumber);
-    //    if(doTask == null)
-    //    {
-    //        throw new Exception("Task not found");
-    //    }
-    //    return new BO.Task()
-    //    {
-    //        TaskNumber = doTask.TaskNumber,
-    //        Description = doTask.Description,
-    //        Nickname = doTask.Nickname,
-    //        Status = getStatus((DateTime)doTask.EstimatedStartDate, (DateTime)doTask.StartDate, (DateTime)doTask.FinalDateForCompletion),
-    //        DependenciesList = getDependenciesList(doTask.TaskNumber),
-    //        ProductionDate = (DateTime)doTask.CreatedAtDate,
-    //        EstimatedStartDate = (DateTime)doTask.EstimatedStartDate,
-    //        ActualStartDate = (DateTime)doTask.StartDate,
-    //        EstimatedCompletionDate = GetEstimatedCompletionDate((DateTime)doTask.EstimatedStartDate, (DateTime)doTask.StartDate, (int)doTask.RequiredEffortTime),
-    //        ActualEndDate = (DateTime)doTask.ActualEndDate,
-    //        RequiredEffortTime = (int)doTask.RequiredEffortTime,
-    //        Product = doTask.Product,
-    //        Notes = doTask.Notes,
-    //        eng = engineerImplementation.GetEngineerInTask(doTask.EngineerId ?? 0),
-    //        DifficultyLevel = (BO.Levels)Enum.Parse(typeof(BO.Levels), doTask.DifficultyLevel.ToString())
-    //    };
-    //}
+   
 
     public void RemoveTask(int taskNumber)
     {
@@ -366,19 +249,7 @@ internal class TaskImplementation : ITask
         }
     }
 
-    //public void RemoveTask(int taskNumber)
-    //{
-    //    try
-    //    {
-    //        if (_dal.Task.ReadAll().Any(t => t?.TaskNumber == taskNumber) == false)
-    //            throw new Exception("Task not exist");
-    //        if (_dal.Dependence.ReadAll().Any(d => d?.NuberPreviousTask == taskNumber))
-    //            throw new Exception("DEpence");
-    //        _dal.Task.Delete(taskNumber);
-
-    //    }
-    //    catch (Exception ex) { }
-    //}
+    
 
     public void UpdateTask(BO.Task task)
     {
@@ -414,32 +285,5 @@ internal class TaskImplementation : ITask
 
 
 
-    //public void UpdateTask(BO.Task task)
-    //{
-    //    try 
-    //    {
-    //        if (task.TaskNumber > 0 &&task.Nickname != "")
-    //        {
-    //            DO.Task doTask = new DO.Task(
-    //              task.TaskNumber,
-    //                task.Description,
-    //                task.Nickname,
-    //                //true,
-    //                task.ProductionDate,
-    //                task.ActualStartDate,
-    //                task.EstimatedStartDate,
-    //                task.RequiredEffortTime,
-    //                task.EstimatedCompletionDate,
-    //                task.ActualEndDate,
-    //                task.Product,
-    //                task.Notes,
-    //                task.eng == null? null: task.eng.IdEngineer,
-    //                (DO.Levels)(int)Enum.Parse(typeof(DO.Levels), task.DifficultyLevel.ToString())
-    //              ) ;
-    //            _dal.Task.Update(doTask);
-    //        }
-
-    //    }
-    //    catch (Exception ex) {  }
-    //}
+    
 }

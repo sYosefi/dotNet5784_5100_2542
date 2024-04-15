@@ -80,11 +80,6 @@ namespace PL
                  task?.DifficultyLevel <= (BO.Levels)engineer.EngineerLevel
                  && task?.ActualEndDate == null
                  ).ToList();
-
-
-
-
-                
             
                 TasksToEngineerList = new ObservableCollection<BO.Task>(dificalt);
 
